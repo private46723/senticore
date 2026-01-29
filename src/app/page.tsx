@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -220,7 +219,6 @@ export default function Home() {
 
       {/* Attackers Scale Section - THE BAD NEWS */}
       <section className="bg-black py-24 relative overflow-hidden border-t border-white/5">
-        {/* Dark red glow in background */}
         <div className="absolute inset-0 pointer-events-none opacity-40">
            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-1/2 h-full bg-gradient-to-r from-red-900/10 to-transparent blur-3xl" />
            <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-64 h-64 bg-red-600/5 rounded-full blur-[100px]" />
@@ -230,7 +228,6 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             {/* Left Column: Horizontal Progress Bars */}
             <div className="space-y-16">
-              {/* Stat 1 */}
               <div className="space-y-4">
                 <p className="text-gray-300 text-[11px] font-bold uppercase tracking-[0.15em]">
                   INCREASE IN EXPLOITED ZERO DAYS (YoY, 2023)
@@ -246,7 +243,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Stat 2 */}
               <div className="space-y-4">
                 <p className="text-gray-300 text-[11px] font-bold uppercase tracking-[0.15em]">
                   INCREASE IN RANSOMWARE ATTACKS (YoY, 2023)
@@ -262,7 +258,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Stat 3 */}
               <div className="space-y-4">
                 <p className="text-gray-300 text-[11px] font-bold uppercase tracking-[0.15em]">
                   INCREASE IN DATA BREACHES AND LEAKS (YoY, 2023)
@@ -287,6 +282,43 @@ export default function Home() {
               <h2 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white">
                 Attackers are supercharging their speed and scale.
               </h2>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Platformization Section */}
+      <section className="bg-[#050505] py-24 relative overflow-hidden border-t border-white/5">
+        {/* Subtle dot pattern background */}
+        <div 
+          className="absolute inset-0 opacity-10 pointer-events-none"
+          style={{ 
+            backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', 
+            backgroundSize: '20px 20px' 
+          }} 
+        />
+        
+        <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+            <div className="max-w-4xl">
+              <p className="text-primary text-[13px] font-bold tracking-[0.2em] uppercase mb-8">
+                Why Palo Alto Networks
+              </p>
+              <h2 className="text-4xl md:text-[54px] font-bold leading-[1.2] text-white">
+                Platformization empowers you to harness AI-ready infrastructure.
+                <span className="text-primary block mt-2">
+                  And leverage services powered by Precision AI<sup>®</sup> to keep everything secure.
+                </span>
+              </h2>
+            </div>
+            
+            <div className="shrink-0">
+              <Button 
+                variant="outline" 
+                className="rounded-full border-white/20 bg-transparent hover:bg-white hover:text-black px-8 py-7 text-[15px] font-bold transition-all flex items-center gap-3 border-2"
+              >
+                See our platform approach <ArrowRight className="w-5 h-5" />
+              </Button>
             </div>
           </div>
         </div>
