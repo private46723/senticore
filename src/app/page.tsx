@@ -138,7 +138,7 @@ export default function Home() {
         </main>
       </div>
 
-      {/* AI Transformation Stats Section - THE GOOD NEWS */}
+      {/* AI Transformation Stats Section */}
       <section className="bg-black py-24 relative overflow-hidden">
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-2 h-2 bg-primary rounded-full blur-[1px] animate-pulse" />
@@ -217,7 +217,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Attackers Scale Section - THE BAD NEWS */}
+      {/* Attackers Scale Section */}
       <section className="bg-black py-24 relative overflow-hidden border-t border-white/5">
         <div className="absolute inset-0 pointer-events-none opacity-40">
            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-1/2 h-full bg-gradient-to-r from-red-900/10 to-transparent blur-3xl" />
@@ -226,7 +226,6 @@ export default function Home() {
 
         <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            {/* Left Column: Horizontal Progress Bars */}
             <div className="space-y-16">
               <div className="space-y-4">
                 <p className="text-gray-300 text-[11px] font-bold uppercase tracking-[0.15em]">
@@ -235,7 +234,7 @@ export default function Home() {
                 <div className="flex items-center gap-8">
                   <div className="flex-grow h-4 bg-[#1a1a1a] rounded-full relative overflow-hidden">
                     <div 
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full shadow-[0_0_15px_rgba(241,102,50,0.3)]"
+                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full"
                       style={{ width: '56%' }}
                     />
                   </div>
@@ -250,7 +249,7 @@ export default function Home() {
                 <div className="flex items-center gap-8">
                   <div className="flex-grow h-4 bg-[#1a1a1a] rounded-full relative overflow-hidden">
                     <div 
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full shadow-[0_0_15px_rgba(241,102,50,0.3)]"
+                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full"
                       style={{ width: '73%' }}
                     />
                   </div>
@@ -265,7 +264,7 @@ export default function Home() {
                 <div className="flex items-center gap-8">
                   <div className="flex-grow h-4 bg-[#1a1a1a] rounded-full relative overflow-hidden">
                     <div 
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full shadow-[0_0_15px_rgba(241,102,50,0.3)]"
+                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full"
                       style={{ width: '56%' }}
                     />
                   </div>
@@ -274,7 +273,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Text */}
             <div className="max-w-xl lg:pl-16">
               <p className="text-primary text-sm font-bold tracking-[0.2em] uppercase mb-6">
                 The Bad News
@@ -289,7 +287,6 @@ export default function Home() {
 
       {/* Platformization Section */}
       <section className="bg-[#050505] py-24 relative overflow-hidden border-t border-white/5">
-        {/* Subtle dot pattern background */}
         <div 
           className="absolute inset-0 opacity-10 pointer-events-none"
           style={{ 
@@ -319,6 +316,77 @@ export default function Home() {
               >
                 See our platform approach <ArrowRight className="w-5 h-5" />
               </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Impact Stats Section */}
+      <section className="bg-black py-24 relative overflow-hidden">
+        <div 
+          className="absolute inset-0 opacity-20 pointer-events-none"
+          style={{ 
+            backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', 
+            backgroundSize: '30px 30px' 
+          }} 
+        />
+        
+        <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Card 1 */}
+            <div className="bg-[#121212] border border-white/10 rounded-[32px] p-10 min-h-[460px] flex flex-col relative overflow-hidden group hover:border-primary/50 transition-colors">
+              <div 
+                className="absolute top-0 right-0 w-64 h-64 opacity-20 pointer-events-none"
+                style={{ 
+                  backgroundImage: 'linear-gradient(135deg, transparent 45%, #F16632 45%, #F16632 55%, transparent 55%)',
+                  backgroundSize: '20px 20px'
+                }} 
+              />
+              <div className="relative z-10 mt-auto">
+                <div className="text-primary text-6xl md:text-[72px] font-bold mb-6 tracking-tight">90 %</div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 leading-tight">reduction in MTTR</h3>
+                <p className="text-gray-400 text-lg leading-relaxed max-w-[280px] font-normal">
+                  Drive innovation and digital transformation with AI.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-[#121212] border border-white/10 rounded-[32px] p-10 min-h-[460px] flex flex-col relative overflow-hidden group hover:border-primary/50 transition-colors">
+              <div 
+                className="absolute top-0 right-0 w-64 h-64 opacity-20 pointer-events-none"
+                style={{ 
+                  backgroundImage: 'linear-gradient(135deg, transparent 45%, #F16632 45%, #F16632 55%, transparent 55%)',
+                  backgroundSize: '20px 20px'
+                }} 
+              />
+              <div className="relative z-10 mt-auto">
+                <div className="text-white text-3xl font-normal mb-2 flex items-baseline gap-3">
+                  up to <span className="text-primary text-6xl md:text-[72px] font-bold tracking-tight">30.9 B</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 leading-tight">inline attacks blocked per day</h3>
+                <p className="text-gray-400 text-lg leading-relaxed font-normal">
+                  Proactively monitor, analyze and prevent sophisticated threats in real time with less complexity, enabling secure growth and innovation for your organization.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-[#121212] border border-white/10 rounded-[32px] p-10 min-h-[460px] flex flex-col relative overflow-hidden group hover:border-primary/50 transition-colors">
+              <div 
+                className="absolute top-0 right-0 w-64 h-64 opacity-20 pointer-events-none"
+                style={{ 
+                  backgroundImage: 'linear-gradient(135deg, transparent 45%, #F16632 45%, #F16632 55%, transparent 55%)',
+                  backgroundSize: '20px 20px'
+                }} 
+              />
+              <div className="relative z-10 mt-auto">
+                <div className="text-primary text-6xl md:text-[72px] font-bold mb-6 tracking-tight">480 B</div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 leading-tight">endpoints scanned daily</h3>
+                <p className="text-gray-400 text-lg leading-relaxed font-normal">
+                  Enable better, faster security with an integrated suite of battle-tested, AI-driven products.
+                </p>
+              </div>
             </div>
           </div>
         </div>
