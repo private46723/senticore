@@ -621,6 +621,67 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Threat Intel & Incident Response Section */}
+      <section className="bg-[#050505] py-24 relative overflow-hidden border-t border-white/5">
+        <div className="container mx-auto px-10 max-w-[1400px]">
+          {/* Background Pattern/Glow */}
+          <div className="absolute right-0 bottom-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
+          <div className="absolute right-0 bottom-[-20%] w-[800px] h-[800px] opacity-10 pointer-events-none rotate-12" style={{ 
+            backgroundImage: 'radial-gradient(circle, #F16632 1px, transparent 1px)', 
+            backgroundSize: '30px 30px' 
+          }} />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
+            {/* Left Column */}
+            <div className="space-y-12">
+              <div>
+                <p className="text-primary text-[13px] font-bold tracking-[0.2em] uppercase mb-8">
+                  Services
+                </p>
+                <h2 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white mb-10">
+                  Threat Intel &amp;<br />Incident Response
+                </h2>
+                <p className="text-gray-300 text-lg md:text-xl leading-relaxed max-w-xl font-normal opacity-90">
+                  Unit 42's world-renowned threat researchers, elite incident responders and expert security consultants will guide you with a threat-informed approach before, during and after an incident.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-12 pt-4 border-t border-white/10">
+                <div className="space-y-1">
+                  <div className="text-4xl font-bold text-white tracking-tighter">1 K+</div>
+                  <div className="text-[11px] font-bold text-gray-500 tracking-[0.15em] uppercase">Matters per year</div>
+                </div>
+                <div className="space-y-1">
+                  <div className="text-4xl font-bold text-white tracking-tighter">24 / 7 / 365</div>
+                  <div className="text-[11px] font-bold text-gray-500 tracking-[0.15em] uppercase">Incident Response</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column */}
+            <div className="flex flex-col gap-8 lg:items-end">
+              <Button variant="outline" className="rounded-full border-white/30 bg-transparent hover:bg-white hover:text-black px-8 h-12 text-[15px] font-bold transition-all flex items-center gap-3 border-2 w-fit mb-4">
+                Explore Unit 42 <ArrowRight className="w-5 h-5" />
+              </Button>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl">
+                {[
+                  { val: '200+', label: 'threat researchers' },
+                  { val: '30 M', label: 'malware samples analyzed per day' },
+                  { val: '1 K+', label: 'incident response engagements a year' },
+                  { val: '150+', label: 'trusted partner of law firms' }
+                ].map((stat, i) => (
+                  <div key={i} className="bg-[#b9461d] p-8 rounded-xl aspect-[1.8/1] flex flex-col justify-center items-center text-center shadow-2xl transition-transform hover:scale-[1.02] cursor-default">
+                    <div className="text-5xl font-bold text-white mb-2 tracking-tighter">{stat.val}</div>
+                    <div className="text-[13px] font-bold text-white/90 leading-tight max-w-[160px] uppercase tracking-wide">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Cookie Banner */}
       {showCookies && (
         <div className="fixed bottom-0 left-0 right-0 bg-[#000000] border-t border-white/10 p-5 z-[100] animate-in slide-in-from-bottom duration-500">
