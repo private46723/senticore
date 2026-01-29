@@ -2,15 +2,15 @@
   "placeholderImages": [
     {
       "id": "hero-bg",
-      "description": "Abstract technological background with diagonal lines and dark gradients",
-      "imageUrl": "https://images.unsplash.com/photo-1599949104055-2d04026aee1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjeWJlcnNlY3VyaXR5JTIwdGVjaHxlbnwwfHx8fDE3Njk3MjE2MDB8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "cybersecurity tech"
+      "description": "Abstract technological background with glowing network connections and dark blue gradients",
+      "imageUrl": "https://images.unsplash.com/photo-1768839721176-2fa91fdce725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjeWJlcnNlY3VyaXR5JTIwbmV0d29ya3xlbnwwfHx8fDE3Njk3MjY4NTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cybersecurity network"
     },
     {
       "id": "feature-person-bg",
-      "description": "Woman with glasses in a modern, tech-focused environment",
-      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3b21hbiUyMGdsYXNzZXMlMjB0ZWNofGVufDB8fHx8MTc2OTcyNTIwMHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "woman glasses"
+      "description": "Professional woman in a modern high-tech office environment, focused on security operations",
+      "imageUrl": "https://images.unsplash.com/photo-1759489036027-44eac680741a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0ZWNobm9sb2d5JTIwcHJvZmVzc2lvbmFsfGVufDB8fHx8MTc2OTcyNjg1OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "technology professional"
     }
   ]
 }
