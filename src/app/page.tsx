@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe } from 'lucide-react';
+import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
@@ -14,6 +14,7 @@ export default function Home() {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
+  const featurePersonBg = PlaceHolderImages.find(img => img.id === 'feature-person-bg');
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -674,6 +675,94 @@ export default function Home() {
                   <div key={i} className="bg-[#b9461d] p-8 rounded-xl aspect-[1.8/1] flex flex-col justify-center items-center text-center shadow-2xl transition-transform hover:scale-[1.02] cursor-default">
                     <div className="text-5xl font-bold text-white mb-2 tracking-tighter">{stat.val}</div>
                     <div className="text-[13px] font-bold text-white/90 leading-tight max-w-[160px] uppercase tracking-wide">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Secure Whatever/AI Feature Section */}
+      <section className="relative min-h-[900px] flex items-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          {featurePersonBg && (
+            <Image
+              src={featurePersonBg.imageUrl}
+              alt={featurePersonBg.description}
+              fill
+              className="object-cover"
+              priority
+              data-ai-hint={featurePersonBg.imageHint}
+            />
+          )}
+          {/* Top Orange Line Indicator */}
+          <div className="absolute top-0 left-20 w-32 h-1 bg-primary" />
+          
+          {/* Gradient Overlays */}
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+          
+          {/* Subtle Right Side Tech Pattern */}
+          <div className="absolute right-0 top-0 bottom-0 w-1/4 opacity-10 pointer-events-none" style={{ 
+            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 15px, #F16632 15px, #F16632 16px)',
+          }} />
+        </div>
+
+        <div className="container mx-auto px-20 max-w-[1400px] relative z-10 py-32">
+          <div className="flex flex-col h-full justify-between">
+            {/* Headline */}
+            <div className="max-w-4xl mb-24">
+              <h2 className="text-5xl md:text-[68px] font-bold leading-[1.05] tracking-tight text-white">
+                Secure whatever, whenever, wherever — with less complexity.
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+              {/* Left Side Feature List */}
+              <div className="lg:col-span-4 space-y-12">
+                {[
+                  { label: 'Secure Your AI ecosystem', icon: <Sparkles className="w-5 h-5" />, active: true },
+                  { label: 'Secure your network', icon: <Shield className="w-5 h-5" /> },
+                  { label: 'Secure your cloud', icon: <Cloud className="w-5 h-5" /> },
+                  { label: 'Automate your SOC', icon: <Activity className="w-5 h-5" /> },
+                  { label: 'Threat intel and incident response services', icon: <Search className="w-5 h-5" /> }
+                ].map((item, i) => (
+                  <div key={i} className={cn(
+                    "flex items-center gap-4 transition-all cursor-pointer group",
+                    item.active ? "opacity-100" : "opacity-40 hover:opacity-100"
+                  )}>
+                    <div className={cn(
+                      "transition-colors",
+                      item.active ? "text-primary" : "text-white group-hover:text-primary"
+                    )}>
+                      {item.icon}
+                    </div>
+                    <span className={cn(
+                      "text-lg font-bold tracking-tight",
+                      item.active ? "text-white underline underline-offset-8 decoration-primary decoration-2" : "text-white"
+                    )}>
+                      {item.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bottom Right CTA Links */}
+              <div className="lg:col-span-8 lg:flex justify-end gap-12 items-end">
+                {[
+                  { text: 'Secure AI apps, agents, models, and data at every step' },
+                  { text: 'Secure the use of GenAI applications in the enterprise' }
+                ].map((link, i) => (
+                  <div key={i} className="group cursor-pointer max-w-[320px] mb-8 lg:mb-0">
+                    <div className="flex items-start gap-4 p-2 transition-transform group-hover:translate-x-1">
+                      <p className="text-xl md:text-2xl font-bold leading-tight text-white group-hover:text-primary transition-colors">
+                        {link.text}
+                      </p>
+                      <ArrowRight className="w-6 h-6 mt-1 text-white shrink-0 group-hover:text-primary" />
+                    </div>
                   </div>
                 ))}
               </div>
