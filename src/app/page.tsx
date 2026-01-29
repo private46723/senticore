@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus } from 'lucide-react';
+import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 export default function Home() {
   const [showCookies, setShowCookies] = useState(true);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [activePlatformTab, setActivePlatformTab] = useState('cloud');
+  const [activePlatformTab, setActivePlatformTab] = useState('network');
   const menuRef = useRef<HTMLDivElement>(null);
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
@@ -480,6 +480,134 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Speed and Scale Live Data Section */}
+      <section className="bg-black py-24 relative overflow-hidden">
+        <div className="container mx-auto px-10 max-w-[1400px]">
+          <div className="mb-16">
+            <h2 className="text-5xl md:text-[64px] font-bold leading-tight mb-4">
+              So you can defend at <span className="text-primary">speed and scale.</span>
+            </h2>
+            <div className="flex items-center gap-2 text-gray-400 text-sm font-medium tracking-wide">
+              <Clock className="w-4 h-4" />
+              <span>Daily data as of 01.29.26 at 7AM PST</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-auto lg:h-[600px]">
+            {/* Card 1: Cloud Events */}
+            <div className="lg:col-span-7 bg-[#111] border border-white/10 rounded-lg p-10 relative overflow-hidden group hover:border-primary/50 transition-colors flex flex-col justify-between">
+              {/* Animated Visualization Background */}
+              <div className="absolute inset-0 opacity-20 pointer-events-none">
+                <svg className="w-full h-full" viewBox="0 0 800 500">
+                  <path d="M100 250 H700" stroke="currentColor" strokeWidth="1" className="text-primary animate-pulse" />
+                  <path d="M100 250 Q 200 150 400 250 T 700 250" stroke="currentColor" strokeWidth="1" fill="none" className="text-primary/40" />
+                  <circle cx="400" cy="250" r="100" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-primary animate-spin-slow" />
+                </svg>
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-8 mb-20">
+                  <div className="w-24 h-24 rounded-2xl bg-black border border-white/10 flex items-center justify-center shadow-2xl">
+                    <Cloud className="w-10 h-10 text-primary" />
+                  </div>
+                  <div className="h-[1px] flex-grow bg-gradient-to-r from-primary to-transparent" />
+                  <div className="w-24 h-24 rounded-2xl bg-black border border-white/10 flex items-center justify-center shadow-2xl relative">
+                    <Shield className="w-10 h-10 text-primary" />
+                    <div className="absolute inset-0 rounded-2xl border-2 border-primary animate-ping opacity-20" />
+                  </div>
+                  <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent to-primary" />
+                  <div className="w-24 h-24 rounded-2xl bg-black border border-white/10 flex items-center justify-center shadow-2xl">
+                    <User className="w-10 h-10 text-primary" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative z-10">
+                <div className="text-6xl md:text-[80px] font-bold text-white mb-2 tracking-tighter">1 T</div>
+                <div className="text-gray-400 text-lg uppercase tracking-[0.2em] font-bold">Cloud Events Processed</div>
+              </div>
+            </div>
+
+            {/* Card 2: Exploits Detected */}
+            <div className="lg:col-span-5 bg-[#111] border border-white/10 rounded-lg p-10 relative overflow-hidden group hover:border-primary/50 transition-colors flex flex-col justify-between">
+              <div className="relative z-10">
+                <p className="text-gray-500 text-[11px] font-bold uppercase tracking-[0.2em] mb-10">Exploits Detected</p>
+                <div className="space-y-8">
+                  {[
+                    { name: 'Heartbleed', desc: 'Severely impacts enterprise servers', icon: <Globe className="w-5 h-5" /> },
+                    { name: 'Spectre and Meltdown', desc: 'Hardware-based vulnerabilities', icon: <Bug className="w-5 h-5" /> },
+                    { name: 'EternalBlue', desc: 'Code exploiting a vulnerability', icon: <Bug className="w-5 h-5" /> },
+                    { name: 'ZeroLogon', desc: 'Elevation of privilege (EoP) vulnerability', icon: <Lock className="w-5 h-5" /> }
+                  ].map((exploit, i) => (
+                    <div key={i} className="flex gap-4 group/item cursor-default">
+                      <div className="p-3 rounded-lg bg-black border border-white/5 group-hover/item:border-primary/50 transition-colors">
+                        <div className="text-primary">{exploit.icon}</div>
+                      </div>
+                      <div>
+                        <h4 className="text-primary font-bold text-[15px]">{exploit.name}</h4>
+                        <p className="text-gray-500 text-sm font-medium">{exploit.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="relative z-10 pt-10 mt-auto">
+                <div className="text-5xl md:text-6xl font-bold text-white mb-2 tracking-tight">3.13 K</div>
+                <div className="text-gray-400 text-sm uppercase tracking-[0.1em] font-bold">Exploit Attempts Detected</div>
+              </div>
+            </div>
+
+            {/* Card 3: Malware Executions (Bottom Row Simulation via Grid) */}
+            <div className="lg:col-span-4 bg-[#111] border border-white/10 rounded-lg p-10 relative overflow-hidden group hover:border-primary/50 transition-colors min-h-[400px] flex flex-col">
+              <div className="flex-grow relative flex items-center justify-center">
+                {/* Falling Malware Animation */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  {[...Array(6)].map((_, i) => (
+                    <div 
+                      key={i}
+                      className="absolute top-[-20px] w-[2px] h-10 bg-gradient-to-b from-transparent to-red-600 animate-malware-fall"
+                      style={{ 
+                        left: `${15 + i * 15}%`, 
+                        animationDelay: `${i * 0.8}s`,
+                        animationDuration: '3s'
+                      }}
+                    />
+                  ))}
+                </div>
+                <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/30 flex items-center justify-center relative shadow-[0_0_30px_rgba(241,102,50,0.2)]">
+                  <svg className="w-12 h-12 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                  </svg>
+                  <div className="absolute inset-0 rounded-full border-2 border-primary/50 animate-ping-slow" />
+                </div>
+              </div>
+              <div className="mt-auto">
+                <div className="text-5xl md:text-6xl font-bold text-white mb-2 tracking-tight">309.39 K</div>
+                <div className="text-gray-400 text-sm uppercase tracking-[0.1em] font-bold">Malware Executions Blocked</div>
+              </div>
+            </div>
+            
+            {/* Added a filler card to maintain the grid logic if needed, or just let spans handle it */}
+            <div className="lg:col-span-8 bg-[#111] border border-white/10 rounded-lg p-10 relative overflow-hidden flex items-center justify-between group hover:border-primary/50 transition-colors">
+               <div className="max-w-xl">
+                 <h3 className="text-3xl font-bold mb-4">Precision AI<sup>®</sup> for better security</h3>
+                 <p className="text-gray-400 text-lg leading-relaxed">
+                   Harnessing the power of advanced data and automation to deliver real-time, agentic remediation.
+                 </p>
+               </div>
+               <div className="hidden md:block w-48 h-48 relative">
+                 <div className="absolute inset-0 border border-primary/20 rounded-full animate-spin-slow" />
+                 <div className="absolute inset-4 border border-primary/40 rounded-full animate-reverse-spin" />
+                 <div className="absolute inset-0 flex items-center justify-center">
+                    <Shield className="w-12 h-12 text-primary" />
+                 </div>
+               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Cookie Banner */}
       {showCookies && (
         <div className="fixed bottom-0 left-0 right-0 bg-[#000000] border-t border-white/10 p-5 z-[100] animate-in slide-in-from-bottom duration-500">
@@ -498,6 +626,37 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      <style jsx global>{`
+        @keyframes malware-fall {
+          0% { transform: translateY(-20px); opacity: 0; }
+          20% { opacity: 1; }
+          80% { opacity: 1; }
+          100% { transform: translateY(180px); opacity: 0; }
+        }
+        .animate-malware-fall {
+          animation: malware-fall linear infinite;
+        }
+        .animate-spin-slow {
+          animation: spin 12s linear infinite;
+        }
+        .animate-reverse-spin {
+          animation: spin 8s linear reverse infinite;
+        }
+        .animate-ping-slow {
+          animation: ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes ping {
+          75%, 100% {
+            transform: scale(2);
+            opacity: 0;
+          }
+        }
+      `}</style>
     </div>
   );
 }
