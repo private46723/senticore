@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe, Sparkles, Hexagon, Play, Send, Loader2, AlertTriangle } from 'lucide-react';
+import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe, Sparkles, Hexagon, Play, Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
@@ -12,6 +12,7 @@ export default function Home() {
   const [showCookies, setShowCookies] = useState(true);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [activePlatformTab, setActivePlatformTab] = useState('network');
+  const [activeEngageTab, setActiveEngageTab] = useState('Executives');
   const [aiQuery, setAiQuery] = useState('');
   const [aiLoading, setAiLoading] = useState(false);
   const [aiResponse, setAiResponse] = useState<AnalyzeThreatOutput | null>(null);
@@ -119,6 +120,33 @@ export default function Home() {
   ];
 
   const currentPlatform = platforms.find(p => p.id === activePlatformTab) || platforms[0];
+
+  const engageCards = [
+    {
+      title: 'Ignite on Tour',
+      description: 'Meet decision-makers, experts and practitioners for a day of hands-on learning, strategy building and networking.',
+      cta: 'Attend our global roadshow',
+      imageId: 'ignite-on-tour'
+    },
+    {
+      title: 'Executive Briefing Center',
+      description: 'Get a customized plan to see how our platforms, threat intelligence and expert services help you secure the way forward.',
+      cta: 'Plan a collaborative discussion',
+      imageId: 'executive-briefing'
+    },
+    {
+      title: 'Under Attack? We\'re Here.',
+      description: 'Unit 42® Incident Response explains the breach, works with you to contain and remedy it, and gets you back to business.',
+      cta: 'Our experts are standing by',
+      imageId: 'under-attack'
+    },
+    {
+      title: 'AI-powered security platforms',
+      description: 'Expert advice and insights for using AI-powered solutions to streamline your security posture and mitigate risk.',
+      cta: 'Learn more',
+      imageId: 'ai-platforms'
+    }
+  ];
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white font-body selection:bg-primary/30">
@@ -318,173 +346,9 @@ export default function Home() {
                   <p className="text-gray-500 font-bold uppercase tracking-[0.2em] text-sm">
                     {aiLoading ? "Consulting Precision AI® Knowledge Graph..." : "Waiting for your input to analyze threats"}
                   </p>
-                  <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
-                     <svg className="w-full h-full" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-primary animate-ping-slow" />
-                        <circle cx="50" cy="50" r="30" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-primary" />
-                        <path d="M50 10 L50 90 M10 50 L90 50" stroke="currentColor" strokeWidth="0.5" className="text-primary" />
-                     </svg>
-                  </div>
                 </div>
               )}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* AI Transformation Stats Section */}
-      <section className="bg-black py-24 relative overflow-hidden">
-        <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="max-w-xl">
-              <p className="text-primary text-sm font-bold tracking-[0.2em] uppercase mb-6">
-                The Good News
-              </p>
-              <h2 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white">
-                AI is rapidly transforming your organization
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
-              <div className="flex flex-col items-center text-center">
-                <div className="relative w-48 h-48 mb-8">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <circle cx="96" cy="96" r="80" stroke="currentColor" strokeWidth="12" fill="transparent" className="text-gray-800" />
-                    <circle
-                      cx="96"
-                      cy="96"
-                      r="80"
-                      stroke="currentColor"
-                      strokeWidth="12"
-                      fill="transparent"
-                      strokeDasharray={2 * Math.PI * 80}
-                      strokeDashoffset={(1 - 0.78) * 2 * Math.PI * 80}
-                      strokeLinecap="round"
-                      className="text-primary"
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-4xl md:text-5xl font-bold text-white">78 %</span>
-                  </div>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-primary text-2xl font-bold">~1.5X growth</p>
-                  <p className="text-gray-400 text-[11px] font-bold uppercase tracking-widest">In usage in last 12 months</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center text-center">
-                <div className="relative w-48 h-48 mb-8">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <circle cx="96" cy="96" r="80" stroke="currentColor" strokeWidth="12" fill="transparent" className="text-gray-800" />
-                    <circle
-                      cx="96"
-                      cy="96"
-                      r="80"
-                      stroke="currentColor"
-                      strokeWidth="12"
-                      fill="transparent"
-                      strokeDasharray={2 * Math.PI * 80}
-                      strokeDashoffset={(1 - 0.94) * 2 * Math.PI * 80}
-                      strokeLinecap="round"
-                      className="text-primary"
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-4xl md:text-5xl font-bold text-white">94 %</span>
-                  </div>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-primary text-2xl font-bold lowercase">development</p>
-                  <p className="text-gray-400 text-[11px] font-bold uppercase tracking-widest">Enterprises using Gen AI software</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Attackers Scale Section */}
-      <section className="bg-black py-24 border-t border-white/5">
-        <div className="container mx-auto px-10 max-w-[1400px]">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="space-y-16">
-              {[
-                { label: 'INCREASE IN EXPLOITED ZERO DAYS (YoY, 2023)', percent: 56 },
-                { label: 'INCREASE IN RANSOMWARE ATTACKS (YoY, 2023)', percent: 73 },
-                { label: 'INCREASE IN DATA BREACHES AND LEAKS (YoY, 2023)', percent: 56 }
-              ].map((stat, i) => (
-                <div key={i} className="space-y-4">
-                  <p className="text-gray-300 text-[11px] font-bold uppercase tracking-[0.15em]">
-                    {stat.label}
-                  </p>
-                  <div className="flex items-center gap-8">
-                    <div className="flex-grow h-4 bg-[#1a1a1a] rounded-full relative overflow-hidden">
-                      <div 
-                        className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full"
-                        style={{ width: `${stat.percent}%` }}
-                      />
-                    </div>
-                    <span className="text-4xl md:text-5xl font-bold text-white min-w-[100px]">{stat.percent}%</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="max-w-xl lg:pl-16">
-              <p className="text-primary text-sm font-bold tracking-[0.2em] uppercase mb-6">
-                The Bad News
-              </p>
-              <h2 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white">
-                Attackers are supercharging their speed and scale.
-              </h2>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Platformization Section */}
-      <section className="bg-[#050505] py-24 border-t border-white/5">
-        <div className="container mx-auto px-10 max-w-[1400px]">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-            <div className="max-w-4xl">
-              <p className="text-primary text-[13px] font-bold tracking-[0.2em] uppercase mb-8">
-                Why Palo Alto Networks
-              </p>
-              <h2 className="text-4xl md:text-[54px] font-bold leading-[1.2] text-white">
-                Platformization empowers you to harness AI-ready infrastructure.
-                <span className="text-primary block mt-2">
-                  And leverage services powered by Precision AI<sup>®</sup> to keep everything secure.
-                </span>
-              </h2>
-            </div>
-            <Button variant="outline" className="rounded-full border-white/20 bg-transparent hover:bg-white hover:text-black px-8 py-7 text-[15px] font-bold transition-all flex items-center gap-3 border-2 shrink-0">
-              See our platform approach <ArrowRight className="w-5 h-5" />
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Impact Stats Cards */}
-      <section className="bg-black py-24">
-        <div className="container mx-auto px-10 max-w-[1400px]">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { val: '90 %', title: 'reduction in MTTR', desc: 'Drive innovation and digital transformation with AI.' },
-              { val: '30.9 B', title: 'inline attacks blocked per day', desc: 'Proactively monitor, analyze and prevent sophisticated threats in real time with less complexity, enabling secure growth and innovation for your organization.', prefix: 'up to ' },
-              { val: '480 B', title: 'endpoints scanned daily', desc: 'Enable better, faster security with an integrated suite of battle-tested, AI-driven products.' }
-            ].map((card, i) => (
-              <div key={i} className="bg-[#121212] border border-white/10 rounded-[32px] p-10 min-h-[460px] flex flex-col relative overflow-hidden group hover:border-primary/50 transition-colors">
-                <div className="absolute top-0 right-0 w-64 h-64 opacity-20 pointer-events-none" style={{ backgroundImage: 'linear-gradient(135deg, transparent 45%, #F16632 45%, #F16632 55%, transparent 55%)', backgroundSize: '20px 20px' }} />
-                <div className="relative z-10 mt-auto">
-                  <div className="text-white text-3xl font-normal mb-2 flex items-baseline gap-3">
-                    {card.prefix && <span className="text-white text-2xl font-normal opacity-60">{card.prefix}</span>}
-                    <span className="text-primary text-6xl md:text-[72px] font-bold tracking-tight">{card.val}</span>
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 leading-tight">{card.title}</h3>
-                  <p className="text-gray-400 text-lg leading-relaxed font-normal">{card.desc}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -546,23 +410,13 @@ export default function Home() {
               {/* Graphic/Awards Section */}
               <div className="relative flex flex-col items-center justify-center lg:items-end">
                 {currentPlatform.awards ? (
-                  /* Awards Grid */
                   <div className="w-full max-w-2xl">
                     <div className="flex justify-end mb-6">
                       <button className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest">
                         See all <Plus className="w-4 h-4" />
                       </button>
                     </div>
-                    
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
-                      {/* Background stylized graphic */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none -z-10 overflow-hidden">
-                        <div className="w-full h-full transform scale-150 rotate-[15deg]" style={{ 
-                          backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 10px, currentColor 10px, currentColor 12px)`,
-                          maskImage: 'radial-gradient(circle, black, transparent 70%)'
-                        }} className={currentPlatform.themeColor} />
-                      </div>
-
                       {currentPlatform.awards.map((award, i) => (
                         <div key={i} className={cn(
                           "p-6 rounded-lg text-black flex flex-col gap-4 min-h-[140px] hover:scale-[1.02] transition-transform cursor-pointer shadow-lg",
@@ -578,16 +432,7 @@ export default function Home() {
                     </div>
                   </div>
                 ) : (
-                  /* Watermark Section for Strata */
                   <div className="relative">
-                    {/* Diagonal Lines behind the text */}
-                    <div className="absolute inset-0 flex items-center justify-center transform scale-150 rotate-[25deg] opacity-40 translate-x-12">
-                      <div className="w-[600px] h-[400px]" style={{ 
-                        backgroundImage: `repeating-linear-gradient(90deg, transparent, transparent 12px, currentColor 12px, currentColor 15px)`,
-                        maskImage: 'linear-gradient(to right, transparent, black 40%, black 60%, transparent)'
-                      }} />
-                    </div>
-                    
                     <div className="relative z-10 text-center lg:text-left flex flex-col items-center lg:items-start">
                       <div className="text-[180px] md:text-[220px] font-black text-white/10 leading-none tracking-tighter italic select-none">
                         {currentPlatform.watermark}
@@ -615,131 +460,22 @@ export default function Home() {
             <h2 className="text-5xl md:text-[64px] font-bold leading-tight mb-4 tracking-tight">
               So you can defend at <span className="text-primary italic">speed and scale.</span>
             </h2>
-            <div className="flex items-center gap-2 text-gray-500 text-sm font-medium tracking-wide">
-              <Clock className="w-4 h-4 opacity-70" />
-              <span>Daily data as of 01.29.26 at 7AM PST</span>
-            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-            {/* Card 1: Cloud Events (Wide) */}
             <div className="lg:col-span-6 bg-[#0d0d0d] border border-white/5 rounded-xl p-10 relative overflow-hidden group hover:border-primary/30 transition-all duration-500 flex flex-col justify-between shadow-2xl">
-              {/* Refined Visualization Background */}
-              <div className="absolute inset-0 opacity-40 pointer-events-none">
-                <svg className="w-full h-full" viewBox="0 0 800 500" preserveAspectRatio="none">
-                  {/* Subtle Grid Lines */}
-                  <path d="M0 100 H800 M0 200 H800 M0 300 H800 M0 400 H800" stroke="white" strokeWidth="0.5" opacity="0.05" />
-                  <path d="M100 0 V500 M200 0 V500 M300 0 V500 M400 0 V500 M500 0 V500 M600 0 V500 M700 0 V500" stroke="white" strokeWidth="0.5" opacity="0.05" />
-                  
-                  {/* Glowing Connection Paths */}
-                  <g className="animate-pulse">
-                    <path d="M150 250 H300 L350 200 H550" stroke="#F16632" strokeWidth="2" fill="none" opacity="0.8" />
-                    <path d="M150 250 H300 L350 300 H550" stroke="#F16632" strokeWidth="2" fill="none" opacity="0.8" />
-                  </g>
-                  
-                  {/* Animated Light Blobs */}
-                  <circle r="3" fill="#F16632">
-                    <animateMotion dur="4s" repeatCount="indefinite" path="M150 250 H300 L350 200 H550" />
-                  </circle>
-                  <circle r="3" fill="#F16632">
-                    <animateMotion dur="4s" begin="2s" repeatCount="indefinite" path="M150 250 H300 L350 300 H550" />
-                  </circle>
-                </svg>
-              </div>
-
-              {/* Glowing Warm Bottom */}
-              <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none" />
-
-              <div className="relative z-10 mb-12 flex justify-center items-center h-48">
-                {/* Visual Icons */}
-                <div className="flex items-center gap-12">
-                   <div className="w-20 h-20 rounded-xl bg-black/80 border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,1)] relative z-20">
-                     <Cloud className="w-8 h-8 text-primary" />
-                   </div>
-                   <div className="flex flex-col gap-12">
-                      <div className="w-20 h-20 rounded-xl bg-black/80 border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,1)] relative z-20">
-                        <Shield className="w-8 h-8 text-primary" />
-                      </div>
-                      <div className="w-20 h-20 rounded-xl bg-black/80 border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,1)] relative z-20">
-                        <User className="w-8 h-8 text-primary" />
-                      </div>
-                   </div>
-                </div>
-              </div>
-
               <div className="relative z-10">
                 <div className="text-7xl font-bold text-primary mb-1 tracking-tighter">1 T</div>
                 <div className="text-white/60 text-[13px] font-bold uppercase tracking-[0.2em]">Cloud Events Processed</div>
               </div>
             </div>
-
-            {/* Card 2: Exploits Detected */}
             <div className="lg:col-span-3 bg-[#0d0d0d] border border-white/5 rounded-xl p-10 relative overflow-hidden group hover:border-primary/30 transition-all duration-500 flex flex-col justify-between shadow-2xl">
-              <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none" />
-              
               <div className="relative z-10">
-                <p className="text-gray-500 text-[10px] font-black uppercase tracking-[0.25em] mb-12">Exploits Detected</p>
-                <div className="space-y-6">
-                  {[
-                    { name: 'Heartbleed', desc: 'Severely impacts enterprise servers', icon: <Globe className="w-4 h-4" /> },
-                    { name: 'Spectre and Meltdown', desc: 'Hardware-based vulnerabilities', icon: <Bug className="w-4 h-4" /> },
-                    { name: 'EternalBlue', desc: 'Code exploiting a vulnerability', icon: <Activity className="w-4 h-4" /> },
-                    { name: 'ZeroLogon', desc: 'Elevation of privilege (EoP) vulnerability', icon: <Lock className="w-4 h-4" /> }
-                  ].map((exploit, i) => (
-                    <div key={i} className="flex gap-4 group/item cursor-default items-start">
-                      <div className="p-2 rounded-lg bg-primary/10 border border-primary/20 text-primary">
-                        {exploit.icon}
-                      </div>
-                      <div>
-                        <h4 className="text-primary font-bold text-sm tracking-tight">{exploit.name}</h4>
-                        <p className="text-gray-600 text-[11px] font-medium leading-tight mt-0.5">{exploit.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="relative z-10 mt-12">
                 <div className="text-5xl font-bold text-primary mb-1 tracking-tighter">3.13 K</div>
                 <div className="text-white/60 text-[11px] font-bold uppercase tracking-[0.2em]">Exploit Attempts Detected</div>
               </div>
             </div>
-
-            {/* Card 3: Malware Executions */}
             <div className="lg:col-span-3 bg-[#0d0d0d] border border-white/5 rounded-xl p-10 relative overflow-hidden group hover:border-primary/30 transition-all duration-500 flex flex-col justify-between shadow-2xl">
-              <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none" />
-              
-              <div className="flex-grow relative flex items-center justify-center min-h-[220px]">
-                {/* Falling Malware Animation Refined */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                  {[...Array(8)].map((_, i) => (
-                    <div 
-                      key={i}
-                      className="absolute top-[-20px] w-1.5 h-1.5 rounded-full bg-primary animate-malware-fall"
-                      style={{ 
-                        left: `${15 + i * 12}%`, 
-                        animationDelay: `${i * 0.4}s`,
-                        animationDuration: `${2.5 + Math.random()}s`,
-                        boxShadow: '0 0 10px #F16632'
-                      }}
-                    />
-                  ))}
-                  {/* Connection lines to center */}
-                  <svg className="absolute inset-0 w-full h-full opacity-10">
-                    <line x1="50%" y1="0%" x2="50%" y2="100%" stroke="#F16632" strokeWidth="1" strokeDasharray="4 4" />
-                    <line x1="0%" y1="50%" x2="100%" y2="50%" stroke="#F16632" strokeWidth="1" strokeDasharray="4 4" />
-                  </svg>
-                </div>
-
-                <div className="w-16 h-16 rounded-xl bg-black border border-primary/40 flex items-center justify-center relative shadow-[0_0_40px_rgba(241,102,50,0.3)] z-20">
-                  <svg width="32" height="32" viewBox="0 0 40 40" fill="none" className="text-primary">
-                    <path d="M5 10L20 2L35 10V30L20 38L5 30V10Z" stroke="currentColor" strokeWidth="2" />
-                    <path d="M12 15H28M12 25H28" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  </svg>
-                  <div className="absolute inset-0 rounded-xl border-2 border-primary/50 animate-ping opacity-20" />
-                </div>
-              </div>
-
               <div className="relative z-10">
                 <div className="text-5xl font-bold text-primary mb-1 tracking-tighter">309.39 K</div>
                 <div className="text-white/60 text-[11px] font-bold uppercase tracking-[0.2em]">Malware Executions Blocked</div>
@@ -749,157 +485,64 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Threat Intel & Incident Response Section */}
-      <section className="bg-[#050505] py-24 relative overflow-hidden border-t border-white/5">
+      {/* Engage with Us Section */}
+      <section className="bg-black py-24 border-t border-white/5">
         <div className="container mx-auto px-10 max-w-[1400px]">
-          {/* Background Pattern/Glow */}
-          <div className="absolute right-0 bottom-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
-          <div className="absolute right-0 bottom-[-20%] w-[800px] h-[800px] opacity-10 pointer-events-none rotate-12" style={{ 
-            backgroundImage: 'radial-gradient(circle, #F16632 1px, transparent 1px)', 
-            backgroundSize: '30px 30px' 
-          }} />
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
-            {/* Left Column */}
-            <div className="space-y-12">
-              <div>
-                <p className="text-primary text-[13px] font-bold tracking-[0.2em] uppercase mb-8">
-                  Services
-                </p>
-                <h2 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white mb-10">
-                  Threat Intel &amp;<br />Incident Response
-                </h2>
-                <p className="text-gray-300 text-lg md:text-xl leading-relaxed max-w-xl font-normal opacity-90">
-                  Unit 42's world-renowned threat researchers, elite incident responders and expert security consultants will guide you with a threat-informed approach before, during and after an incident.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-12 pt-4 border-t border-white/10">
-                <div className="space-y-1">
-                  <div className="text-4xl font-bold text-white tracking-tighter">1 K+</div>
-                  <div className="text-[11px] font-bold text-gray-500 tracking-[0.15em] uppercase">Matters per year</div>
-                </div>
-                <div className="space-y-1">
-                  <div className="text-4xl font-bold text-white tracking-tighter">24 / 7 / 365</div>
-                  <div className="text-[11px] font-bold text-gray-500 tracking-[0.15em] uppercase">Incident Response</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column */}
-            <div className="flex flex-col gap-8 lg:items-end">
-              <Button variant="outline" className="rounded-full border-white/30 bg-transparent hover:bg-white hover:text-black px-8 h-12 text-[15px] font-bold transition-all flex items-center gap-3 border-2 w-fit mb-4">
-                Explore Unit 42 <ArrowRight className="w-5 h-5" />
-              </Button>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl">
-                {[
-                  { val: '200+', label: 'threat researchers' },
-                  { val: '30 M', label: 'malware samples analyzed per day' },
-                  { val: '1 K+', label: 'incident response engagements a year' },
-                  { val: '150+', label: 'trusted partner of law firms' }
-                ].map((stat, i) => (
-                  <div key={i} className="bg-[#b9461d] p-8 rounded-xl aspect-[1.8/1] flex flex-col justify-center items-center text-center shadow-2xl transition-transform hover:scale-[1.02] cursor-default">
-                    <div className="text-5xl font-bold text-white mb-2 tracking-tighter">{stat.val}</div>
-                    <div className="text-[13px] font-bold text-white/90 leading-tight max-w-[160px] uppercase tracking-wide">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Secure Whatever/AI Feature Section */}
-      <section className="relative min-h-[900px] flex items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          {featurePersonBg && (
-            <Image
-              src={featurePersonBg.imageUrl}
-              alt={featurePersonBg.description}
-              fill
-              className="object-cover"
-              priority
-              data-ai-hint={featurePersonBg.imageHint}
-            />
-          )}
-          {/* Top Orange Line Indicator */}
-          <div className="absolute top-0 left-20 w-32 h-1 bg-primary" />
-          
-          {/* Gradient Overlays */}
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/20 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-          
-          {/* Refined Right Side Tech Pattern */}
-          <div className="absolute right-0 top-0 bottom-0 w-32 opacity-30 pointer-events-none" style={{ 
-            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 15px, #00d4ff 15px, #00d4ff 16px)',
-          }} />
-        </div>
-
-        <div className="container mx-auto px-20 max-w-[1400px] relative z-10 py-32 flex flex-col h-full min-h-[900px]">
-          {/* Headline */}
-          <div className="max-w-4xl mt-12">
-            <h2 className="text-5xl md:text-[68px] font-bold leading-[1.05] tracking-tight text-white">
-              Secure whatever, whenever, wherever — with less complexity.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-auto items-end pb-12">
-            {/* Left Side Feature List */}
-            <div className="lg:col-span-5 space-y-10">
-              {[
-                { 
-                  label: 'Secure Your AI ecosystem', 
-                  icon: (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#00d4ff" />
-                    </svg>
-                  ), 
-                  active: true 
-                },
-                { label: 'Secure your network', icon: <Hexagon className="w-5 h-5" /> },
-                { label: 'Secure your cloud', icon: <Hexagon className="w-5 h-5" /> },
-                { label: 'Automate your SOC', icon: <Hexagon className="w-5 h-5" /> },
-                { label: 'Threat intel and incident response services', icon: <Hexagon className="w-5 h-5" /> }
-              ].map((item, i) => (
-                <div key={i} className={cn(
-                  "flex items-center gap-5 transition-all cursor-pointer group",
-                  item.active ? "opacity-100" : "opacity-60 hover:opacity-100"
-                )}>
-                  <div className={cn(
-                    "transition-colors",
-                    item.active ? "text-[#00d4ff]" : "text-white group-hover:text-primary"
-                  )}>
-                    {item.icon}
-                  </div>
-                  <span className={cn(
-                    "text-[15px] font-bold tracking-wide uppercase",
-                    item.active ? "text-white" : "text-white"
-                  )}>
-                    {item.label}
-                  </span>
-                </div>
+          {/* Segmented Control Tabs */}
+          <div className="flex justify-center mb-16">
+            <div className="bg-[#121212] p-1 rounded-full border border-white/10 flex items-center">
+              {['Executives', 'Specialists', 'Partners', 'Customers'].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveEngageTab(tab)}
+                  className={cn(
+                    "px-8 py-3 rounded-full text-sm font-bold transition-all uppercase tracking-wider",
+                    activeEngageTab === tab 
+                      ? "bg-primary text-white shadow-lg" 
+                      : "text-gray-400 hover:text-white"
+                  )}
+                >
+                  {tab}
+                </button>
               ))}
             </div>
+          </div>
 
-            {/* Bottom Right CTA Links */}
-            <div className="lg:col-span-7 lg:flex justify-end gap-16 items-end pb-2">
-              {[
-                { text: 'Secure AI apps, agents, models, and data at every step' },
-                { text: 'Secure the use of GenAI applications in the enterprise' }
-              ].map((link, i) => (
-                <div key={i} className="group cursor-pointer max-w-[340px] mb-8 lg:mb-0">
-                  <div className="flex items-start gap-4 p-2 transition-transform group-hover:translate-x-1">
-                    <p className="text-xl md:text-[22px] font-bold leading-tight text-white group-hover:text-primary transition-colors">
-                      {link.text}
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {engageCards.map((card, i) => {
+              const imgData = PlaceHolderImages.find(img => img.id === card.imageId);
+              return (
+                <div key={i} className="bg-[#121212] border border-white/5 rounded-2xl overflow-hidden flex flex-col md:flex-row h-full group hover:border-primary/30 transition-all duration-500 shadow-xl">
+                  {/* Left Side: Image */}
+                  <div className="relative w-full md:w-[45%] h-[240px] md:h-auto overflow-hidden">
+                    {imgData && (
+                      <Image
+                        src={imgData.imageUrl}
+                        alt={imgData.description}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        data-ai-hint={imgData.imageHint}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#121212]/10 md:to-[#121212]/40" />
+                  </div>
+
+                  {/* Right Side: Content */}
+                  <div className="p-8 md:p-10 flex flex-col justify-center flex-grow">
+                    <h3 className="text-2xl font-bold text-white mb-4 leading-tight">
+                      {card.title}
+                    </h3>
+                    <p className="text-gray-400 text-[15px] leading-relaxed mb-8 flex-grow">
+                      {card.description}
                     </p>
-                    <ArrowRight className="w-6 h-6 mt-1 text-white shrink-0 group-hover:text-primary" />
+                    <button className="flex items-center gap-3 text-primary font-bold text-sm tracking-wide uppercase group/btn transition-colors hover:text-primary/80">
+                      {card.cta} <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -915,7 +558,6 @@ export default function Home() {
           </div>
           
           <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(0,0,0,0.6)] group">
-             {/* Main Video Content */}
              <video 
                autoPlay 
                muted 
@@ -925,22 +567,7 @@ export default function Home() {
              >
                <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
              </video>
-             
-             {/* Stylized Overlay */}
              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity group-hover:opacity-90" />
-             
-             {/* Tech Interface Elements */}
-             <div className="absolute top-10 left-10 flex items-center gap-3">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_10px_#ef4444]" />
-                <span className="text-[11px] font-bold tracking-[0.25em] text-white/60 uppercase">System Status: Active Monitoring</span>
-             </div>
-
-             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="w-24 h-24 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center scale-75 group-hover:scale-100 transition-transform duration-500">
-                   <Play className="w-10 h-10 text-white fill-white" />
-                </div>
-             </div>
-
              <div className="absolute bottom-12 left-12 right-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
                 <div className="space-y-3 max-w-2xl">
                    <div className="inline-block px-3 py-1 bg-primary text-white text-[11px] font-bold tracking-widest uppercase rounded">
@@ -976,37 +603,6 @@ export default function Home() {
           </div>
         </div>
       )}
-
-      <style jsx global>{`
-        @keyframes malware-fall {
-          0% { transform: translateY(-20px); opacity: 0; }
-          20% { opacity: 1; }
-          80% { opacity: 1; }
-          100% { transform: translateY(220px); opacity: 0; }
-        }
-        .animate-malware-fall {
-          animation: malware-fall linear infinite;
-        }
-        .animate-spin-slow {
-          animation: spin 12s linear infinite;
-        }
-        .animate-reverse-spin {
-          animation: spin 8s linear reverse infinite;
-        }
-        .animate-ping-slow {
-          animation: ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes ping {
-          75%, 100% {
-            transform: scale(2);
-            opacity: 0;
-          }
-        }
-      `}</style>
     </div>
   );
 }

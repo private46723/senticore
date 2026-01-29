@@ -11,6 +11,30 @@
       "description": "Professional woman in a modern high-tech office environment, focused on security operations",
       "imageUrl": "https://images.unsplash.com/photo-1759489036027-44eac680741a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0ZWNobm9sb2d5JTIwcHJvZmVzc2lvbmFsfGVufDB8fHx8MTc2OTcyNjg1OHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "technology professional"
+    },
+    {
+      "id": "ignite-on-tour",
+      "description": "Ignite on Tour event poster with orange glowing text and technological patterns",
+      "imageUrl": "https://images.unsplash.com/photo-1736768393527-4a001a156402?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxldmVudCUyMHBvc3RlcnxlbnwwfHx8fDE3Njk3MjY4NTl8MA&ixlib=rb-4.1.0&q=80&w=600",
+      "imageHint": "event poster"
+    },
+    {
+      "id": "executive-briefing",
+      "description": "Business professionals in a collaborative meeting discussing security strategy",
+      "imageUrl": "https://images.unsplash.com/photo-1522071823991-b9671f903f60?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxidXNpbmVzcyUyMG1lZXRpbmd8ZW58MHx8fHwxNzY5NzI2ODU5fDA&ixlib=rb-4.1.0&q=80&w=600",
+      "imageHint": "business meeting"
+    },
+    {
+      "id": "under-attack",
+      "description": "Cybersecurity data center with glowing digital patterns representing incident response",
+      "imageUrl": "https://images.unsplash.com/photo-1629904853716-f0bc54eea481?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjeWJlcnNlY3VyaXR5JTIwaGFsbHdheXxlbnwwfHx8fDE3Njk3MjY4NTl8MA&ixlib=rb-4.1.0&q=80&w=600",
+      "imageHint": "cybersecurity hallway"
+    },
+    {
+      "id": "ai-platforms",
+      "description": "Stylized glowing security shield on a dark background representing AI-powered security",
+      "imageUrl": "https://images.unsplash.com/photo-1633412802994-5c058f151b66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjeWJlcnNlc2VjdXJpdHklMjBzaGllbGR8ZW58MHx8fHwxNzY5NzI2ODU5fDA&ixlib=rb-4.1.0&q=80&w=600",
+      "imageHint": "cybersecurity shield"
     }
   ]
 }
