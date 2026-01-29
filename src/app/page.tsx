@@ -1,23 +1,25 @@
-
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe, Sparkles, Hexagon, Play } from 'lucide-react';
+import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe, Sparkles, Hexagon, Play, Send, Loader2, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
+import { analyzeThreat, type AnalyzeThreatOutput } from '@/ai/flows/analyze-security-threat';
 
 export default function Home() {
   const [showCookies, setShowCookies] = useState(true);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [activePlatformTab, setActivePlatformTab] = useState('network');
+  const [aiQuery, setAiQuery] = useState('');
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiResponse, setAiResponse] = useState<AnalyzeThreatOutput | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
   const featurePersonBg = PlaceHolderImages.find(img => img.id === 'feature-person-bg');
 
-  // Close menu when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -27,6 +29,22 @@ export default function Home() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  async function handleAiSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!aiQuery.trim() || aiLoading) return;
+
+    setAiLoading(true);
+    setAiResponse(null);
+    try {
+      const result = await analyzeThreat({ query: aiQuery });
+      setAiResponse(result);
+    } catch (error) {
+      console.error('AI Analysis failed:', error);
+    } finally {
+      setAiLoading(false);
+    }
+  }
 
   const navItems = [
     { name: 'Why Palo Alto Networks?', hasMenu: false },
@@ -205,6 +223,114 @@ export default function Home() {
           </div>
         </main>
       </div>
+
+      {/* Precision AI Analyst Section */}
+      <section className="bg-gradient-to-b from-black to-[#0a0a0a] py-24 relative overflow-hidden border-t border-white/10">
+        <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="max-w-xl">
+              <div className="flex items-center gap-3 mb-6">
+                <Sparkles className="text-primary w-6 h-6" />
+                <p className="text-primary text-sm font-bold tracking-[0.2em] uppercase">
+                  Precision AI® Interactive
+                </p>
+              </div>
+              <h2 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white mb-8">
+                Consult the Precision AI® Analyst
+              </h2>
+              <p className="text-gray-300 text-lg leading-relaxed mb-10">
+                Leverage our industry-leading AI models to analyze potential threats, decode log anomalies, and receive precision remediation steps instantly.
+              </p>
+              
+              <div className="bg-[#121212] border border-white/10 p-6 rounded-2xl shadow-2xl">
+                <form onSubmit={handleAiSubmit} className="relative">
+                  <input 
+                    type="text" 
+                    value={aiQuery}
+                    onChange={(e) => setAiQuery(e.target.value)}
+                    placeholder="Ask about a threat or paste a security log..."
+                    className="w-full bg-black border border-white/20 rounded-xl py-4 pl-5 pr-14 text-white placeholder:text-gray-600 focus:outline-none focus:border-primary transition-colors"
+                  />
+                  <button 
+                    disabled={aiLoading}
+                    type="submit" 
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-primary rounded-lg text-white hover:bg-primary/80 transition-all disabled:opacity-50"
+                  >
+                    {aiLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
+                  </button>
+                </form>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {['Explain Heartbleed', 'Analyze log anomaly', 'Remediation for SQLi'].map((suggest) => (
+                    <button 
+                      key={suggest}
+                      onClick={() => setAiQuery(suggest)}
+                      className="text-[11px] font-bold uppercase tracking-wider text-gray-500 hover:text-primary transition-colors border border-white/5 px-3 py-1.5 rounded-full bg-white/5"
+                    >
+                      {suggest}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="relative min-h-[400px] flex items-center justify-center">
+              {aiResponse ? (
+                <div className="w-full bg-[#121212] border border-primary/30 rounded-3xl p-10 animate-in fade-in zoom-in duration-500 shadow-[0_0_50px_rgba(241,102,50,0.15)]">
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center gap-3">
+                      <Shield className="text-primary w-6 h-6" />
+                      <h3 className="text-xl font-bold text-white">AI Analysis Result</h3>
+                    </div>
+                    <div className={cn(
+                      "px-4 py-1.5 rounded-full text-[11px] font-black uppercase tracking-widest",
+                      aiResponse.severity === 'critical' ? "bg-red-500 text-white" : "bg-primary/20 text-primary border border-primary/30"
+                    )}>
+                      {aiResponse.severity} severity
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="text-gray-500 text-[11px] font-black uppercase tracking-[0.2em] mb-3">Threat Assessment</h4>
+                      <p className="text-gray-200 leading-relaxed italic border-l-2 border-primary pl-4">
+                        "{aiResponse.analysis}"
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-gray-500 text-[11px] font-black uppercase tracking-[0.2em] mb-4">Recommended Actions</h4>
+                      <ul className="grid grid-cols-1 gap-3">
+                        {aiResponse.recommendations.map((rec, i) => (
+                          <li key={i} className="flex items-center gap-3 bg-black/40 border border-white/5 p-4 rounded-xl group hover:border-primary/40 transition-colors">
+                            <div className="w-2 h-2 rounded-full bg-primary" />
+                            <span className="text-sm font-medium text-gray-300">{rec}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center space-y-8 max-w-sm">
+                  <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto border border-primary/20 animate-pulse">
+                    <Sparkles className="text-primary w-10 h-10" />
+                  </div>
+                  <p className="text-gray-500 font-bold uppercase tracking-[0.2em] text-sm">
+                    {aiLoading ? "Consulting Precision AI® Knowledge Graph..." : "Waiting for your input to analyze threats"}
+                  </p>
+                  <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+                     <svg className="w-full h-full" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-primary animate-ping-slow" />
+                        <circle cx="50" cy="50" r="30" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-primary" />
+                        <path d="M50 10 L50 90 M10 50 L90 50" stroke="currentColor" strokeWidth="0.5" className="text-primary" />
+                     </svg>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* AI Transformation Stats Section */}
       <section className="bg-black py-24 relative overflow-hidden">
