@@ -2,8 +2,8 @@ import type {Metadata} from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Simple Page',
-  description: 'A friendly Hello World application',
+  title: 'Senticore | Global Security Operations & Managed SOC',
+  description: 'Next-generation Blue Team (L1/L2) security monitoring, EDR management, and AI-driven threat intelligence for the modern enterprise.',
 };
 
 export default function RootLayout({
@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

@@ -1,6 +1,6 @@
 'use server';
 /**
- * @fileOverview A cybersecurity threat analysis AI agent.
+ * @fileOverview A cybersecurity threat analysis AI agent for Senticore.
  *
  * - analyzeThreat - A function that handles the threat analysis process.
  * - AnalyzeThreatInput - The input type for the analyzeThreat function.
@@ -30,13 +30,13 @@ const prompt = ai.definePrompt({
   name: 'analyzeThreatPrompt',
   input: { schema: AnalyzeThreatInputSchema },
   output: { schema: AnalyzeThreatOutputSchema },
-  prompt: `You are an elite cybersecurity analyst at Palo Alto Networks, specializing in Precision AI® technologies.
+  prompt: `You are an elite cybersecurity analyst at Senticore Security Global, specializing in Precision AI® threat hunting.
   
   Analyze the following security query or log snippet:
   
   Query: {{{query}}}
   
-  Provide a professional, technical analysis including the threat nature, its potential impact, and a set of specific, actionable remediation steps. Use a tone that is authoritative yet helpful.`,
+  Provide a professional, technical analysis including the threat nature, its potential impact on enterprise infrastructure, and a set of specific, actionable remediation steps. Your tone should be authoritative, global, and highly professional.`,
 });
 
 const analyzeThreatFlow = ai.defineFlow(
@@ -47,7 +47,7 @@ const analyzeThreatFlow = ai.defineFlow(
   },
   async (input) => {
     const { output } = await prompt(input);
-    if (!output) throw new Error('AI failed to generate analysis');
+    if (!output) throw new Error('Senticore AI failed to generate analysis');
     return output;
   }
 );
