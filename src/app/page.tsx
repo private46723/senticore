@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -488,60 +487,82 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Proven Success Video Section */}
+      {/* Proven Success Full Width Video Section */}
       <section id="proven-success" className="bg-[#050505] py-24 border-t border-white/5 relative overflow-hidden">
         <div className="container mx-auto px-10 max-w-[1400px]">
-          <div className="flex flex-col lg:flex-row gap-20 items-center">
-            <div className="lg:w-1/2 space-y-10">
-              <h2 className="text-5xl md:text-[72px] font-black leading-none tracking-tight uppercase">
-                Proven <br />
-                <span className="text-primary italic">Success</span>
-              </h2>
-              <p className="text-xl text-gray-400 max-w-xl leading-relaxed">
-                Senticore's Blue Team operations provide more than just monitoring. We deliver measurable security outcomes for the world's most targeted industries.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <div className="text-4xl font-bold text-white">99.9%</div>
-                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Threat Containment Rate</p>
-                </div>
-                <div className="space-y-2">
-                  <div className="text-4xl font-bold text-white">&lt; 15m</div>
-                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Average Response Time</p>
-                </div>
-              </div>
-              <Button className="bg-white text-black hover:bg-gray-200 rounded-full px-12 py-7 font-bold text-sm uppercase tracking-wider">
-                View Case Studies
-              </Button>
-            </div>
-            <div className="lg:w-1/2 w-full">
-              <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 group cursor-pointer shadow-[0_0_80px_rgba(241,102,50,0.1)]">
-                {videoThumb && (
-                  <Image
-                    src={videoThumb.imageUrl}
-                    alt="Cybersecurity Operations Video"
-                    fill
-                    className="object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000"
-                    data-ai-hint={videoThumb.imageHint}
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-24 h-24 bg-primary/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-300 shadow-2xl">
-                    <Play className="text-white w-10 h-10 fill-current ml-1" />
-                  </div>
-                </div>
-                <div className="absolute bottom-8 left-8 flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center">
-                    <Shield className="text-primary w-6 h-6" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-black text-white/40 uppercase tracking-widest mb-1">Senticore Operations</div>
-                    <div className="text-lg font-bold text-white uppercase tracking-tight">Real-Time Threat Hunting 2025</div>
-                  </div>
-                </div>
+          <div className="text-center mb-20 max-w-4xl mx-auto">
+            <h2 className="text-5xl md:text-[80px] font-black leading-none tracking-tight uppercase mb-8">
+              Proven <span className="text-primary italic">Success</span>
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light">
+              Senticore delivers measurable security outcomes for the world's most targeted industries. Witness our global Blue Team in action.
+            </p>
+          </div>
+
+          {/* Full Width Video Container */}
+          <div className="relative w-full aspect-video rounded-[2rem] overflow-hidden border border-white/10 group cursor-pointer shadow-[0_0_120px_rgba(241,102,50,0.2)] transition-all duration-700">
+            {videoThumb && (
+              <Image
+                src={videoThumb.imageUrl}
+                alt="Cybersecurity Operations Video"
+                fill
+                className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
+                data-ai-hint={videoThumb.imageHint}
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/20" />
+            
+            {/* Play Button Overlay */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-28 h-28 bg-primary/90 rounded-full flex items-center justify-center backdrop-blur-md group-hover:scale-110 transition-transform duration-500 shadow-[0_0_60px_rgba(241,102,50,0.4)]">
+                <Play className="text-white w-12 h-12 fill-current ml-2" />
               </div>
             </div>
+
+            {/* Video Interface Details */}
+            <div className="absolute bottom-12 left-12 right-12 flex items-center justify-between pointer-events-none">
+              <div className="flex items-center gap-6">
+                <div className="w-16 h-16 rounded-2xl border border-white/20 bg-black/40 backdrop-blur-xl flex items-center justify-center">
+                  <Shield className="text-primary w-8 h-8" />
+                </div>
+                <div>
+                  <div className="text-xs font-black text-white/50 uppercase tracking-[0.3em] mb-1">Live Operation Feed</div>
+                  <div className="text-2xl font-bold text-white uppercase tracking-tight">Global Threat Hunting Strategy 2025</div>
+                </div>
+              </div>
+              <div className="hidden md:flex items-center gap-4">
+                 <div className="flex items-center gap-2 px-4 py-2 bg-red-500/20 border border-red-500/30 rounded-full">
+                    <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-red-500">Secure Protocol Active</span>
+                 </div>
+                 <div className="text-white/40 text-sm font-mono tracking-widest uppercase">08:42:12</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Success Metrics Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-20 pt-20 border-t border-white/5">
+            <div className="space-y-4">
+              <div className="text-6xl font-black text-white tracking-tighter">99.9%</div>
+              <p className="text-xs font-bold text-primary uppercase tracking-[0.3em] border-l-2 border-primary pl-4">Threat Containment Rate</p>
+              <p className="text-sm text-gray-500 leading-relaxed">Verified precision in isolating high-risk vectors before lateral movement occurs.</p>
+            </div>
+            <div className="space-y-4">
+              <div className="text-6xl font-black text-white tracking-tighter">&lt; 15m</div>
+              <p className="text-xs font-bold text-primary uppercase tracking-[0.3em] border-l-2 border-primary pl-4">Average Response SLA</p>
+              <p className="text-sm text-gray-500 leading-relaxed">Industry-leading response times powered by Senticore's global L1/L2 distribution.</p>
+            </div>
+            <div className="space-y-4">
+              <div className="text-6xl font-black text-white tracking-tighter">1.5M</div>
+              <p className="text-xs font-bold text-primary uppercase tracking-[0.3em] border-l-2 border-primary pl-4">Daily Anomalies Resolved</p>
+              <p className="text-sm text-gray-500 leading-relaxed">Seamless AI-driven filtering ensures only critical alerts reach your leadership team.</p>
+            </div>
+          </div>
+
+          <div className="mt-20 flex justify-center">
+            <Button className="bg-white text-black hover:bg-gray-200 rounded-full px-16 py-8 font-black text-sm uppercase tracking-[0.2em] shadow-2xl hover:scale-105 transition-all">
+              View Detailed Case Studies
+            </Button>
           </div>
         </div>
       </section>
