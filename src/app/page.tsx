@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe, Sparkles, Hexagon, Play, Send, Loader2 } from 'lucide-react';
+import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe, Sparkles, Hexagon, Play, Send, Loader2, Linkedin, Twitter, Youtube, Facebook } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
@@ -654,6 +654,172 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Footer Section */}
+      <footer className="bg-white text-[#555] py-20 border-t border-gray-200">
+        <div className="container mx-auto px-10 max-w-[1400px]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            {/* Products and Services Column */}
+            <div className="lg:col-span-8">
+              <div className="mb-10">
+                <h3 className="text-black font-bold text-base mb-4 inline-block border-b-2 border-gray-100 pb-2 w-full max-w-[200px]">
+                  Products and Services
+                </h3>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+                {/* Network & Cloud Sub-col */}
+                <div className="space-y-10">
+                  <div>
+                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">AI-Powered Network Security Platform</h4>
+                    <ul className="space-y-3 text-[13px]">
+                      <li><a href="#" className="hover:text-black transition-colors">Secure AI by Design</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Prisma AIRS</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">AI Access Security</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Cloud Delivered Security Services</h4>
+                    <ul className="space-y-3 text-[13px]">
+                      <li><a href="#" className="hover:text-black transition-colors">Advanced Threat Prevention</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Advanced URL Filtering</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Advanced WildFire</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Advanced DNS Security</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Enterprise Data Loss Prevention</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Enterprise IoT Security</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Medical IoT Security</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Industrial OT Security</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">SaaS Security</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Firewalls & SASE Sub-col */}
+                <div className="space-y-10">
+                  <div>
+                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Next-Generation Firewalls</h4>
+                    <ul className="space-y-3 text-[13px]">
+                      <li><a href="#" className="hover:text-black transition-colors">Hardware Firewalls</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Software Firewalls</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Strata Cloud Manager</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">SD-WAN for NGFW</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">PAN-OS</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Panorama</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Secure Access Service Edge</h4>
+                    <ul className="space-y-3 text-[13px]">
+                      <li><a href="#" className="hover:text-black transition-colors">Prisma SASE</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Application Acceleration</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Autonomous Digital Experience Management</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Enterprise DLP</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Prisma Access</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Prisma Browser</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Ops & SOC & Intel Sub-col */}
+                <div className="space-y-10">
+                  <div>
+                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">AI-Driven Security Operations Platform</h4>
+                    <ul className="space-y-3 text-[13px]">
+                      <li><a href="#" className="hover:text-black transition-colors">Cloud Security</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Cortex Cloud</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Application Security</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Cloud Posture Security</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Cloud Runtime Security</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Prisma Cloud</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">AI-Driven SOC</h4>
+                    <ul className="space-y-3 text-[13px]">
+                      <li><a href="#" className="hover:text-black transition-colors">Cortex XSIAM</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Cortex XDR</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Cortex XSOAR</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Cortex Xpanse</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Threat Intel and Incident Response Services</h4>
+                    <ul className="space-y-3 text-[13px]">
+                      <li><a href="#" className="hover:text-black transition-colors">Unit 42 Managed Detection & Response</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Managed XSIAM</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Proactive Assessments</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Incident Response</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Transform Your Security Strategy</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Discover Threat Intelligence</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Company Column */}
+            <div className="lg:col-span-2">
+              <h3 className="text-black font-bold text-base mb-10 border-b-2 border-gray-100 pb-2 inline-block w-full">
+                Company
+              </h3>
+              <ul className="space-y-4 text-[13px] font-medium">
+                <li><a href="#" className="hover:text-black transition-colors">About Us</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Careers</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Contact Us</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Corporate Responsibility</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Customers</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Investor Relations</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Location</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Newsroom</a></li>
+              </ul>
+            </div>
+
+            {/* Popular Links Column */}
+            <div className="lg:col-span-2">
+              <h3 className="text-black font-bold text-base mb-10 border-b-2 border-gray-100 pb-2 inline-block w-full">
+                Popular Links
+              </h3>
+              <ul className="space-y-4 text-[13px] font-medium">
+                <li><a href="#" className="hover:text-black transition-colors">Blog</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Communities</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Content Library</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Cyberpedia</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Event Center</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Manage Email Preferences</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Products A-Z</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Product Certifications</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Report a Vulnerability</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Sitemap</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Tech Docs</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Unit 42</a></li>
+                <li><a href="#" className="hover:text-black transition-colors">Do Not Sell or Share My Personal Information</a></li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Branding & Social */}
+          <div className="mt-24 pt-10 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex items-center gap-8">
+              <svg width="140" height="30" viewBox="0 0 160 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 6.5L14 1L23.5 6.5V17.5L14 23L4.5 17.5V6.5Z" fill="#F16632"/>
+                <path d="M14 8V16M10 12H18" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+                <text x="32" y="22" fill="black" fontSize="22" fontWeight="700" fontFamily="sans-serif">paloalto</text>
+                <text x="124" y="12" fill="#666" fontSize="9" fontFamily="sans-serif" letterSpacing="0.05em">NETWORKS</text>
+              </svg>
+              <p className="text-[11px] text-gray-400 font-medium">
+                © 2024 Palo Alto Networks, Inc. All rights reserved.
+              </p>
+            </div>
+            <div className="flex items-center gap-6">
+              <a href="#" className="text-gray-400 hover:text-primary transition-colors"><Linkedin className="w-5 h-5" /></a>
+              <a href="#" className="text-gray-400 hover:text-primary transition-colors"><Twitter className="w-5 h-5" /></a>
+              <a href="#" className="text-gray-400 hover:text-primary transition-colors"><Youtube className="w-5 h-5" /></a>
+              <a href="#" className="text-gray-400 hover:text-primary transition-colors"><Facebook className="w-5 h-5" /></a>
+            </div>
+          </div>
+        </div>
+      </footer>
 
       {/* Cookie Banner */}
       {showCookies && (
