@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 
 export default function Home() {
   const [showCookies, setShowCookies] = useState(true);
-  const [activeMenu, setActiveMenu] = useState<string | null>('Platforms');
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [activePlatformTab, setActivePlatformTab] = useState('network');
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -19,8 +19,7 @@ export default function Home() {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        // We keep 'Platforms' active as per the user's latest request screenshot
-        // setActiveMenu(null);
+        setActiveMenu(null);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -40,21 +39,47 @@ export default function Home() {
       id: 'network', 
       name: 'AI-Powered Network Security', 
       icon: <Shield className={cn("w-6 h-6 transition-colors", activePlatformTab === 'network' ? "text-yellow-400 fill-yellow-400/20" : "text-gray-400")} />,
-      largeTitle: 'AI-POWERED NETWORK SECURITY'
+      largeTitle: 'AI-POWERED NETWORK SECURITY',
+      description: 'Securing everyone and everything from the latest threats in every location. Built for Zero Trust and powered by AI, the Strata™ Network Security Platform proactively monitors, analyzes and prevents sophisticated threats in real time with less complexity, enabling secure growth and innovation for your organization.',
+      stats: [
+        { value: '95%', label: 'OF THE FORTUNE 100' },
+        { value: '70 K', label: 'CUSTOMERS' }
+      ],
+      cta: 'Explore Network Security',
+      watermark: '13x',
+      watermarkLabel: 'NETWORK SECURITY LEADER'
     },
     { 
       id: 'ops', 
       name: 'AI-Driven Security Operations', 
       icon: <Activity className={cn("w-6 h-6 transition-colors", activePlatformTab === 'ops' ? "text-yellow-400" : "text-gray-400")} />,
-      largeTitle: 'AI-DRIVEN SECURITY OPERATIONS'
+      largeTitle: 'AI-DRIVEN SECURITY OPERATIONS',
+      description: 'Supercharge your security operations with AI-driven automation. Cortex delivers visibility across the entire enterprise, automating detection and response to stay ahead of evolving threats.',
+      stats: [
+        { value: '8x', label: 'FASTER RESPONSE' },
+        { value: '250M', label: 'ALERTS REDUCED' }
+      ],
+      cta: 'Explore Security Operations',
+      watermark: 'AI',
+      watermarkLabel: 'DRIVEN SOC OPS'
     },
     { 
       id: 'cloud', 
       name: 'Real-Time Cloud Security', 
       icon: <Cloud className={cn("w-6 h-6 transition-colors", activePlatformTab === 'cloud' ? "text-yellow-400 fill-yellow-400/20" : "text-gray-400")} />,
-      largeTitle: 'REAL-TIME CLOUD SECURITY'
+      largeTitle: 'REAL-TIME CLOUD SECURITY',
+      description: 'Comprehensive security for every stage of the cloud journey. Prisma Cloud protects applications from code to cloud, ensuring complete visibility and control over your multi-cloud environment.',
+      stats: [
+        { value: '70%', label: 'REDUCTION IN RISK' },
+        { value: '2M+', label: 'WORKLOADS PROTECTED' }
+      ],
+      cta: 'Explore Cloud Security',
+      watermark: 'SEC',
+      watermarkLabel: 'CODE TO CLOUD'
     },
   ];
+
+  const currentPlatform = platforms.find(p => p.id === activePlatformTab) || platforms[0];
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white font-body selection:bg-primary/30">
@@ -106,7 +131,6 @@ export default function Home() {
                style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 0)', backgroundSize: '24px 24px' }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
-          <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-primary/10 via-accent/5 to-transparent skew-x-[-20deg] translate-x-1/4" />
         </div>
 
         {/* Header */}
@@ -163,13 +187,6 @@ export default function Home() {
 
       {/* AI Transformation Stats Section */}
       <section className="bg-black py-24 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-2 h-2 bg-primary rounded-full blur-[1px] animate-pulse" />
-          <div className="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-accent rounded-full blur-[1px] animate-pulse delay-700" />
-          <div className="absolute bottom-1/4 left-1/2 w-1 h-1 bg-white rounded-full blur-[1px] animate-pulse delay-300" />
-          <div className="absolute top-10 right-20 w-40 h-40 opacity-20 border-t-2 border-r-2 border-primary skew-x-[-20deg]" />
-        </div>
-
         <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="max-w-xl">
@@ -241,61 +258,31 @@ export default function Home() {
       </section>
 
       {/* Attackers Scale Section */}
-      <section className="bg-black py-24 relative overflow-hidden border-t border-white/5">
-        <div className="absolute inset-0 pointer-events-none opacity-40">
-           <div className="absolute top-1/2 left-0 -translate-y-1/2 w-1/2 h-full bg-gradient-to-r from-red-900/10 to-transparent blur-3xl" />
-           <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-64 h-64 bg-red-600/5 rounded-full blur-[100px]" />
-        </div>
-
-        <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
+      <section className="bg-black py-24 border-t border-white/5">
+        <div className="container mx-auto px-10 max-w-[1400px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-16">
-              <div className="space-y-4">
-                <p className="text-gray-300 text-[11px] font-bold uppercase tracking-[0.15em]">
-                  INCREASE IN EXPLOITED ZERO DAYS (YoY, 2023)
-                </p>
-                <div className="flex items-center gap-8">
-                  <div className="flex-grow h-4 bg-[#1a1a1a] rounded-full relative overflow-hidden">
-                    <div 
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full"
-                      style={{ width: '56%' }}
-                    />
+              {[
+                { label: 'INCREASE IN EXPLOITED ZERO DAYS (YoY, 2023)', percent: 56 },
+                { label: 'INCREASE IN RANSOMWARE ATTACKS (YoY, 2023)', percent: 73 },
+                { label: 'INCREASE IN DATA BREACHES AND LEAKS (YoY, 2023)', percent: 56 }
+              ].map((stat, i) => (
+                <div key={i} className="space-y-4">
+                  <p className="text-gray-300 text-[11px] font-bold uppercase tracking-[0.15em]">
+                    {stat.label}
+                  </p>
+                  <div className="flex items-center gap-8">
+                    <div className="flex-grow h-4 bg-[#1a1a1a] rounded-full relative overflow-hidden">
+                      <div 
+                        className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full"
+                        style={{ width: `${stat.percent}%` }}
+                      />
+                    </div>
+                    <span className="text-4xl md:text-5xl font-bold text-white min-w-[100px]">{stat.percent}%</span>
                   </div>
-                  <span className="text-4xl md:text-5xl font-bold text-white min-w-[100px]">56%</span>
                 </div>
-              </div>
-
-              <div className="space-y-4">
-                <p className="text-gray-300 text-[11px] font-bold uppercase tracking-[0.15em]">
-                  INCREASE IN RANSOMWARE ATTACKS (YoY, 2023)
-                </p>
-                <div className="flex items-center gap-8">
-                  <div className="flex-grow h-4 bg-[#1a1a1a] rounded-full relative overflow-hidden">
-                    <div 
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full"
-                      style={{ width: '73%' }}
-                    />
-                  </div>
-                  <span className="text-4xl md:text-5xl font-bold text-white min-w-[100px]">73%</span>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <p className="text-gray-300 text-[11px] font-bold uppercase tracking-[0.15em]">
-                  INCREASE IN DATA BREACHES AND LEAKS (YoY, 2023)
-                </p>
-                <div className="flex items-center gap-8">
-                  <div className="flex-grow h-4 bg-[#1a1a1a] rounded-full relative overflow-hidden">
-                    <div 
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full"
-                      style={{ width: '56%' }}
-                    />
-                  </div>
-                  <span className="text-4xl md:text-5xl font-bold text-white min-w-[100px]">56%</span>
-                </div>
-              </div>
+              ))}
             </div>
-
             <div className="max-w-xl lg:pl-16">
               <p className="text-primary text-sm font-bold tracking-[0.2em] uppercase mb-6">
                 The Bad News
@@ -309,16 +296,8 @@ export default function Home() {
       </section>
 
       {/* Platformization Section */}
-      <section className="bg-[#050505] py-24 relative overflow-hidden border-t border-white/5">
-        <div 
-          className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{ 
-            backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', 
-            backgroundSize: '20px 20px' 
-          }} 
-        />
-        
-        <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
+      <section className="bg-[#050505] py-24 border-t border-white/5">
+        <div className="container mx-auto px-10 max-w-[1400px]">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
             <div className="max-w-4xl">
               <p className="text-primary text-[13px] font-bold tracking-[0.2em] uppercase mb-8">
@@ -331,92 +310,40 @@ export default function Home() {
                 </span>
               </h2>
             </div>
-            
-            <div className="shrink-0">
-              <Button 
-                variant="outline" 
-                className="rounded-full border-white/20 bg-transparent hover:bg-white hover:text-black px-8 py-7 text-[15px] font-bold transition-all flex items-center gap-3 border-2"
-              >
-                See our platform approach <ArrowRight className="w-5 h-5" />
-              </Button>
-            </div>
+            <Button variant="outline" className="rounded-full border-white/20 bg-transparent hover:bg-white hover:text-black px-8 py-7 text-[15px] font-bold transition-all flex items-center gap-3 border-2 shrink-0">
+              See our platform approach <ArrowRight className="w-5 h-5" />
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Impact Stats Section */}
-      <section className="bg-black py-24 relative overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-20 pointer-events-none"
-          style={{ 
-            backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', 
-            backgroundSize: '30px 30px' 
-          }} 
-        />
-        
-        <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
+      {/* Impact Stats Cards */}
+      <section className="bg-black py-24">
+        <div className="container mx-auto px-10 max-w-[1400px]">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Card 1 */}
-            <div className="bg-[#121212] border border-white/10 rounded-[32px] p-10 min-h-[460px] flex flex-col relative overflow-hidden group hover:border-primary/50 transition-colors">
-              <div 
-                className="absolute top-0 right-0 w-64 h-64 opacity-20 pointer-events-none"
-                style={{ 
-                  backgroundImage: 'linear-gradient(135deg, transparent 45%, #F16632 45%, #F16632 55%, transparent 55%)',
-                  backgroundSize: '20px 20px'
-                }} 
-              />
-              <div className="relative z-10 mt-auto">
-                <div className="text-primary text-6xl md:text-[72px] font-bold mb-6 tracking-tight">90 %</div>
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 leading-tight">reduction in MTTR</h3>
-                <p className="text-gray-400 text-lg leading-relaxed max-w-[280px] font-normal">
-                  Drive innovation and digital transformation with AI.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-[#121212] border border-white/10 rounded-[32px] p-10 min-h-[460px] flex flex-col relative overflow-hidden group hover:border-primary/50 transition-colors">
-              <div 
-                className="absolute top-0 right-0 w-64 h-64 opacity-20 pointer-events-none"
-                style={{ 
-                  backgroundImage: 'linear-gradient(135deg, transparent 45%, #F16632 45%, #F16632 55%, transparent 55%)',
-                  backgroundSize: '20px 20px'
-                }} 
-              />
-              <div className="relative z-10 mt-auto">
-                <div className="text-white text-3xl font-normal mb-2 flex items-baseline gap-3">
-                  up to <span className="text-primary text-6xl md:text-[72px] font-bold tracking-tight">30.9 B</span>
+            {[
+              { val: '90 %', title: 'reduction in MTTR', desc: 'Drive innovation and digital transformation with AI.' },
+              { val: '30.9 B', title: 'inline attacks blocked per day', desc: 'Proactively monitor, analyze and prevent sophisticated threats in real time with less complexity, enabling secure growth and innovation for your organization.', prefix: 'up to ' },
+              { val: '480 B', title: 'endpoints scanned daily', desc: 'Enable better, faster security with an integrated suite of battle-tested, AI-driven products.' }
+            ].map((card, i) => (
+              <div key={i} className="bg-[#121212] border border-white/10 rounded-[32px] p-10 min-h-[460px] flex flex-col relative overflow-hidden group hover:border-primary/50 transition-colors">
+                <div className="absolute top-0 right-0 w-64 h-64 opacity-20 pointer-events-none" style={{ backgroundImage: 'linear-gradient(135deg, transparent 45%, #F16632 45%, #F16632 55%, transparent 55%)', backgroundSize: '20px 20px' }} />
+                <div className="relative z-10 mt-auto">
+                  <div className="text-white text-3xl font-normal mb-2 flex items-baseline gap-3">
+                    {card.prefix && <span className="text-white text-2xl font-normal opacity-60">{card.prefix}</span>}
+                    <span className="text-primary text-6xl md:text-[72px] font-bold tracking-tight">{card.val}</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 leading-tight">{card.title}</h3>
+                  <p className="text-gray-400 text-lg leading-relaxed font-normal">{card.desc}</p>
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 leading-tight">inline attacks blocked per day</h3>
-                <p className="text-gray-400 text-lg leading-relaxed font-normal">
-                  Proactively monitor, analyze and prevent sophisticated threats in real time with less complexity, enabling secure growth and innovation for your organization.
-                </p>
               </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-[#121212] border border-white/10 rounded-[32px] p-10 min-h-[460px] flex flex-col relative overflow-hidden group hover:border-primary/50 transition-colors">
-              <div 
-                className="absolute top-0 right-0 w-64 h-64 opacity-20 pointer-events-none"
-                style={{ 
-                  backgroundImage: 'linear-gradient(135deg, transparent 45%, #F16632 45%, #F16632 55%, transparent 55%)',
-                  backgroundSize: '20px 20px'
-                }} 
-              />
-              <div className="relative z-10 mt-auto">
-                <div className="text-primary text-6xl md:text-[72px] font-bold mb-6 tracking-tight">480 B</div>
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 leading-tight">endpoints scanned daily</h3>
-                <p className="text-gray-400 text-lg leading-relaxed font-normal">
-                  Enable better, faster security with an integrated suite of battle-tested, AI-driven products.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Platforms Tab Section */}
-      <section className="bg-black py-24 border-t border-white/5">
+      <section className="bg-black py-24 border-t border-white/5 overflow-hidden">
         <div className="container mx-auto px-10 max-w-[1400px]">
           <h2 className="text-5xl md:text-[64px] font-bold leading-tight text-white mb-16 max-w-4xl">
             Introducing the Platforms, powered by Precision AI
@@ -448,10 +375,53 @@ export default function Home() {
           </div>
 
           {/* Platform Content Area */}
-          <div className="py-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <h3 className="text-6xl md:text-[110px] font-black text-yellow-400 tracking-[0.05em] uppercase leading-none opacity-90 drop-shadow-[0_0_20px_rgba(250,204,21,0.15)]">
-              {platforms.find(p => p.id === activePlatformTab)?.largeTitle}
+          <div key={activePlatformTab} className="animate-in fade-in slide-in-from-bottom-4 duration-700 relative">
+            <h3 className="text-6xl md:text-[110px] font-black text-yellow-400 tracking-[0.02em] uppercase leading-none opacity-90 mb-16 max-w-6xl">
+              {currentPlatform.largeTitle}
             </h3>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 relative">
+              <div className="space-y-12 relative z-10">
+                <p className="text-gray-200 text-xl md:text-[22px] leading-relaxed max-w-2xl font-normal opacity-90">
+                  {currentPlatform.description}
+                </p>
+
+                <div className="flex flex-wrap gap-20">
+                  {currentPlatform.stats.map((stat, i) => (
+                    <div key={i} className="space-y-2">
+                      <div className="text-5xl md:text-6xl font-bold text-white">{stat.value}</div>
+                      <div className="text-xs font-bold text-gray-400 tracking-widest uppercase">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <Button className="bg-yellow-400 hover:bg-yellow-500 text-black rounded-full px-10 py-7 font-bold text-[15px] flex items-center gap-3 shadow-xl transition-all">
+                  {currentPlatform.cta} <ArrowRight className="w-5 h-5" />
+                </Button>
+              </div>
+
+              {/* Watermark Section */}
+              <div className="relative flex items-center justify-center lg:justify-end">
+                <div className="relative select-none pointer-events-none group">
+                  {/* Diagonal Lines Background */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                    <div className="w-[400px] h-[400px]" style={{ 
+                      backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 15px, #F16632 15px, #F16632 18px)',
+                      maskImage: 'radial-gradient(circle, black, transparent 70%)'
+                    }} />
+                  </div>
+                  
+                  <div className="relative text-center">
+                    <div className="text-[180px] md:text-[280px] font-black text-white/5 leading-none tracking-tighter italic">
+                      {currentPlatform.watermark}
+                    </div>
+                    <div className="text-2xl md:text-3xl font-bold text-white/10 uppercase tracking-[0.2em] -mt-10">
+                      {currentPlatform.watermarkLabel}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -464,10 +434,7 @@ export default function Home() {
               This site uses cookies essential to its operation, for analytics, and for personalized content and ads. By continuing to browse this site, you acknowledge the use of cookies. <a href="#" className="text-accent hover:underline font-medium">Privacy statement</a>
             </p>
             <div className="flex items-center gap-6 shrink-0">
-              <Button 
-                onClick={() => setShowCookies(false)}
-                className="bg-accent hover:bg-[#00c853] text-black text-sm px-8 h-10 rounded-sm font-bold tracking-tight"
-              >
+              <Button onClick={() => setShowCookies(false)} className="bg-accent hover:bg-[#00c853] text-black text-sm px-8 h-10 rounded-sm font-bold tracking-tight">
                 Manage My Cookie Settings
               </Button>
               <button onClick={() => setShowCookies(false)} className="text-gray-400 hover:text-white p-2 transition-colors">
