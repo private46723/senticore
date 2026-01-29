@@ -27,12 +27,11 @@ export default function Home() {
   }, []);
 
   const navItems = [
-    { name: 'Products', hasMenu: true },
+    { name: 'Why Palo Alto Networks?', hasMenu: false },
+    { name: 'Platforms', hasMenu: true },
     { name: 'Solutions', hasMenu: false },
-    { name: 'Services', hasMenu: false },
-    { name: 'Partners', hasMenu: false },
-    { name: 'Company', hasMenu: false },
-    { name: 'More', hasMenu: false },
+    { name: 'Proven Success', hasMenu: false },
+    { name: 'Engage with Us', hasMenu: false },
   ];
 
   return (
@@ -67,7 +66,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Hero & Main Nav Container */}
+      {/* Hero Container */}
       <div className="relative flex flex-col min-h-[700px]">
         {/* Background Layer */}
         <div className="absolute inset-0 z-0">
@@ -81,22 +80,18 @@ export default function Home() {
               data-ai-hint={heroBg.imageHint}
             />
           )}
-          {/* Hexagonal Pattern Overlay */}
           <div className="absolute inset-0 opacity-20 pointer-events-none" 
                style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 0)', backgroundSize: '24px 24px' }} />
-          {/* Gradients */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
-          {/* Diagonal Accents (representing the orange/green shapes in the original) */}
           <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-primary/10 via-accent/5 to-transparent skew-x-[-20deg] translate-x-1/4" />
         </div>
 
-        {/* Header - Transparent over Hero */}
+        {/* Header */}
         <header className="relative z-[60]" ref={menuRef}>
           <nav className="py-6 px-10 flex items-center justify-between">
             <div className="flex items-center gap-12">
               <div className="flex items-center cursor-pointer">
-                {/* Logo SVG */}
                 <svg width="160" height="34" viewBox="0 0 160 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4.5 6.5L14 1L23.5 6.5V17.5L14 23L4.5 17.5V6.5Z" fill="#F16632"/>
                   <path d="M14 8V16M10 12H18" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
@@ -110,7 +105,7 @@ export default function Home() {
                     key={item.name}
                     onClick={() => setActiveMenu(activeMenu === item.name ? null : item.name)}
                     className={cn(
-                      "hover:text-primary transition-colors py-2 relative",
+                      "hover:text-primary transition-colors py-2 relative text-sm tracking-wide uppercase",
                       activeMenu === item.name && "text-primary"
                     )}
                   >
@@ -123,70 +118,9 @@ export default function Home() {
               </div>
             </div>
             <Button className="bg-[#f16632] hover:bg-[#d95528] text-white rounded-full px-10 py-6 font-bold text-sm tracking-wide shadow-lg">
-              Demos and Trials
+              Demos and trials
             </Button>
           </nav>
-
-          {/* Mega Menu - Products */}
-          {activeMenu === 'Products' && (
-            <div className="absolute top-full left-0 right-0 bg-white text-black border-t border-gray-200 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="container mx-auto px-10 py-12 max-w-[1400px]">
-                <div className="grid grid-cols-12 gap-12">
-                  <div className="col-span-8">
-                    <div className="flex items-center gap-2 mb-8 group cursor-pointer">
-                      <h2 className="text-xl font-medium text-gray-500 group-hover:text-black transition-colors">AI-Powered Network Security Platform</h2>
-                      <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" />
-                    </div>
-                    <div className="grid grid-cols-4 gap-8">
-                      <div>
-                        <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">AI Security <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
-                        <ul className="space-y-3 text-[14px]">
-                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Prisma AIRS</a></li>
-                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">AI Access Security</a></li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">Cloud Delivered Security Services <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
-                        <ul className="space-y-3 text-[14px]">
-                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Advanced Threat Prevention</a></li>
-                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Advanced URL Filtering</a></li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">Next-Generation Firewalls <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
-                        <ul className="space-y-3 text-[14px]">
-                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Hardware Firewalls</a></li>
-                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Software Firewalls</a></li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">SASE <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
-                        <ul className="space-y-3 text-[14px]">
-                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Prisma SASE</a></li>
-                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Prisma Browser</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-span-4 border-l border-gray-100 pl-12">
-                    <div className="flex items-center gap-2 mb-8 group cursor-pointer">
-                      <h2 className="text-xl font-medium text-gray-500 group-hover:text-black transition-colors">AI-Driven SOC Platform</h2>
-                      <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" />
-                    </div>
-                    <div className="grid grid-cols-1 gap-8">
-                      <div>
-                        <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">Cortex <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
-                        <ul className="space-y-3 text-[14px]">
-                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cortex XSIAM</a></li>
-                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cortex XDR</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
         </header>
 
         {/* Hero Content */}
@@ -205,17 +139,123 @@ export default function Home() {
         </main>
       </div>
 
+      {/* AI Transformation Stats Section */}
+      <section className="bg-black py-24 relative overflow-hidden">
+        {/* Particle effect background */}
+        <div className="absolute inset-0 opacity-30 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-2 h-2 bg-primary rounded-full blur-[1px] animate-pulse" />
+          <div className="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-accent rounded-full blur-[1px] animate-pulse delay-700" />
+          <div className="absolute bottom-1/4 left-1/2 w-1 h-1 bg-white rounded-full blur-[1px] animate-pulse delay-300" />
+          {/* Subtle lines in corner like the image */}
+          <div className="absolute top-10 right-20 w-40 h-40 opacity-20 border-t-2 border-r-2 border-primary skew-x-[-20deg]" />
+        </div>
+
+        <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            {/* Left Column: Text */}
+            <div className="max-w-xl">
+              <p className="text-primary text-sm font-bold tracking-[0.2em] uppercase mb-6">
+                The Good News
+              </p>
+              <h2 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white">
+                AI is rapidly transforming your organization
+              </h2>
+            </div>
+
+            {/* Right Column: Stats */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+              {/* Stat 1 */}
+              <div className="flex flex-col items-center text-center">
+                <div className="relative w-48 h-48 mb-8">
+                  {/* SVG Circular Chart */}
+                  <svg className="w-full h-full transform -rotate-90">
+                    <circle
+                      cx="96"
+                      cy="96"
+                      r="80"
+                      stroke="currentColor"
+                      strokeWidth="12"
+                      fill="transparent"
+                      className="text-gray-800"
+                    />
+                    <circle
+                      cx="96"
+                      cy="96"
+                      r="80"
+                      stroke="currentColor"
+                      strokeWidth="12"
+                      fill="transparent"
+                      strokeDasharray={2 * Math.PI * 80}
+                      strokeDashoffset={(1 - 0.78) * 2 * Math.PI * 80}
+                      strokeLinecap="round"
+                      className="text-primary"
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-4xl md:text-5xl font-bold text-white">78 %</span>
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-primary text-2xl font-bold">~1.5X growth</p>
+                  <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">
+                    In usage in last 12 months
+                  </p>
+                </div>
+              </div>
+
+              {/* Stat 2 */}
+              <div className="flex flex-col items-center text-center">
+                <div className="relative w-48 h-48 mb-8">
+                  <svg className="w-full h-full transform -rotate-90">
+                    <circle
+                      cx="96"
+                      cy="96"
+                      r="80"
+                      stroke="currentColor"
+                      strokeWidth="12"
+                      fill="transparent"
+                      className="text-gray-800"
+                    />
+                    <circle
+                      cx="96"
+                      cy="96"
+                      r="80"
+                      stroke="currentColor"
+                      strokeWidth="12"
+                      fill="transparent"
+                      strokeDasharray={2 * Math.PI * 80}
+                      strokeDashoffset={(1 - 0.94) * 2 * Math.PI * 80}
+                      strokeLinecap="round"
+                      className="text-primary"
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-4xl md:text-5xl font-bold text-white">94 %</span>
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-primary text-2xl font-bold lowercase">development</p>
+                  <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">
+                    Enterprises using Gen AI software
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Cookie Banner */}
       {showCookies && (
         <div className="fixed bottom-0 left-0 right-0 bg-[#000000] border-t border-white/10 p-5 z-[100] animate-in slide-in-from-bottom duration-500">
           <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6 max-w-[1400px]">
-            <p className="text-[14px] text-gray-200/90 leading-normal font-normal">
+            <p className="text-[14px] text-gray-200/90 leading-normal font-normal flex-grow">
               This site uses cookies essential to its operation, for analytics, and for personalized content and ads. By continuing to browse this site, you acknowledge the use of cookies. <a href="#" className="text-accent hover:underline font-medium">Privacy statement</a>
             </p>
             <div className="flex items-center gap-6 shrink-0">
               <Button 
                 onClick={() => setShowCookies(false)}
-                className="bg-accent hover:bg-[#00c853] text-black text-sm px-8 h-12 rounded-sm font-bold tracking-tight"
+                className="bg-accent hover:bg-[#00c853] text-black text-sm px-8 h-10 rounded-sm font-bold tracking-tight"
               >
                 Manage My Cookie Settings
               </Button>
