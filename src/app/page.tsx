@@ -139,20 +139,17 @@ export default function Home() {
         </main>
       </div>
 
-      {/* AI Transformation Stats Section */}
+      {/* AI Transformation Stats Section - THE GOOD NEWS */}
       <section className="bg-black py-24 relative overflow-hidden">
-        {/* Particle effect background */}
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-2 h-2 bg-primary rounded-full blur-[1px] animate-pulse" />
           <div className="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-accent rounded-full blur-[1px] animate-pulse delay-700" />
           <div className="absolute bottom-1/4 left-1/2 w-1 h-1 bg-white rounded-full blur-[1px] animate-pulse delay-300" />
-          {/* Subtle lines in corner like the image */}
           <div className="absolute top-10 right-20 w-40 h-40 opacity-20 border-t-2 border-r-2 border-primary skew-x-[-20deg]" />
         </div>
 
         <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            {/* Left Column: Text */}
             <div className="max-w-xl">
               <p className="text-primary text-sm font-bold tracking-[0.2em] uppercase mb-6">
                 The Good News
@@ -162,22 +159,11 @@ export default function Home() {
               </h2>
             </div>
 
-            {/* Right Column: Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
-              {/* Stat 1 */}
               <div className="flex flex-col items-center text-center">
                 <div className="relative w-48 h-48 mb-8">
-                  {/* SVG Circular Chart */}
                   <svg className="w-full h-full transform -rotate-90">
-                    <circle
-                      cx="96"
-                      cy="96"
-                      r="80"
-                      stroke="currentColor"
-                      strokeWidth="12"
-                      fill="transparent"
-                      className="text-gray-800"
-                    />
+                    <circle cx="96" cy="96" r="80" stroke="currentColor" strokeWidth="12" fill="transparent" className="text-gray-800" />
                     <circle
                       cx="96"
                       cy="96"
@@ -197,25 +183,14 @@ export default function Home() {
                 </div>
                 <div className="space-y-1">
                   <p className="text-primary text-2xl font-bold">~1.5X growth</p>
-                  <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">
-                    In usage in last 12 months
-                  </p>
+                  <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">In usage in last 12 months</p>
                 </div>
               </div>
 
-              {/* Stat 2 */}
               <div className="flex flex-col items-center text-center">
                 <div className="relative w-48 h-48 mb-8">
                   <svg className="w-full h-full transform -rotate-90">
-                    <circle
-                      cx="96"
-                      cy="96"
-                      r="80"
-                      stroke="currentColor"
-                      strokeWidth="12"
-                      fill="transparent"
-                      className="text-gray-800"
-                    />
+                    <circle cx="96" cy="96" r="80" stroke="currentColor" strokeWidth="12" fill="transparent" className="text-gray-800" />
                     <circle
                       cx="96"
                       cy="96"
@@ -235,11 +210,83 @@ export default function Home() {
                 </div>
                 <div className="space-y-1">
                   <p className="text-primary text-2xl font-bold lowercase">development</p>
-                  <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">
-                    Enterprises using Gen AI software
-                  </p>
+                  <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">Enterprises using Gen AI software</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Attackers Scale Section - THE BAD NEWS */}
+      <section className="bg-black py-24 relative overflow-hidden border-t border-white/5">
+        {/* Dark red glow in background */}
+        <div className="absolute inset-0 pointer-events-none opacity-40">
+           <div className="absolute top-1/2 left-0 -translate-y-1/2 w-1/2 h-full bg-gradient-to-r from-red-900/10 to-transparent blur-3xl" />
+           <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-64 h-64 bg-red-600/5 rounded-full blur-[100px]" />
+        </div>
+
+        <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            {/* Left Column: Horizontal Progress Bars */}
+            <div className="space-y-16">
+              {/* Stat 1 */}
+              <div className="space-y-4">
+                <p className="text-gray-300 text-[11px] font-bold uppercase tracking-[0.15em]">
+                  INCREASE IN EXPLOITED ZERO DAYS (YoY, 2023)
+                </p>
+                <div className="flex items-center gap-8">
+                  <div className="flex-grow h-4 bg-[#1a1a1a] rounded-full relative overflow-hidden">
+                    <div 
+                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full shadow-[0_0_15px_rgba(241,102,50,0.3)]"
+                      style={{ width: '56%' }}
+                    />
+                  </div>
+                  <span className="text-4xl md:text-5xl font-bold text-white min-w-[100px]">56%</span>
+                </div>
+              </div>
+
+              {/* Stat 2 */}
+              <div className="space-y-4">
+                <p className="text-gray-300 text-[11px] font-bold uppercase tracking-[0.15em]">
+                  INCREASE IN RANSOMWARE ATTACKS (YoY, 2023)
+                </p>
+                <div className="flex items-center gap-8">
+                  <div className="flex-grow h-4 bg-[#1a1a1a] rounded-full relative overflow-hidden">
+                    <div 
+                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full shadow-[0_0_15px_rgba(241,102,50,0.3)]"
+                      style={{ width: '73%' }}
+                    />
+                  </div>
+                  <span className="text-4xl md:text-5xl font-bold text-white min-w-[100px]">73%</span>
+                </div>
+              </div>
+
+              {/* Stat 3 */}
+              <div className="space-y-4">
+                <p className="text-gray-300 text-[11px] font-bold uppercase tracking-[0.15em]">
+                  INCREASE IN DATA BREACHES AND LEAKS (YoY, 2023)
+                </p>
+                <div className="flex items-center gap-8">
+                  <div className="flex-grow h-4 bg-[#1a1a1a] rounded-full relative overflow-hidden">
+                    <div 
+                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-900/40 via-primary to-primary rounded-full shadow-[0_0_15px_rgba(241,102,50,0.3)]"
+                      style={{ width: '56%' }}
+                    />
+                  </div>
+                  <span className="text-4xl md:text-5xl font-bold text-white min-w-[100px]">56%</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Text */}
+            <div className="max-w-xl lg:pl-16">
+              <p className="text-primary text-sm font-bold tracking-[0.2em] uppercase mb-6">
+                The Bad News
+              </p>
+              <h2 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white">
+                Attackers are supercharging their speed and scale.
+              </h2>
             </div>
           </div>
         </div>
