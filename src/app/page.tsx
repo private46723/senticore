@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe, Sparkles } from 'lucide-react';
+import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe, Sparkles, Hexagon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
@@ -705,67 +705,73 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/20 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
           
-          {/* Subtle Right Side Tech Pattern */}
-          <div className="absolute right-0 top-0 bottom-0 w-1/4 opacity-10 pointer-events-none" style={{ 
-            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 15px, #F16632 15px, #F16632 16px)',
+          {/* Refined Right Side Tech Pattern */}
+          <div className="absolute right-0 top-0 bottom-0 w-32 opacity-30 pointer-events-none" style={{ 
+            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 15px, #00d4ff 15px, #00d4ff 16px)',
           }} />
         </div>
 
-        <div className="container mx-auto px-20 max-w-[1400px] relative z-10 py-32">
-          <div className="flex flex-col h-full justify-between">
-            {/* Headline */}
-            <div className="max-w-4xl mb-24">
-              <h2 className="text-5xl md:text-[68px] font-bold leading-[1.05] tracking-tight text-white">
-                Secure whatever, whenever, wherever — with less complexity.
-              </h2>
+        <div className="container mx-auto px-20 max-w-[1400px] relative z-10 py-32 flex flex-col h-full min-h-[900px]">
+          {/* Headline */}
+          <div className="max-w-4xl mt-12">
+            <h2 className="text-5xl md:text-[68px] font-bold leading-[1.05] tracking-tight text-white">
+              Secure whatever, whenever, wherever — with less complexity.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-auto items-end pb-12">
+            {/* Left Side Feature List */}
+            <div className="lg:col-span-5 space-y-10">
+              {[
+                { 
+                  label: 'Secure Your AI ecosystem', 
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#00d4ff" />
+                    </svg>
+                  ), 
+                  active: true 
+                },
+                { label: 'Secure your network', icon: <Hexagon className="w-5 h-5" /> },
+                { label: 'Secure your cloud', icon: <Hexagon className="w-5 h-5" /> },
+                { label: 'Automate your SOC', icon: <Hexagon className="w-5 h-5" /> },
+                { label: 'Threat intel and incident response services', icon: <Hexagon className="w-5 h-5" /> }
+              ].map((item, i) => (
+                <div key={i} className={cn(
+                  "flex items-center gap-5 transition-all cursor-pointer group",
+                  item.active ? "opacity-100" : "opacity-60 hover:opacity-100"
+                )}>
+                  <div className={cn(
+                    "transition-colors",
+                    item.active ? "text-[#00d4ff]" : "text-white group-hover:text-primary"
+                  )}>
+                    {item.icon}
+                  </div>
+                  <span className={cn(
+                    "text-[15px] font-bold tracking-wide uppercase",
+                    item.active ? "text-white" : "text-white"
+                  )}>
+                    {item.label}
+                  </span>
+                </div>
+              ))}
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
-              {/* Left Side Feature List */}
-              <div className="lg:col-span-4 space-y-12">
-                {[
-                  { label: 'Secure Your AI ecosystem', icon: <Sparkles className="w-5 h-5" />, active: true },
-                  { label: 'Secure your network', icon: <Shield className="w-5 h-5" /> },
-                  { label: 'Secure your cloud', icon: <Cloud className="w-5 h-5" /> },
-                  { label: 'Automate your SOC', icon: <Activity className="w-5 h-5" /> },
-                  { label: 'Threat intel and incident response services', icon: <Search className="w-5 h-5" /> }
-                ].map((item, i) => (
-                  <div key={i} className={cn(
-                    "flex items-center gap-4 transition-all cursor-pointer group",
-                    item.active ? "opacity-100" : "opacity-40 hover:opacity-100"
-                  )}>
-                    <div className={cn(
-                      "transition-colors",
-                      item.active ? "text-primary" : "text-white group-hover:text-primary"
-                    )}>
-                      {item.icon}
-                    </div>
-                    <span className={cn(
-                      "text-lg font-bold tracking-tight",
-                      item.active ? "text-white underline underline-offset-8 decoration-primary decoration-2" : "text-white"
-                    )}>
-                      {item.label}
-                    </span>
+            {/* Bottom Right CTA Links */}
+            <div className="lg:col-span-7 lg:flex justify-end gap-16 items-end pb-2">
+              {[
+                { text: 'Secure AI apps, agents, models, and data at every step' },
+                { text: 'Secure the use of GenAI applications in the enterprise' }
+              ].map((link, i) => (
+                <div key={i} className="group cursor-pointer max-w-[340px] mb-8 lg:mb-0">
+                  <div className="flex items-start gap-4 p-2 transition-transform group-hover:translate-x-1">
+                    <p className="text-xl md:text-[22px] font-bold leading-tight text-white group-hover:text-primary transition-colors">
+                      {link.text}
+                    </p>
+                    <ArrowRight className="w-6 h-6 mt-1 text-white shrink-0 group-hover:text-primary" />
                   </div>
-                ))}
-              </div>
-
-              {/* Bottom Right CTA Links */}
-              <div className="lg:col-span-8 lg:flex justify-end gap-12 items-end">
-                {[
-                  { text: 'Secure AI apps, agents, models, and data at every step' },
-                  { text: 'Secure the use of GenAI applications in the enterprise' }
-                ].map((link, i) => (
-                  <div key={i} className="group cursor-pointer max-w-[320px] mb-8 lg:mb-0">
-                    <div className="flex items-start gap-4 p-2 transition-transform group-hover:translate-x-1">
-                      <p className="text-xl md:text-2xl font-bold leading-tight text-white group-hover:text-primary transition-colors">
-                        {link.text}
-                      </p>
-                      <ArrowRight className="w-6 h-6 mt-1 text-white shrink-0 group-hover:text-primary" />
-                    </div>
-                  </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -779,7 +785,7 @@ export default function Home() {
               This site uses cookies essential to its operation, for analytics, and for personalized content and ads. By continuing to browse this site, you acknowledge the use of cookies. <a href="#" className="text-accent hover:underline font-medium">Privacy statement</a>
             </p>
             <div className="flex items-center gap-6 shrink-0">
-              <Button onClick={() => setShowCookies(false)} className="bg-accent hover:bg-[#00c853] text-black text-sm px-8 h-10 rounded-sm font-bold tracking-tight">
+              <Button onClick={() => setShowCookies(false)} className="bg-[#00c853] hover:bg-[#00e676] text-black text-[13px] px-8 h-11 rounded-[4px] font-bold tracking-tight uppercase">
                 Manage My Cookie Settings
               </Button>
               <button onClick={() => setShowCookies(false)} className="text-gray-400 hover:text-white p-2 transition-colors">
