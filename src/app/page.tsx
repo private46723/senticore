@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy } from 'lucide-react';
+import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 export default function Home() {
   const [showCookies, setShowCookies] = useState(true);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [activePlatformTab, setActivePlatformTab] = useState('ops');
+  const [activePlatformTab, setActivePlatformTab] = useState('cloud');
   const menuRef = useRef<HTMLDivElement>(null);
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
@@ -76,19 +76,25 @@ export default function Home() {
     { 
       id: 'cloud', 
       name: 'Real-Time Cloud Security', 
-      icon: <Cloud className={cn("w-5 h-5 transition-colors", activePlatformTab === 'cloud' ? "text-sky-400" : "text-gray-400")} />,
+      icon: <Cloud className={cn("w-5 h-5 transition-colors", activePlatformTab === 'cloud' ? "text-accent" : "text-gray-400")} />,
       largeTitle: 'REAL-TIME CLOUD SECURITY',
-      description: 'Comprehensive security for every stage of the cloud journey. Prisma Cloud protects applications from code to cloud, ensuring complete visibility and control over your multi-cloud environment.',
+      description: 'See more, remediate faster, and prevent what others miss with independent, multi-cloud protection on the only platform that merges the industry\'s leading CNAPP with best-in-class CDR.',
       stats: [
-        { value: '70%', label: 'REDUCTION IN RISK' },
-        { value: '2M+', label: 'WORKLOADS PROTECTED' }
+        { value: '90%', label: 'RISK REDUCTION WITH SHIFT LEFT' },
+        { value: '25x', label: 'REDUCTION IN ALERTS & REMEDIATION WORKFLOWS' }
       ],
       cta: 'Explore Cloud Security',
-      themeColor: 'text-sky-400',
-      btnColor: 'bg-sky-400 hover:bg-sky-500 text-black',
-      underlineColor: 'bg-sky-400',
-      watermark: 'SEC',
-      watermarkLabel: ['CODE', 'TO', 'CLOUD']
+      themeColor: 'text-accent',
+      btnColor: 'bg-accent hover:bg-[#00c853] text-black',
+      underlineColor: 'bg-accent',
+      awards: [
+        { title: 'GIGAOM', subtitle: 'A Leader and Outperformer in the GigaOm Radar for CIEM' },
+        { title: 'GIGAOM', subtitle: 'Palo Alto Networks: Cloud Security Leader in First-Ever CNAPP Report' },
+        { title: 'FORRESTER', subtitle: 'The Forrester Wave™: Cloud Workload Security, Q1 2024' },
+        { title: 'FROST & SULLIVAN', subtitle: 'Frost Radar™: Cloud Security Posture Management, 2024' },
+        { title: 'FROST & SULLIVAN', subtitle: 'Frost Radar™ names Palo Alto Networks a CNAPP Leader' },
+        { title: 'KUPPINGERCOLE', subtitle: 'Overall leader : 2024 Leadership Compass: Cloud Security Orchestration' }
+      ]
     },
   ];
 
@@ -409,31 +415,42 @@ export default function Home() {
                 </Button>
               </div>
 
-              {/* Graphic/Watermark Section */}
-              <div className="relative flex items-center justify-center lg:justify-end">
+              {/* Graphic/Awards Section */}
+              <div className="relative flex flex-col items-center justify-center lg:items-end">
                 {currentPlatform.awards ? (
-                  /* Awards Grid for SecOps */
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl relative">
-                    {/* Background stylized graphic for SecOps */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none -z-10 overflow-hidden">
-                       <div className="w-full h-full transform scale-150 rotate-[15deg]" style={{ 
-                        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 10px, #00c853 10px, #00c853 12px)',
-                        maskImage: 'radial-gradient(circle, black, transparent 70%)'
-                      }} />
+                  /* Awards Grid */
+                  <div className="w-full max-w-2xl">
+                    <div className="flex justify-end mb-6">
+                      <button className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest">
+                        See all <Plus className="w-4 h-4" />
+                      </button>
                     </div>
-
-                    {currentPlatform.awards.map((award, i) => (
-                      <div key={i} className="bg-accent/90 p-6 rounded-lg text-black flex flex-col gap-4 min-h-[160px] hover:scale-[1.02] transition-transform cursor-pointer shadow-lg">
-                        <Trophy className="w-10 h-10 opacity-80" />
-                        <div>
-                          <h4 className="text-xl font-bold tracking-tight mb-1">{award.title}</h4>
-                          <p className="text-sm font-medium leading-tight opacity-90">{award.subtitle}</p>
-                        </div>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
+                      {/* Background stylized graphic */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none -z-10 overflow-hidden">
+                        <div className="w-full h-full transform scale-150 rotate-[15deg]" style={{ 
+                          backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 10px, currentColor 10px, currentColor 12px)`,
+                          maskImage: 'radial-gradient(circle, black, transparent 70%)'
+                        }} className={currentPlatform.themeColor} />
                       </div>
-                    ))}
+
+                      {currentPlatform.awards.map((award, i) => (
+                        <div key={i} className={cn(
+                          "p-6 rounded-lg text-black flex flex-col gap-4 min-h-[140px] hover:scale-[1.02] transition-transform cursor-pointer shadow-lg",
+                          currentPlatform.id === 'cloud' ? "bg-accent" : "bg-accent/90"
+                        )}>
+                          <Trophy className="w-8 h-8 opacity-60" />
+                          <div>
+                            <h4 className="text-lg font-bold tracking-tight mb-1">{award.title}</h4>
+                            <p className="text-[13px] font-medium leading-tight opacity-90">{award.subtitle}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ) : (
-                  /* Watermark Section for Strata/Prisma */
+                  /* Watermark Section for Strata */
                   <div className="relative">
                     {/* Diagonal Lines behind the text */}
                     <div className="absolute inset-0 flex items-center justify-center transform scale-150 rotate-[25deg] opacity-40 translate-x-12">
