@@ -2,15 +2,15 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud } from 'lucide-react';
+import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
 
 export default function Home() {
   const [showCookies, setShowCookies] = useState(true);
-  const [activeMenu, setActiveMenu] = useState<string | null>('Platforms');
-  const [activePlatformTab, setActivePlatformTab] = useState('network');
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [activePlatformTab, setActivePlatformTab] = useState('ops');
   const menuRef = useRef<HTMLDivElement>(null);
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
@@ -19,8 +19,7 @@ export default function Home() {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        // Keeping Platforms open for the sake of the prototype if needed
-        // setActiveMenu(null);
+        setActiveMenu(null);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -47,27 +46,37 @@ export default function Home() {
         { value: '70 K', label: 'CUSTOMERS' }
       ],
       cta: 'Explore Network Security',
+      themeColor: 'text-yellow-400',
+      btnColor: 'bg-yellow-400 hover:bg-yellow-500 text-black',
+      underlineColor: 'bg-yellow-400',
       watermark: '13x',
       watermarkLabel: ['NETWORK', 'SECURITY', 'LEADER']
     },
     { 
       id: 'ops', 
       name: 'AI-Driven Security Operations', 
-      icon: <Activity className={cn("w-5 h-5 transition-colors", activePlatformTab === 'ops' ? "text-yellow-400" : "text-gray-400")} />,
+      icon: <Activity className={cn("w-5 h-5 transition-colors", activePlatformTab === 'ops' ? "text-accent" : "text-gray-400")} />,
       largeTitle: 'AI-DRIVEN SECURITY OPERATIONS',
-      description: 'Supercharge your security operations with AI-driven automation. Cortex delivers visibility across the entire enterprise, automating detection and response to stay ahead of evolving threats.',
+      description: 'Transform the SOC and enable better, faster security with the #1 AI-driven SecOps platform powered by unified data, artificial intelligence and automation.',
       stats: [
-        { value: '8x', label: 'FASTER RESPONSE' },
-        { value: '250M', label: 'ALERTS REDUCED' }
+        { value: '700+', label: 'PARTNER INTEGRATIONS' },
+        { value: '480 B', label: 'ENDPOINTS SCANNED DAILY' }
       ],
-      cta: 'Explore Security Operations',
-      watermark: 'AI',
-      watermarkLabel: ['DRIVEN', 'SOC', 'OPS']
+      cta: 'Explore SecOps',
+      themeColor: 'text-accent',
+      btnColor: 'bg-accent hover:bg-[#00c853] text-black',
+      underlineColor: 'bg-accent',
+      awards: [
+        { title: 'Gartner.', subtitle: '2024 Gartner® Magic Quadrant™ for Endpoint Protection Platforms' },
+        { title: 'FORRESTER', subtitle: 'Forrester Cybersecurity IR Services Wave' },
+        { title: 'FROST & SULLIVAN', subtitle: 'Frost & Sullivan MDR Radar' },
+        { title: 'FORRESTER', subtitle: 'Forrester Wave™: Extended Detection And Response Platforms, Q2 2024' }
+      ]
     },
     { 
       id: 'cloud', 
       name: 'Real-Time Cloud Security', 
-      icon: <Cloud className={cn("w-5 h-5 transition-colors", activePlatformTab === 'cloud' ? "text-yellow-400" : "text-gray-400")} />,
+      icon: <Cloud className={cn("w-5 h-5 transition-colors", activePlatformTab === 'cloud' ? "text-sky-400" : "text-gray-400")} />,
       largeTitle: 'REAL-TIME CLOUD SECURITY',
       description: 'Comprehensive security for every stage of the cloud journey. Prisma Cloud protects applications from code to cloud, ensuring complete visibility and control over your multi-cloud environment.',
       stats: [
@@ -75,6 +84,9 @@ export default function Home() {
         { value: '2M+', label: 'WORKLOADS PROTECTED' }
       ],
       cta: 'Explore Cloud Security',
+      themeColor: 'text-sky-400',
+      btnColor: 'bg-sky-400 hover:bg-sky-500 text-black',
+      underlineColor: 'bg-sky-400',
       watermark: 'SEC',
       watermarkLabel: ['CODE', 'TO', 'CLOUD']
     },
@@ -365,7 +377,7 @@ export default function Home() {
                   {platform.name}
                 </span>
                 {activePlatformTab === platform.id && (
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.5)]" />
+                  <div className={cn("absolute bottom-0 left-0 right-0 h-1 shadow-[0_0_15px_rgba(255,255,255,0.2)]", currentPlatform.underlineColor)} />
                 )}
               </button>
             ))}
@@ -373,7 +385,7 @@ export default function Home() {
 
           {/* Platform Content Area */}
           <div key={activePlatformTab} className="animate-in fade-in slide-in-from-bottom-4 duration-700 relative">
-            <h3 className="text-6xl md:text-[90px] font-black text-yellow-400 tracking-[0.02em] uppercase leading-none opacity-90 mb-16 max-w-6xl">
+            <h3 className={cn("text-6xl md:text-[90px] font-black tracking-[0.02em] uppercase leading-none opacity-90 mb-16 max-w-6xl", currentPlatform.themeColor)}>
               {currentPlatform.largeTitle}
             </h3>
 
@@ -392,35 +404,59 @@ export default function Home() {
                   ))}
                 </div>
 
-                <Button className="bg-yellow-400 hover:bg-yellow-500 text-black rounded-full px-10 h-14 font-bold text-[15px] flex items-center gap-3 shadow-xl transition-all">
+                <Button className={cn("rounded-full px-10 h-14 font-bold text-[15px] flex items-center gap-3 shadow-xl transition-all", currentPlatform.btnColor)}>
                   {currentPlatform.cta} <ArrowRight className="w-5 h-5" />
                 </Button>
               </div>
 
               {/* Graphic/Watermark Section */}
-              <div className="relative flex items-center justify-center lg:justify-end pr-12">
-                <div className="relative">
-                  {/* Diagonal Lines behind the text */}
-                  <div className="absolute inset-0 flex items-center justify-center transform scale-150 rotate-[25deg] opacity-40 translate-x-12">
-                    <div className="w-[600px] h-[400px]" style={{ 
-                      backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 12px, #facc15 12px, #facc15 15px)',
-                      maskImage: 'linear-gradient(to right, transparent, black 40%, black 60%, transparent)'
-                    }} />
-                  </div>
-                  
-                  <div className="relative z-10 text-center lg:text-left flex flex-col items-center lg:items-start">
-                    <div className="text-[180px] md:text-[220px] font-black text-white/10 leading-none tracking-tighter italic select-none">
-                      {currentPlatform.watermark}
+              <div className="relative flex items-center justify-center lg:justify-end">
+                {currentPlatform.awards ? (
+                  /* Awards Grid for SecOps */
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl relative">
+                    {/* Background stylized graphic for SecOps */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none -z-10 overflow-hidden">
+                       <div className="w-full h-full transform scale-150 rotate-[15deg]" style={{ 
+                        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 10px, #00c853 10px, #00c853 12px)',
+                        maskImage: 'radial-gradient(circle, black, transparent 70%)'
+                      }} />
                     </div>
-                    <div className="mt-[-20px] space-y-1">
-                      {currentPlatform.watermarkLabel.map((line, idx) => (
-                        <div key={idx} className="text-3xl md:text-4xl font-black text-white/20 uppercase tracking-[0.15em] leading-tight select-none">
-                          {line}
+
+                    {currentPlatform.awards.map((award, i) => (
+                      <div key={i} className="bg-accent/90 p-6 rounded-lg text-black flex flex-col gap-4 min-h-[160px] hover:scale-[1.02] transition-transform cursor-pointer shadow-lg">
+                        <Trophy className="w-10 h-10 opacity-80" />
+                        <div>
+                          <h4 className="text-xl font-bold tracking-tight mb-1">{award.title}</h4>
+                          <p className="text-sm font-medium leading-tight opacity-90">{award.subtitle}</p>
                         </div>
-                      ))}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  /* Watermark Section for Strata/Prisma */
+                  <div className="relative">
+                    {/* Diagonal Lines behind the text */}
+                    <div className="absolute inset-0 flex items-center justify-center transform scale-150 rotate-[25deg] opacity-40 translate-x-12">
+                      <div className="w-[600px] h-[400px]" style={{ 
+                        backgroundImage: `repeating-linear-gradient(90deg, transparent, transparent 12px, currentColor 12px, currentColor 15px)`,
+                        maskImage: 'linear-gradient(to right, transparent, black 40%, black 60%, transparent)'
+                      }} />
+                    </div>
+                    
+                    <div className="relative z-10 text-center lg:text-left flex flex-col items-center lg:items-start">
+                      <div className="text-[180px] md:text-[220px] font-black text-white/10 leading-none tracking-tighter italic select-none">
+                        {currentPlatform.watermark}
+                      </div>
+                      <div className="mt-[-20px] space-y-1">
+                        {currentPlatform.watermarkLabel?.map((line, idx) => (
+                          <div key={idx} className="text-3xl md:text-4xl font-black text-white/20 uppercase tracking-[0.15em] leading-tight select-none">
+                            {line}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
