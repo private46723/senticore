@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 
 export default function Home() {
   const [showCookies, setShowCookies] = useState(true);
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [activeMenu, setActiveMenu] = useState<string | null>('Platforms');
   const [activePlatformTab, setActivePlatformTab] = useState('network');
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -19,7 +19,8 @@ export default function Home() {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setActiveMenu(null);
+        // Keeping Platforms open for the sake of the prototype if needed
+        // setActiveMenu(null);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -38,7 +39,7 @@ export default function Home() {
     { 
       id: 'network', 
       name: 'AI-Powered Network Security', 
-      icon: <Shield className={cn("w-6 h-6 transition-colors", activePlatformTab === 'network' ? "text-yellow-400 fill-yellow-400/20" : "text-gray-400")} />,
+      icon: <Shield className={cn("w-5 h-5 transition-colors", activePlatformTab === 'network' ? "text-yellow-400" : "text-gray-400")} />,
       largeTitle: 'AI-POWERED NETWORK SECURITY',
       description: 'Securing everyone and everything from the latest threats in every location. Built for Zero Trust and powered by AI, the Strata™ Network Security Platform proactively monitors, analyzes and prevents sophisticated threats in real time with less complexity, enabling secure growth and innovation for your organization.',
       stats: [
@@ -47,12 +48,12 @@ export default function Home() {
       ],
       cta: 'Explore Network Security',
       watermark: '13x',
-      watermarkLabel: 'NETWORK SECURITY LEADER'
+      watermarkLabel: ['NETWORK', 'SECURITY', 'LEADER']
     },
     { 
       id: 'ops', 
       name: 'AI-Driven Security Operations', 
-      icon: <Activity className={cn("w-6 h-6 transition-colors", activePlatformTab === 'ops' ? "text-yellow-400" : "text-gray-400")} />,
+      icon: <Activity className={cn("w-5 h-5 transition-colors", activePlatformTab === 'ops' ? "text-yellow-400" : "text-gray-400")} />,
       largeTitle: 'AI-DRIVEN SECURITY OPERATIONS',
       description: 'Supercharge your security operations with AI-driven automation. Cortex delivers visibility across the entire enterprise, automating detection and response to stay ahead of evolving threats.',
       stats: [
@@ -61,12 +62,12 @@ export default function Home() {
       ],
       cta: 'Explore Security Operations',
       watermark: 'AI',
-      watermarkLabel: 'DRIVEN SOC OPS'
+      watermarkLabel: ['DRIVEN', 'SOC', 'OPS']
     },
     { 
       id: 'cloud', 
       name: 'Real-Time Cloud Security', 
-      icon: <Cloud className={cn("w-6 h-6 transition-colors", activePlatformTab === 'cloud' ? "text-yellow-400 fill-yellow-400/20" : "text-gray-400")} />,
+      icon: <Cloud className={cn("w-5 h-5 transition-colors", activePlatformTab === 'cloud' ? "text-yellow-400" : "text-gray-400")} />,
       largeTitle: 'REAL-TIME CLOUD SECURITY',
       description: 'Comprehensive security for every stage of the cloud journey. Prisma Cloud protects applications from code to cloud, ensuring complete visibility and control over your multi-cloud environment.',
       stats: [
@@ -75,7 +76,7 @@ export default function Home() {
       ],
       cta: 'Explore Cloud Security',
       watermark: 'SEC',
-      watermarkLabel: 'CODE TO CLOUD'
+      watermarkLabel: ['CODE', 'TO', 'CLOUD']
     },
   ];
 
@@ -343,13 +344,9 @@ export default function Home() {
       </section>
 
       {/* Platforms Tab Section */}
-      <section className="bg-black py-24 border-t border-white/5 overflow-hidden">
+      <section className="bg-[#0a0a0a] py-24 border-t border-white/5 overflow-hidden">
         <div className="container mx-auto px-10 max-w-[1400px]">
-          <h2 className="text-5xl md:text-[64px] font-bold leading-tight text-white mb-16 max-w-4xl">
-            Introducing the Platforms, powered by Precision AI
-          </h2>
-
-          {/* Platform Tabs */}
+          {/* Main Tabs */}
           <div className="flex flex-wrap items-center gap-12 border-b border-white/10 mb-20">
             {platforms.map((platform) => (
               <button
@@ -376,13 +373,13 @@ export default function Home() {
 
           {/* Platform Content Area */}
           <div key={activePlatformTab} className="animate-in fade-in slide-in-from-bottom-4 duration-700 relative">
-            <h3 className="text-6xl md:text-[110px] font-black text-yellow-400 tracking-[0.02em] uppercase leading-none opacity-90 mb-16 max-w-6xl">
+            <h3 className="text-6xl md:text-[90px] font-black text-yellow-400 tracking-[0.02em] uppercase leading-none opacity-90 mb-16 max-w-6xl">
               {currentPlatform.largeTitle}
             </h3>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative">
               <div className="space-y-12 relative z-10">
-                <p className="text-gray-200 text-xl md:text-[22px] leading-relaxed max-w-2xl font-normal opacity-90">
+                <p className="text-gray-300 text-xl md:text-[18px] leading-relaxed max-w-xl font-normal opacity-90">
                   {currentPlatform.description}
                 </p>
 
@@ -395,28 +392,32 @@ export default function Home() {
                   ))}
                 </div>
 
-                <Button className="bg-yellow-400 hover:bg-yellow-500 text-black rounded-full px-10 py-7 font-bold text-[15px] flex items-center gap-3 shadow-xl transition-all">
+                <Button className="bg-yellow-400 hover:bg-yellow-500 text-black rounded-full px-10 h-14 font-bold text-[15px] flex items-center gap-3 shadow-xl transition-all">
                   {currentPlatform.cta} <ArrowRight className="w-5 h-5" />
                 </Button>
               </div>
 
-              {/* Watermark Section */}
-              <div className="relative flex items-center justify-center lg:justify-end">
-                <div className="relative select-none pointer-events-none group">
-                  {/* Diagonal Lines Background */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                    <div className="w-[400px] h-[400px]" style={{ 
-                      backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 15px, #F16632 15px, #F16632 18px)',
-                      maskImage: 'radial-gradient(circle, black, transparent 70%)'
+              {/* Graphic/Watermark Section */}
+              <div className="relative flex items-center justify-center lg:justify-end pr-12">
+                <div className="relative">
+                  {/* Diagonal Lines behind the text */}
+                  <div className="absolute inset-0 flex items-center justify-center transform scale-150 rotate-[25deg] opacity-40 translate-x-12">
+                    <div className="w-[600px] h-[400px]" style={{ 
+                      backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 12px, #facc15 12px, #facc15 15px)',
+                      maskImage: 'linear-gradient(to right, transparent, black 40%, black 60%, transparent)'
                     }} />
                   </div>
                   
-                  <div className="relative text-center">
-                    <div className="text-[180px] md:text-[280px] font-black text-white/5 leading-none tracking-tighter italic">
+                  <div className="relative z-10 text-center lg:text-left flex flex-col items-center lg:items-start">
+                    <div className="text-[180px] md:text-[220px] font-black text-white/10 leading-none tracking-tighter italic select-none">
                       {currentPlatform.watermark}
                     </div>
-                    <div className="text-2xl md:text-3xl font-bold text-white/10 uppercase tracking-[0.2em] -mt-10">
-                      {currentPlatform.watermarkLabel}
+                    <div className="mt-[-20px] space-y-1">
+                      {currentPlatform.watermarkLabel.map((line, idx) => (
+                        <div key={idx} className="text-3xl md:text-4xl font-black text-white/20 uppercase tracking-[0.15em] leading-tight select-none">
+                          {line}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
