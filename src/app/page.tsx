@@ -2,14 +2,15 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Search, ChevronDown, X, ArrowRight } from 'lucide-react';
+import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
 
 export default function Home() {
   const [showCookies, setShowCookies] = useState(true);
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [activeMenu, setActiveMenu] = useState<string | null>('Platforms');
+  const [activePlatformTab, setActivePlatformTab] = useState('network');
   const menuRef = useRef<HTMLDivElement>(null);
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
@@ -18,7 +19,8 @@ export default function Home() {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setActiveMenu(null);
+        // We keep 'Platforms' active as per the user's latest request screenshot
+        // setActiveMenu(null);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -31,6 +33,27 @@ export default function Home() {
     { name: 'Solutions', hasMenu: false },
     { name: 'Proven Success', hasMenu: false },
     { name: 'Engage with Us', hasMenu: false },
+  ];
+
+  const platforms = [
+    { 
+      id: 'network', 
+      name: 'AI-Powered Network Security', 
+      icon: <Shield className={cn("w-6 h-6 transition-colors", activePlatformTab === 'network' ? "text-yellow-400 fill-yellow-400/20" : "text-gray-400")} />,
+      largeTitle: 'AI-POWERED NETWORK SECURITY'
+    },
+    { 
+      id: 'ops', 
+      name: 'AI-Driven Security Operations', 
+      icon: <Activity className={cn("w-6 h-6 transition-colors", activePlatformTab === 'ops' ? "text-yellow-400" : "text-gray-400")} />,
+      largeTitle: 'AI-DRIVEN SECURITY OPERATIONS'
+    },
+    { 
+      id: 'cloud', 
+      name: 'Real-Time Cloud Security', 
+      icon: <Cloud className={cn("w-6 h-6 transition-colors", activePlatformTab === 'cloud' ? "text-yellow-400 fill-yellow-400/20" : "text-gray-400")} />,
+      largeTitle: 'REAL-TIME CLOUD SECURITY'
+    },
   ];
 
   return (
@@ -104,8 +127,8 @@ export default function Home() {
                     key={item.name}
                     onClick={() => setActiveMenu(activeMenu === item.name ? null : item.name)}
                     className={cn(
-                      "hover:text-primary transition-colors py-2 relative text-sm tracking-wide uppercase",
-                      activeMenu === item.name && "text-primary"
+                      "hover:text-primary transition-colors py-2 relative text-[13px] tracking-wide uppercase font-bold",
+                      activeMenu === item.name ? "text-primary" : "text-gray-200"
                     )}
                   >
                     {item.name}
@@ -182,7 +205,7 @@ export default function Home() {
                 </div>
                 <div className="space-y-1">
                   <p className="text-primary text-2xl font-bold">~1.5X growth</p>
-                  <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">In usage in last 12 months</p>
+                  <p className="text-gray-400 text-[11px] font-bold uppercase tracking-widest">In usage in last 12 months</p>
                 </div>
               </div>
 
@@ -209,7 +232,7 @@ export default function Home() {
                 </div>
                 <div className="space-y-1">
                   <p className="text-primary text-2xl font-bold lowercase">development</p>
-                  <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">Enterprises using Gen AI software</p>
+                  <p className="text-gray-400 text-[11px] font-bold uppercase tracking-widest">Enterprises using Gen AI software</p>
                 </div>
               </div>
             </div>
@@ -388,6 +411,47 @@ export default function Home() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Platforms Tab Section */}
+      <section className="bg-black py-24 border-t border-white/5">
+        <div className="container mx-auto px-10 max-w-[1400px]">
+          <h2 className="text-5xl md:text-[64px] font-bold leading-tight text-white mb-16 max-w-4xl">
+            Introducing the Platforms, powered by Precision AI
+          </h2>
+
+          {/* Platform Tabs */}
+          <div className="flex flex-wrap items-center gap-12 border-b border-white/10 mb-20">
+            {platforms.map((platform) => (
+              <button
+                key={platform.id}
+                onClick={() => setActivePlatformTab(platform.id)}
+                className={cn(
+                  "flex items-center gap-4 pb-6 transition-all relative group",
+                  activePlatformTab === platform.id ? "opacity-100" : "opacity-60 hover:opacity-100"
+                )}
+              >
+                {platform.icon}
+                <span className={cn(
+                  "text-lg font-bold transition-colors",
+                  activePlatformTab === platform.id ? "text-white" : "text-gray-300"
+                )}>
+                  {platform.name}
+                </span>
+                {activePlatformTab === platform.id && (
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.5)]" />
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* Platform Content Area */}
+          <div className="py-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <h3 className="text-6xl md:text-[110px] font-black text-yellow-400 tracking-[0.05em] uppercase leading-none opacity-90 drop-shadow-[0_0_20px_rgba(250,204,21,0.15)]">
+              {platforms.find(p => p.id === activePlatformTab)?.largeTitle}
+            </h3>
           </div>
         </div>
       </section>
