@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -19,6 +20,7 @@ export default function Home() {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
+  const videoThumb = PlaceHolderImages.find(img => img.id === 'video-case-study');
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -183,7 +185,6 @@ export default function Home() {
           <a href="mailto:contact@senticore.com" className="hover:text-black transition-colors flex items-center gap-2">
             <Mail className="w-4 h-4" /> contact@senticore.com
           </a>
-          <a href="#" className="hover:text-black transition-colors">Client Portal</a>
           <button className="bg-white border border-gray-300 px-5 py-1.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm text-gray-600 font-medium">
             Emergency IR?
           </button>
@@ -383,6 +384,13 @@ export default function Home() {
 
           {/* Platform Content Area */}
           <div key={activePlatformTab} className="animate-in fade-in slide-in-from-bottom-4 duration-700 relative">
+            {activePlatformTab === 'soc' && (
+              <div className="mb-8 flex items-center gap-3">
+                 <div className="px-3 py-1 bg-accent/20 border border-accent/30 rounded text-accent text-[10px] font-black uppercase tracking-[0.2em]">
+                    Available Now
+                 </div>
+              </div>
+            )}
             <h3 className={cn("text-6xl md:text-[90px] font-black tracking-[0.02em] uppercase leading-none opacity-90 mb-16 max-w-6xl", currentPlatform.themeColor)}>
               {currentPlatform.largeTitle}
             </h3>
@@ -474,6 +482,64 @@ export default function Home() {
               <div className="relative z-10">
                 <div className="text-5xl font-bold text-primary mb-1 tracking-tighter">150+</div>
                 <div className="text-white/60 text-[11px] font-bold uppercase tracking-[0.2em]">Active Breach Responses</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Proven Success Video Section */}
+      <section id="proven-success" className="bg-[#050505] py-24 border-t border-white/5 relative overflow-hidden">
+        <div className="container mx-auto px-10 max-w-[1400px]">
+          <div className="flex flex-col lg:flex-row gap-20 items-center">
+            <div className="lg:w-1/2 space-y-10">
+              <h2 className="text-5xl md:text-[72px] font-black leading-none tracking-tight uppercase">
+                Proven <br />
+                <span className="text-primary italic">Success</span>
+              </h2>
+              <p className="text-xl text-gray-400 max-w-xl leading-relaxed">
+                Senticore's Blue Team operations provide more than just monitoring. We deliver measurable security outcomes for the world's most targeted industries.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <div className="text-4xl font-bold text-white">99.9%</div>
+                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Threat Containment Rate</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-4xl font-bold text-white">&lt; 15m</div>
+                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Average Response Time</p>
+                </div>
+              </div>
+              <Button className="bg-white text-black hover:bg-gray-200 rounded-full px-12 py-7 font-bold text-sm uppercase tracking-wider">
+                View Case Studies
+              </Button>
+            </div>
+            <div className="lg:w-1/2 w-full">
+              <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 group cursor-pointer shadow-[0_0_80px_rgba(241,102,50,0.1)]">
+                {videoThumb && (
+                  <Image
+                    src={videoThumb.imageUrl}
+                    alt="Cybersecurity Operations Video"
+                    fill
+                    className="object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000"
+                    data-ai-hint={videoThumb.imageHint}
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-24 h-24 bg-primary/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-300 shadow-2xl">
+                    <Play className="text-white w-10 h-10 fill-current ml-1" />
+                  </div>
+                </div>
+                <div className="absolute bottom-8 left-8 flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center">
+                    <Shield className="text-primary w-6 h-6" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-black text-white/40 uppercase tracking-widest mb-1">Senticore Operations</div>
+                    <div className="text-lg font-bold text-white uppercase tracking-tight">Real-Time Threat Hunting 2025</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
