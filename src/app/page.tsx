@@ -36,56 +36,78 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-black text-white font-body">
+    <div className="flex flex-col min-h-screen bg-black text-white font-body selection:bg-primary/30">
       {/* Top Banner */}
-      <div className="bg-black text-white text-center py-2 text-sm border-b border-white/10">
+      <div className="bg-[#1a1a1a] text-white text-center py-2 text-[13px] border-b border-white/5">
         <p className="font-medium tracking-wide">
           Deploy Bravely — Secure your AI transformation with Prisma AIRS
         </p>
       </div>
 
       {/* Utility Nav */}
-      <div className="bg-[#f2f2f2] text-black py-1 px-6 flex justify-between items-center text-xs border-b border-gray-200">
+      <div className="bg-white text-[#444] py-2 px-6 flex justify-between items-center text-[13px] border-b border-gray-200">
         <div className="flex items-center gap-6">
-          <button className="flex items-center gap-1 hover:text-primary transition-colors font-medium">
-            Sign In <ChevronDown className="w-3 h-3" />
+          <button className="flex items-center gap-1 hover:text-black transition-colors font-normal">
+            Sign In <ChevronDown className="w-3.5 h-3.5 opacity-60" />
           </button>
-          <button className="flex items-center gap-1 hover:text-primary transition-colors uppercase font-medium">
-            EN <ChevronDown className="w-3 h-3" />
+          <button className="flex items-center gap-1 hover:text-black transition-colors uppercase font-normal">
+            EN <ChevronDown className="w-3.5 h-3.5 opacity-60" />
           </button>
-          <button className="hover:text-primary transition-colors">
+          <button className="hover:text-black transition-colors">
             <Search className="w-4 h-4" />
           </button>
         </div>
-        <div className="flex items-center gap-6 font-medium">
-          <a href="#" className="hover:text-primary transition-colors">Contact Us</a>
-          <a href="#" className="hover:text-primary transition-colors">What's New</a>
-          <a href="#" className="hover:text-primary transition-colors">Get Support</a>
-          <button className="bg-white border border-gray-300 px-4 py-1.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm">
+        <div className="flex items-center gap-6 font-normal">
+          <a href="#" className="hover:text-black transition-colors">Contact Us</a>
+          <a href="#" className="hover:text-black transition-colors">What's New</a>
+          <a href="#" className="hover:text-black transition-colors">Get Support</a>
+          <button className="bg-white border border-gray-300 px-5 py-1.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm text-gray-600 font-medium">
             Under Attack?
           </button>
         </div>
       </div>
 
-      {/* Main Nav */}
-      <header className="relative z-[60]" ref={menuRef}>
-        <nav className="bg-white text-black py-4 px-6 flex items-center justify-between border-b border-gray-100">
-          <div className="flex items-center gap-10">
-            <div className="flex items-center gap-2">
-              <div className="flex items-center">
-                {/* Simplified Logo SVG based on image */}
-                <svg width="140" height="30" viewBox="0 0 140 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4.5 5.5L12 1L19.5 5.5V14.5L12 19L4.5 14.5V5.5Z" fill="#F16632"/>
-                  <path d="M12 7V13M9 10H15" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-                  <text x="28" y="20" fill="black" fontSize="18" fontWeight="bold" fontFamily="sans-serif">paloalto</text>
-                  <text x="105" y="10" fill="black" fontSize="8" fontFamily="sans-serif">NETWORKS</text>
+      {/* Hero & Main Nav Container */}
+      <div className="relative flex flex-col min-h-[700px]">
+        {/* Background Layer */}
+        <div className="absolute inset-0 z-0">
+          {heroBg && (
+            <Image
+              src={heroBg.imageUrl}
+              alt={heroBg.description}
+              fill
+              className="object-cover opacity-50"
+              priority
+              data-ai-hint={heroBg.imageHint}
+            />
+          )}
+          {/* Hexagonal Pattern Overlay */}
+          <div className="absolute inset-0 opacity-20 pointer-events-none" 
+               style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+          {/* Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+          {/* Diagonal Accents (representing the orange/green shapes in the original) */}
+          <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-primary/10 via-accent/5 to-transparent skew-x-[-20deg] translate-x-1/4" />
+        </div>
+
+        {/* Header - Transparent over Hero */}
+        <header className="relative z-[60]" ref={menuRef}>
+          <nav className="py-6 px-10 flex items-center justify-between">
+            <div className="flex items-center gap-12">
+              <div className="flex items-center cursor-pointer">
+                {/* Logo SVG */}
+                <svg width="160" height="34" viewBox="0 0 160 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.5 6.5L14 1L23.5 6.5V17.5L14 23L4.5 17.5V6.5Z" fill="#F16632"/>
+                  <path d="M14 8V16M10 12H18" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+                  <text x="32" y="22" fill="white" fontSize="22" fontWeight="700" fontFamily="sans-serif">paloalto</text>
+                  <text x="124" y="12" fill="white" fontSize="9" fontFamily="sans-serif" letterSpacing="0.05em">NETWORKS</text>
                 </svg>
               </div>
-            </div>
-            <div className="hidden lg:flex items-center gap-8 text-[15px] font-medium h-full">
-              {navItems.map((item) => (
-                <div key={item.name} className="relative group h-full">
+              <div className="hidden lg:flex items-center gap-8 text-[15px] font-medium">
+                {navItems.map((item) => (
                   <button 
+                    key={item.name}
                     onClick={() => setActiveMenu(activeMenu === item.name ? null : item.name)}
                     className={cn(
                       "hover:text-primary transition-colors py-2 relative",
@@ -94,170 +116,111 @@ export default function Home() {
                   >
                     {item.name}
                     {activeMenu === item.name && (
-                      <div className="absolute -bottom-[21px] left-0 right-0 h-1 bg-primary" />
+                      <div className="absolute -bottom-[2px] left-0 right-0 h-[3px] bg-primary" />
                     )}
                   </button>
-                </div>
-              ))}
-            </div>
-          </div>
-          <Button className="bg-black hover:bg-gray-800 text-white rounded-full px-8 py-2 font-bold text-sm">
-            Demos and Trials
-          </Button>
-        </nav>
-
-        {/* Mega Menu - Products */}
-        {activeMenu === 'Products' && (
-          <div className="absolute top-full left-0 right-0 bg-white text-black border-t border-gray-200 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
-            <div className="container mx-auto px-10 py-12 max-w-[1400px]">
-              <div className="grid grid-cols-12 gap-12">
-                
-                {/* Column 1: AI-Powered Network Security */}
-                <div className="col-span-8">
-                  <div className="flex items-center gap-2 mb-8 group cursor-pointer">
-                    <h2 className="text-xl font-medium text-gray-500 group-hover:text-black transition-colors">AI-Powered Network Security Platform</h2>
-                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" />
-                  </div>
-                  
-                  <div className="grid grid-cols-4 gap-8">
-                    {/* Sub-Col: AI Security */}
-                    <div>
-                      <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">AI Security <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
-                      <ul className="space-y-3 text-[14px]">
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Prisma AIRS</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">AI Access Security</a></li>
-                      </ul>
-                    </div>
-
-                    {/* Sub-Col: Cloud Delivered */}
-                    <div>
-                      <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">Cloud Delivered Security Services <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
-                      <ul className="space-y-3 text-[14px]">
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Advanced Threat Prevention</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Advanced URL Filtering</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Advanced WildFire</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Advanced DNS Security</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Enterprise Data Loss Prevention</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Enterprise Device Security</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Medical Device Security</a></li>
-                      </ul>
-                    </div>
-
-                    {/* Sub-Col: Next-Gen Firewalls */}
-                    <div>
-                      <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">Next-Generation Firewalls <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
-                      <ul className="space-y-3 text-[14px]">
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Hardware Firewalls</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Software Firewalls</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Strata Cloud Manager</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">SD-WAN for NGFW</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">PAN-OS</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Panorama</a></li>
-                      </ul>
-                    </div>
-
-                    {/* Sub-Col: SASE */}
-                    <div>
-                      <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">Secure Access Service Edge <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
-                      <ul className="space-y-3 text-[14px]">
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Prisma SASE</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Application Acceleration</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Autonomous Digital Experience Management</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Enterprise DLP</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Prisma Access</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Prisma Browser</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Prisma SD-WAN</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Column 2: AI-Driven Security Operations */}
-                <div className="col-span-4 border-l border-gray-100 pl-12">
-                  <div className="flex items-center gap-2 mb-8 group cursor-pointer">
-                    <h2 className="text-xl font-medium text-gray-500 group-hover:text-black transition-colors">AI-Driven Security Operations Platform</h2>
-                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-8">
-                    {/* Sub-Col: Cloud Security */}
-                    <div>
-                      <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">Cloud Security <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
-                      <ul className="space-y-3 text-[14px]">
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cortex Cloud</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Application Security</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cloud Posture Security</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cloud Runtime Security</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Prisma Cloud</a></li>
-                      </ul>
-                    </div>
-
-                    {/* Sub-Col: AI-Driven SOC */}
-                    <div>
-                      <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">AI-Driven SOC <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
-                      <ul className="space-y-3 text-[14px]">
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cortex XSIAM</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cortex XDR</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cortex AgentX</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cortex XSOAR</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cortex Exposure Management</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cortex Xpanse</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cortex Advanced Email Security</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
+                ))}
               </div>
             </div>
-          </div>
-        )}
-      </header>
+            <Button className="bg-[#f16632] hover:bg-[#d95528] text-white rounded-full px-10 py-6 font-bold text-sm tracking-wide shadow-lg">
+              Demos and Trials
+            </Button>
+          </nav>
 
-      {/* Hero Section */}
-      <main className="relative flex-grow flex items-center min-h-[600px] overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          {heroBg && (
-            <Image
-              src={heroBg.imageUrl}
-              alt={heroBg.description}
-              fill
-              className="object-cover opacity-60"
-              priority
-              data-ai-hint={heroBg.imageHint}
-            />
+          {/* Mega Menu - Products */}
+          {activeMenu === 'Products' && (
+            <div className="absolute top-full left-0 right-0 bg-white text-black border-t border-gray-200 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="container mx-auto px-10 py-12 max-w-[1400px]">
+                <div className="grid grid-cols-12 gap-12">
+                  <div className="col-span-8">
+                    <div className="flex items-center gap-2 mb-8 group cursor-pointer">
+                      <h2 className="text-xl font-medium text-gray-500 group-hover:text-black transition-colors">AI-Powered Network Security Platform</h2>
+                      <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" />
+                    </div>
+                    <div className="grid grid-cols-4 gap-8">
+                      <div>
+                        <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">AI Security <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
+                        <ul className="space-y-3 text-[14px]">
+                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Prisma AIRS</a></li>
+                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">AI Access Security</a></li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">Cloud Delivered Security Services <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
+                        <ul className="space-y-3 text-[14px]">
+                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Advanced Threat Prevention</a></li>
+                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Advanced URL Filtering</a></li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">Next-Generation Firewalls <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
+                        <ul className="space-y-3 text-[14px]">
+                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Hardware Firewalls</a></li>
+                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Software Firewalls</a></li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">SASE <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
+                        <ul className="space-y-3 text-[14px]">
+                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Prisma SASE</a></li>
+                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Prisma Browser</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-span-4 border-l border-gray-100 pl-12">
+                    <div className="flex items-center gap-2 mb-8 group cursor-pointer">
+                      <h2 className="text-xl font-medium text-gray-500 group-hover:text-black transition-colors">AI-Driven SOC Platform</h2>
+                      <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" />
+                    </div>
+                    <div className="grid grid-cols-1 gap-8">
+                      <div>
+                        <h3 className="text-[15px] font-bold mb-4 flex items-center gap-1">Cortex <ArrowRight className="w-3 h-3 text-gray-400" /></h3>
+                        <ul className="space-y-3 text-[14px]">
+                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cortex XSIAM</a></li>
+                          <li><a href="#" className="text-gray-600 hover:text-primary transition-colors">Cortex XDR</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-transparent" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(241,102,50,0.15),transparent_60%)]" />
-        </div>
+        </header>
 
-        <div className="container mx-auto px-6 relative z-10 max-w-6xl">
-          <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] mb-8 max-w-4xl tracking-tight">
-            Palo Alto Networks Completes Chronosphere Acquisition, Unifying Observability and Security for the AI Era
-          </h1>
-          <p className="text-lg md:text-xl text-gray-300 max-w-3xl leading-relaxed mb-10 font-normal">
-            Combination of Chronosphere and Cortex AgentX platform will deliver real-time, agentic remediation for the world's leading AI-native companies.
-          </p>
-          <div className="h-[2px] w-full bg-white/20" />
-        </div>
-      </main>
+        {/* Hero Content */}
+        <main className="flex-grow flex items-center pb-20 overflow-hidden relative z-10">
+          <div className="container mx-auto px-10 max-w-[1400px]">
+            <div className="max-w-5xl">
+              <h1 className="text-5xl md:text-[68px] font-bold leading-[1.05] mb-10 tracking-tight text-white">
+                Palo Alto Networks Completes Chronosphere Acquisition, Unifying Observability and Security for the AI Era
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-200/90 max-w-4xl leading-relaxed mb-12 font-normal">
+                Combination of Chronosphere and Cortex AgentX platform will deliver real-time, agentic remediation for the world's leading AI-native companies.
+              </p>
+              <div className="h-[1px] w-full bg-white/20" />
+            </div>
+          </div>
+        </main>
+      </div>
 
       {/* Cookie Banner */}
       {showCookies && (
-        <div className="fixed bottom-0 left-0 right-0 bg-[#000000] border-t border-white/10 p-4 z-[100] animate-in slide-in-from-bottom duration-500">
-          <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6 max-w-7xl">
-            <p className="text-[13px] text-gray-300 max-w-5xl leading-tight">
-              This site uses cookies essential to its operation, for analytics, and for personalized content and ads. By continuing to browse this site, you acknowledge the use of cookies. <a href="#" className="text-[#00e676] hover:underline font-medium">Privacy statement</a>
+        <div className="fixed bottom-0 left-0 right-0 bg-[#000000] border-t border-white/10 p-5 z-[100] animate-in slide-in-from-bottom duration-500">
+          <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6 max-w-[1400px]">
+            <p className="text-[14px] text-gray-200/90 leading-normal font-normal">
+              This site uses cookies essential to its operation, for analytics, and for personalized content and ads. By continuing to browse this site, you acknowledge the use of cookies. <a href="#" className="text-accent hover:underline font-medium">Privacy statement</a>
             </p>
-            <div className="flex items-center gap-4 shrink-0">
+            <div className="flex items-center gap-6 shrink-0">
               <Button 
                 onClick={() => setShowCookies(false)}
-                className="bg-[#00e676] hover:bg-[#00c853] text-black text-sm px-8 h-10 rounded-sm font-bold tracking-tight"
+                className="bg-accent hover:bg-[#00c853] text-black text-sm px-8 h-12 rounded-sm font-bold tracking-tight"
               >
                 Manage My Cookie Settings
               </Button>
-              <button onClick={() => setShowCookies(false)} className="text-gray-400 hover:text-white p-2">
-                <X className="w-5 h-5" />
+              <button onClick={() => setShowCookies(false)} className="text-gray-400 hover:text-white p-2 transition-colors">
+                <X className="w-6 h-6" />
               </button>
             </div>
           </div>
