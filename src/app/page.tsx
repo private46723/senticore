@@ -3,7 +3,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe, Sparkles, Hexagon } from 'lucide-react';
+import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe, Sparkles, Hexagon, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
@@ -774,6 +774,60 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Customer Success Video Section */}
+      <section className="bg-[#0a0a0a] py-32 border-t border-white/5 overflow-hidden" id="proven-success">
+        <div className="container mx-auto px-10 max-w-[1400px]">
+          <div className="max-w-4xl mb-16">
+            <h2 className="text-5xl md:text-[68px] font-bold leading-[1.05] tracking-tight text-white">
+              Our customers are securing <br />
+              their <span className="text-primary">digital transformation</span>
+            </h2>
+          </div>
+          
+          <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(0,0,0,0.6)] group">
+             {/* Main Video Content */}
+             <video 
+               autoPlay 
+               muted 
+               loop 
+               playsInline 
+               className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+             >
+               <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+             </video>
+             
+             {/* Stylized Overlay */}
+             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity group-hover:opacity-90" />
+             
+             {/* Tech Interface Elements */}
+             <div className="absolute top-10 left-10 flex items-center gap-3">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_10px_#ef4444]" />
+                <span className="text-[11px] font-bold tracking-[0.25em] text-white/60 uppercase">System Status: Active Monitoring</span>
+             </div>
+
+             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="w-24 h-24 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center scale-75 group-hover:scale-100 transition-transform duration-500">
+                   <Play className="w-10 h-10 text-white fill-white" />
+                </div>
+             </div>
+
+             <div className="absolute bottom-12 left-12 right-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div className="space-y-3 max-w-2xl">
+                   <div className="inline-block px-3 py-1 bg-primary text-white text-[11px] font-bold tracking-widest uppercase rounded">
+                     Case Study
+                   </div>
+                   <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+                     Revolutionizing security architecture for the global AI-native enterprise.
+                   </h3>
+                </div>
+                <Button className="rounded-full bg-white text-black hover:bg-[#f16632] hover:text-white px-12 h-14 font-bold text-base transition-all shadow-xl shrink-0">
+                  Watch Story
+                </Button>
+             </div>
           </div>
         </div>
       </section>
