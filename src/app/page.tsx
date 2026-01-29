@@ -19,7 +19,6 @@ export default function Home() {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
-  const featurePersonBg = PlaceHolderImages.find(img => img.id === 'feature-person-bg');
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -145,6 +144,21 @@ export default function Home() {
       description: 'Expert advice and insights for using AI-powered solutions to streamline your security posture and mitigate risk.',
       cta: 'Learn more',
       imageId: 'ai-platforms'
+    }
+  ];
+
+  const perspectives = [
+    {
+      type: 'ARTICLE',
+      title: 'Securing Your AI-Powered Network Transformation: A Guide for C-Suite Leaders',
+      imageId: 'article-network',
+      theme: 'light'
+    },
+    {
+      type: 'ARTICLE',
+      title: 'A New Era of Cybersecurity with AI',
+      imageId: 'article-ai',
+      theme: 'dark-red'
     }
   ];
 
@@ -543,6 +557,62 @@ export default function Home() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Perspectives Section */}
+      <section className="bg-black py-24 relative overflow-hidden border-t border-white/5">
+        <div className="absolute inset-0 opacity-10 pointer-events-none" 
+             style={{ backgroundImage: 'repeating-linear-gradient(45deg, #ffffff 0, #ffffff 1px, transparent 0, transparent 40px)', backgroundSize: '60px 60px' }} />
+        <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+            <div className="max-w-3xl">
+              <div className="w-12 h-0.5 bg-primary mb-6" />
+              <h2 className="text-5xl md:text-[64px] font-bold leading-tight tracking-tight">
+                Staying ahead demands <br />
+                <span className="text-primary italic">perspectives</span> you can trust.
+              </h2>
+            </div>
+            <button className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm font-bold uppercase tracking-[0.2em] group">
+              View all <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {perspectives.map((article, i) => {
+              const imgData = PlaceHolderImages.find(img => img.id === article.imageId);
+              return (
+                <div key={i} className={cn(
+                  "flex flex-col h-full rounded-sm overflow-hidden transition-all duration-500 group cursor-pointer hover:translate-y-[-4px]",
+                  article.theme === 'light' ? "bg-white text-black" : "bg-[#4a140b] text-white"
+                )}>
+                  <div className="p-10 flex-grow flex flex-col">
+                    <div className={cn("text-[11px] font-black tracking-[0.3em] uppercase mb-10 opacity-60")}>
+                      {article.type}
+                    </div>
+                    <h3 className="text-2xl md:text-[28px] font-bold leading-tight mb-12">
+                      {article.title}
+                    </h3>
+                  </div>
+                  <div className="relative aspect-[16/10] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+                    {imgData && (
+                      <Image
+                        src={imgData.imageUrl}
+                        alt={imgData.description}
+                        fill
+                        className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                        data-ai-hint={imgData.imageHint}
+                      />
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+            {/* Empty space/extra card placeholder */}
+            <div className="hidden md:flex items-center justify-center border border-white/5 bg-[#0a0a0a]/40 rounded-sm">
+               <div className="text-white/20 font-bold uppercase tracking-[0.3em] text-xs">Stay Informed</div>
+            </div>
           </div>
         </div>
       </section>

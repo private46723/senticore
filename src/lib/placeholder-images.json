@@ -35,6 +35,18 @@
       "description": "Stylized glowing security shield on a dark background representing AI-powered security",
       "imageUrl": "https://images.unsplash.com/photo-1633412802994-5c058f151b66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjeWJlcnNlc2VjdXJpdHklMjBzaGllbGR8ZW58MHx8fHwxNzY5NzI2ODU5fDA&ixlib=rb-4.1.0&q=80&w=600",
       "imageHint": "cybersecurity shield"
+    },
+    {
+      "id": "article-network",
+      "description": "Abstract digital network visualization for a cybersecurity article",
+      "imageUrl": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwbmV0d29ya3xlbnwwfHx8fDE3Njk3MjY4NTl8MA&ixlib=rb-4.1.0&q=80&w=600",
+      "imageHint": "digital network"
+    },
+    {
+      "id": "article-ai",
+      "description": "Portrait of a woman representing a new era of AI technology",
+      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxmYWNlJTIwcHJvZmVzc2lvbmFsfGVufDB8fHx8MTc2OTcyNjg1OXww&ixlib=rb-4.1.0&q=80&w=600",
+      "imageHint": "face professional"
     }
   ]
 }
