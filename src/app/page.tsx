@@ -105,7 +105,7 @@ export default function Home() {
     { 
       id: 'vulnerability', 
       name: 'Vulnerability Assessment', 
-      icon: <Bug className={cn("w-5 h-5 transition-colors", activePlatformTab === 'vulnerability' ? "text-accent" : "text-gray-400")} />,
+      icon: <Bug className={cn("w-5 h-5 transition-colors", activePlatformTab === 'vulnerability' ? "text-cyan-400" : "text-gray-400")} />,
       largeTitle: 'RISK & REMEDIATION ADVICE',
       description: 'Continuous scanning and risk reporting tailored to your business needs. We provide actionable remediation advice to close security gaps.',
       stats: [
@@ -113,9 +113,9 @@ export default function Home() {
         { value: '80%', label: 'FASTER FIXES' }
       ],
       cta: 'Get a Risk Report',
-      themeColor: 'text-accent',
-      btnColor: 'bg-accent hover:bg-[#00c853] text-black',
-      underlineColor: 'bg-accent',
+      themeColor: 'text-cyan-400',
+      btnColor: 'bg-cyan-400 hover:bg-cyan-500 text-black',
+      underlineColor: 'bg-cyan-400',
       awards: [
         { title: 'Web Pentest', subtitle: 'API security reviews' },
         { title: 'Compliance', subtitle: 'SOC2 readiness support' }
