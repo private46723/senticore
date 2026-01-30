@@ -8,6 +8,29 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
 import { analyzeThreat, type AnalyzeThreatOutput } from '@/ai/flows/analyze-security-threat';
 
+/**
+ * A unique, professional logo for Senticore.
+ * Combines a geometric hexagon (stability) with a shielded core (security).
+ */
+const SenticoreLogo = ({ className = "w-10 h-10", iconOnly = false }: { className?: string, iconOnly?: boolean }) => (
+  <div className={cn("flex items-center gap-3 group cursor-pointer", !iconOnly && "w-auto")}>
+    <div className={cn("relative flex items-center justify-center transition-transform duration-500 group-hover:scale-110", className)}>
+      <svg viewBox="0 0 100 100" className="w-full h-full fill-primary drop-shadow-[0_0_8px_rgba(241,102,50,0.4)]">
+        <path d="M50 5 L90 27.5 V72.5 L50 95 L10 72.5 V27.5 L50 5Z" fillOpacity="0.1" stroke="currentColor" strokeWidth="2" className="text-primary" />
+        <path d="M50 15 L82 32.5 V67.5 L50 85 L18 32.5 V32.5 L50 15Z" className="fill-primary" />
+        <path d="M50 25 L72 37.5 V62.5 L50 75 L28 62.5 V37.5 L50 25Z" fill="white" />
+        <circle cx="50" cy="50" r="8" className="fill-primary animate-pulse" />
+      </svg>
+    </div>
+    {!iconOnly && (
+      <div className="flex flex-col">
+        <span className="text-2xl font-black tracking-tighter text-white uppercase leading-none">Senti<span className="text-primary">core</span></span>
+        <span className="text-[9px] tracking-[0.4em] text-gray-400 font-bold uppercase mt-1 border-t border-white/10 pt-1">Security Global</span>
+      </div>
+    )}
+  </div>
+);
+
 export default function Home() {
   const [showCookies, setShowCookies] = useState(true);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -165,7 +188,7 @@ export default function Home() {
       {/* Top Banner */}
       <div className="bg-[#1a1a1a] text-white text-center py-2 text-[13px] border-b border-white/5">
         <p className="font-medium tracking-wide">
-          Senticore SOC Launch — Elite Blue Team Monitoring Now Available Globaly
+          Senticore SOC Launch — Elite Blue Team Monitoring Now Available Globally
         </p>
       </div>
 
@@ -213,15 +236,7 @@ export default function Home() {
         <header className="relative z-[60]" ref={menuRef}>
           <nav className="py-6 px-10 flex items-center justify-between">
             <div className="flex items-center gap-12">
-              <div className="flex items-center cursor-pointer gap-2 group">
-                <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center transition-transform group-hover:scale-110">
-                  <Shield className="text-white w-6 h-6" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-2xl font-black tracking-tighter text-white uppercase">Senticore</span>
-                  <span className="text-[10px] tracking-[0.3em] text-primary font-bold uppercase -mt-1">Security Global</span>
-                </div>
-              </div>
+              <SenticoreLogo className="w-12 h-12" />
               <div className="hidden lg:flex items-center gap-8 text-[15px] font-medium">
                 {navItems.map((item) => (
                   <button 
@@ -748,12 +763,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-24 pt-10 border-t border-gray-100 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
-                <Shield className="text-white w-5 h-5" />
-              </div>
-              <span className="text-xl font-black text-black uppercase">Senticore</span>
-            </div>
+            <SenticoreLogo className="w-10 h-10" />
             <p className="text-[11px] text-gray-400 font-medium">© 2025 Senticore Security Global. All rights reserved.</p>
           </div>
         </div>
