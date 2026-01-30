@@ -19,7 +19,6 @@ export default function Home() {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
-  const videoThumb = PlaceHolderImages.find(img => img.id === 'video-case-study');
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -274,7 +273,7 @@ export default function Home() {
                   Senticore Precision AI®
                 </p>
               </div>
-              <h2 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white mb-8">
+              <h2 className="text-5xl md:text-[64px] font-bold leading-1.1 text-white mb-8">
                 Consult the Security Analyst
               </h2>
               <p className="text-gray-300 text-lg leading-relaxed mb-10">
@@ -499,24 +498,15 @@ export default function Home() {
         </div>
 
         {/* Full Width Video Container */}
-        <div className="relative w-full aspect-[21/9] overflow-hidden border-y border-white/10 group cursor-pointer shadow-[0_0_120px_rgba(241,102,50,0.1)]">
-          {videoThumb && (
-            <Image
-              src={videoThumb.imageUrl}
-              alt="Cybersecurity Operations Video"
-              fill
-              className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
-              data-ai-hint={videoThumb.imageHint}
-            />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/20" />
+        <div className="relative w-full aspect-video md:aspect-[21/9] overflow-hidden border-y border-white/10 shadow-[0_0_120px_rgba(241,102,50,0.1)]">
+          <iframe
+            src="https://www.youtube.com/embed/NBfcGrHR6P0?autoplay=1&mute=1&loop=1&playlist=NBfcGrHR6P0&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&enablejsapi=1"
+            className="absolute inset-0 w-full h-[115%] -top-[7.5%] pointer-events-none"
+            allow="autoplay; encrypted-media"
+            title="Senticore Operations Video"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/20 pointer-events-none" />
           
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-28 h-28 bg-primary/90 rounded-full flex items-center justify-center backdrop-blur-md group-hover:scale-110 transition-transform duration-500 shadow-[0_0_60px_rgba(241,102,50,0.4)]">
-              <Play className="text-white w-12 h-12 fill-current ml-2" />
-            </div>
-          </div>
-
           <div className="absolute bottom-12 left-12 right-12 flex items-center justify-between pointer-events-none">
             <div className="flex items-center gap-6">
               <div className="w-16 h-16 rounded-2xl border border-white/20 bg-black/40 backdrop-blur-xl flex items-center justify-center">
