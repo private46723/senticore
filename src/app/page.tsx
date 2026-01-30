@@ -455,7 +455,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Speed and Scale Live Data Section */}
+      {/* Speed and Scale Section */}
       <section className="bg-black py-24 relative overflow-hidden">
         <div className="container mx-auto px-10 max-w-[1400px]">
           <div className="mb-16">
@@ -487,60 +487,57 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Proven Success Full Width Video Section */}
+      {/* Proven Success Section - Full Width Video */}
       <section id="proven-success" className="bg-[#050505] py-24 border-t border-white/5 relative overflow-hidden">
+        <div className="container mx-auto px-10 max-w-[1400px] mb-20 text-center">
+          <h2 className="text-5xl md:text-[80px] font-black leading-none tracking-tight uppercase mb-8">
+            Proven <span className="text-primary italic">Success</span>
+          </h2>
+          <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light max-w-4xl mx-auto">
+            Senticore delivers measurable security outcomes for the world's most targeted industries. Witness our global Blue Team in action.
+          </p>
+        </div>
+
+        {/* Full Width Video Container */}
+        <div className="relative w-full aspect-[21/9] overflow-hidden border-y border-white/10 group cursor-pointer shadow-[0_0_120px_rgba(241,102,50,0.1)]">
+          {videoThumb && (
+            <Image
+              src={videoThumb.imageUrl}
+              alt="Cybersecurity Operations Video"
+              fill
+              className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
+              data-ai-hint={videoThumb.imageHint}
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/20" />
+          
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-28 h-28 bg-primary/90 rounded-full flex items-center justify-center backdrop-blur-md group-hover:scale-110 transition-transform duration-500 shadow-[0_0_60px_rgba(241,102,50,0.4)]">
+              <Play className="text-white w-12 h-12 fill-current ml-2" />
+            </div>
+          </div>
+
+          <div className="absolute bottom-12 left-12 right-12 flex items-center justify-between pointer-events-none">
+            <div className="flex items-center gap-6">
+              <div className="w-16 h-16 rounded-2xl border border-white/20 bg-black/40 backdrop-blur-xl flex items-center justify-center">
+                <Shield className="text-primary w-8 h-8" />
+              </div>
+              <div>
+                <div className="text-xs font-black text-white/50 uppercase tracking-[0.3em] mb-1">Live Operation Feed</div>
+                <div className="text-2xl font-bold text-white uppercase tracking-tight">Global Threat Hunting Strategy 2025</div>
+              </div>
+            </div>
+            <div className="hidden md:flex items-center gap-4">
+               <div className="flex items-center gap-2 px-4 py-2 bg-red-500/20 border border-red-500/30 rounded-full">
+                  <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                  <span className="text-[10px] font-black uppercase tracking-widest text-red-500">Secure Protocol Active</span>
+               </div>
+               <div className="text-white/40 text-sm font-mono tracking-widest uppercase">08:42:12</div>
+            </div>
+          </div>
+        </div>
+
         <div className="container mx-auto px-10 max-w-[1400px]">
-          <div className="text-center mb-20 max-w-4xl mx-auto">
-            <h2 className="text-5xl md:text-[80px] font-black leading-none tracking-tight uppercase mb-8">
-              Proven <span className="text-primary italic">Success</span>
-            </h2>
-            <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light">
-              Senticore delivers measurable security outcomes for the world's most targeted industries. Witness our global Blue Team in action.
-            </p>
-          </div>
-
-          {/* Full Width Video Container */}
-          <div className="relative w-full aspect-video rounded-[2rem] overflow-hidden border border-white/10 group cursor-pointer shadow-[0_0_120px_rgba(241,102,50,0.2)] transition-all duration-700">
-            {videoThumb && (
-              <Image
-                src={videoThumb.imageUrl}
-                alt="Cybersecurity Operations Video"
-                fill
-                className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
-                data-ai-hint={videoThumb.imageHint}
-              />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/20" />
-            
-            {/* Play Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-28 h-28 bg-primary/90 rounded-full flex items-center justify-center backdrop-blur-md group-hover:scale-110 transition-transform duration-500 shadow-[0_0_60px_rgba(241,102,50,0.4)]">
-                <Play className="text-white w-12 h-12 fill-current ml-2" />
-              </div>
-            </div>
-
-            {/* Video Interface Details */}
-            <div className="absolute bottom-12 left-12 right-12 flex items-center justify-between pointer-events-none">
-              <div className="flex items-center gap-6">
-                <div className="w-16 h-16 rounded-2xl border border-white/20 bg-black/40 backdrop-blur-xl flex items-center justify-center">
-                  <Shield className="text-primary w-8 h-8" />
-                </div>
-                <div>
-                  <div className="text-xs font-black text-white/50 uppercase tracking-[0.3em] mb-1">Live Operation Feed</div>
-                  <div className="text-2xl font-bold text-white uppercase tracking-tight">Global Threat Hunting Strategy 2025</div>
-                </div>
-              </div>
-              <div className="hidden md:flex items-center gap-4">
-                 <div className="flex items-center gap-2 px-4 py-2 bg-red-500/20 border border-red-500/30 rounded-full">
-                    <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                    <span className="text-[10px] font-black uppercase tracking-widest text-red-500">Secure Protocol Active</span>
-                 </div>
-                 <div className="text-white/40 text-sm font-mono tracking-widest uppercase">08:42:12</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Success Metrics Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-20 pt-20 border-t border-white/5">
             <div className="space-y-4">
               <div className="text-6xl font-black text-white tracking-tighter">99.9%</div>
@@ -681,19 +678,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer Section */}
+      {/* Footer */}
       <footer className="bg-white text-[#555] py-20 border-t border-gray-200">
         <div className="container mx-auto px-10 max-w-[1400px]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
-            {/* Products and Services Column */}
             <div className="lg:col-span-8">
               <div className="mb-10">
                 <h3 className="text-black font-bold text-base mb-4 inline-block border-b-2 border-gray-100 pb-2 w-full max-w-[200px]">
                   Services & Operations
                 </h3>
               </div>
-              
               <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
                 <div className="space-y-10">
                   <div>
@@ -702,7 +696,6 @@ export default function Home() {
                       <li><a href="#" className="hover:text-black transition-colors">SOC as a Service (L1/L2)</a></li>
                       <li><a href="#" className="hover:text-black transition-colors">SIEM Management</a></li>
                       <li><a href="#" className="hover:text-black transition-colors">Log Monitoring</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">Alert Analysis</a></li>
                     </ul>
                   </div>
                   <div>
@@ -710,19 +703,15 @@ export default function Home() {
                     <ul className="space-y-3 text-[13px]">
                       <li><a href="#" className="hover:text-black transition-colors">EDR Management</a></li>
                       <li><a href="#" className="hover:text-black transition-colors">XDR Operations</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">Managed Protection</a></li>
                     </ul>
                   </div>
                 </div>
-
                 <div className="space-y-10">
                   <div>
                     <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Assessments</h4>
                     <ul className="space-y-3 text-[13px]">
-                      <li><a href="#" className="hover:text-black transition-colors">Vulnerability Assessment (VA)</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">Penetration Testing (Limited)</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">Risk Reporting</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">Remediation Advice</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Vulnerability Assessment</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Penetration Testing</a></li>
                     </ul>
                   </div>
                   <div>
@@ -730,52 +719,36 @@ export default function Home() {
                     <ul className="space-y-3 text-[13px]">
                       <li><a href="#" className="hover:text-black transition-colors">Breach Analysis</a></li>
                       <li><a href="#" className="hover:text-black transition-colors">Forensics Recovery</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">Containment Strategy</a></li>
                     </ul>
                   </div>
                 </div>
-
                 <div className="space-y-10">
                   <div>
                     <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Cloud & AI Security</h4>
                     <ul className="space-y-3 text-[13px]">
-                      <li><a href="#" className="hover:text-black transition-colors">AWS / Azure Reviews</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">LLM Security Framework</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">Prompt Injection Defense</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">AI Data Leakage Protection</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Cloud Reviews</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">AI LLM Security</a></li>
                     </ul>
                   </div>
                   <div>
-                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Advanced Defense</h4>
+                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Advanced</h4>
                     <ul className="space-y-3 text-[13px]">
-                      <li><a href="#" className="hover:text-black transition-colors">Purple Team Exercises</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">Threat Hunting</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">Proactive Strategy</a></li>
+                      <li><a href="#" className="hover:text-black transition-colors">Purple Team Hunting</a></li>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* Company Column */}
             <div className="lg:col-span-2">
-              <h3 className="text-black font-bold text-base mb-10 border-b-2 border-gray-100 pb-2 inline-block w-full">
-                Senticore Global
-              </h3>
+              <h3 className="text-black font-bold text-base mb-10 border-b-2 border-gray-100 pb-2 inline-block w-full">Company</h3>
               <ul className="space-y-4 text-[13px] font-medium">
                 <li><a href="#" className="hover:text-black transition-colors">About Us</a></li>
                 <li><a href="#" className="hover:text-black transition-colors">Careers</a></li>
-                <li><a href="mailto:contact@senticore.com" className="hover:text-black transition-colors">Contact Us</a></li>
-                <li><a href="#" className="hover:text-black transition-colors">Locations</a></li>
-                <li><a href="#" className="hover:text-black transition-colors">Newsroom</a></li>
+                <li><a href="mailto:contact@senticore.com" className="hover:text-black transition-colors">Contact</a></li>
               </ul>
             </div>
-
-            {/* Social Column */}
             <div className="lg:col-span-2">
-              <h3 className="text-black font-bold text-base mb-10 border-b-2 border-gray-100 pb-2 inline-block w-full">
-                Connect
-              </h3>
+              <h3 className="text-black font-bold text-base mb-10 border-b-2 border-gray-100 pb-2 inline-block w-full">Connect</h3>
               <ul className="space-y-4 text-[13px] font-medium">
                 <li><a href="#" className="hover:text-black transition-colors flex items-center gap-2"><Linkedin className="w-4 h-4" /> LinkedIn</a></li>
                 <li><a href="#" className="hover:text-black transition-colors flex items-center gap-2"><Instagram className="w-4 h-4" /> Instagram</a></li>
@@ -784,35 +757,30 @@ export default function Home() {
               </ul>
             </div>
           </div>
-
-          <div className="mt-24 pt-10 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex items-center gap-8">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
-                  <Shield className="text-white w-5 h-5" />
-                </div>
-                <span className="text-xl font-black text-black uppercase">Senticore</span>
+          <div className="mt-24 pt-10 border-t border-gray-100 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
+                <Shield className="text-white w-5 h-5" />
               </div>
-              <p className="text-[11px] text-gray-400 font-medium">
-                © 2025 Senticore Security Global. All rights reserved.
-              </p>
+              <span className="text-xl font-black text-black uppercase">Senticore</span>
             </div>
+            <p className="text-[11px] text-gray-400 font-medium">© 2025 Senticore Security Global. All rights reserved.</p>
           </div>
         </div>
       </footer>
 
       {/* Cookie Banner */}
       {showCookies && (
-        <div className="fixed bottom-0 left-0 right-0 bg-[#000000] border-t border-white/10 p-5 z-[100] animate-in slide-in-from-bottom duration-500">
+        <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 p-5 z-[100]">
           <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6 max-w-[1400px]">
             <p className="text-[14px] text-gray-200/90 leading-normal font-normal flex-grow">
-              Senticore uses essential cookies to ensure global security and personalized insights. By continuing, you agree to our security protocols. <a href="#" className="text-accent hover:underline font-medium">Privacy statement</a>
+              Senticore uses essential cookies to ensure global security and personalized insights. <a href="#" className="text-accent hover:underline font-medium">Privacy statement</a>
             </p>
             <div className="flex items-center gap-6 shrink-0">
               <Button onClick={() => setShowCookies(false)} className="bg-[#00c853] hover:bg-[#00e676] text-black text-[13px] px-8 h-11 rounded-[4px] font-bold tracking-tight uppercase">
                 Manage Cookie Settings
               </Button>
-              <button onClick={() => setShowCookies(false)} className="text-gray-400 hover:text-white p-2 transition-colors">
+              <button onClick={() => setShowCookies(false)} className="text-gray-400 hover:text-white p-2">
                 <X className="w-6 h-6" />
               </button>
             </div>
