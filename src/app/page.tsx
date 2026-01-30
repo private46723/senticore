@@ -135,14 +135,14 @@ export default function Home() {
           <a href="mailto:contact@senticore.com" className="hover:text-black transition-colors flex items-center gap-2">
             <Mail className="w-4 h-4" /> contact@senticore.com
           </a>
-          <button onClick={() => scrollToSection('contact')} className="bg-white border border-gray-300 px-5 py-1.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm text-gray-600 font-medium">
+          <button onClick={() => scrollToSection('contact')} className="bg-white border border-gray-300 px-5 py-1.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm text-gray-600 font-bold">
             Emergency IR?
           </button>
         </div>
       </div>
 
       {/* Hero Container */}
-      <div className="relative flex flex-col min-h-[700px]">
+      <div className="relative flex flex-col min-h-[750px]">
         <div className="absolute inset-0 z-0">
           {heroBg && <Image src={heroBg.imageUrl} alt={heroBg.description} fill className="object-cover opacity-50" priority data-ai-hint={heroBg.imageHint} />}
           <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 0)', backgroundSize: '24px 24px' }} />
@@ -158,14 +158,14 @@ export default function Home() {
                   <button 
                     key={item.name}
                     onClick={() => scrollToSection(item.id)}
-                    className="hover:text-primary transition-colors py-2 relative text-[13px] tracking-wide uppercase font-bold text-gray-200"
+                    className="hover:text-primary transition-colors py-2 relative text-[13px] tracking-wide uppercase font-black text-gray-200"
                   >
                     {item.name}
                   </button>
                 ))}
               </div>
             </div>
-            <Button onClick={() => scrollToSection('contact')} className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 py-6 font-bold text-sm tracking-wide shadow-lg">
+            <Button onClick={() => scrollToSection('contact')} className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 py-6 font-black text-sm tracking-wide shadow-lg border-none">
               Get in Touch
             </Button>
           </nav>
@@ -174,15 +174,19 @@ export default function Home() {
         <main className="flex-grow flex items-center pb-20 overflow-hidden relative z-10">
           <div className="container mx-auto px-10 max-w-[1400px]">
             <div className="max-w-5xl">
-              <h1 className="text-5xl md:text-[68px] font-bold leading-[1.05] mb-10 tracking-tight text-white">
+              <h1 className="text-5xl md:text-[72px] font-black leading-[1.05] mb-10 tracking-tight text-white">
                 Defending the Global Enterprise with <span className="text-primary italic">Precision.</span>
               </h1>
-              <p className="text-xl md:text-2xl text-gray-200/90 max-w-4xl leading-relaxed mb-12 font-normal">
+              <p className="text-xl md:text-2xl text-gray-200/90 max-w-4xl leading-relaxed mb-12 font-medium">
                 Next-gen SOC operations, EDR management, and AI-driven threat intelligence. We are your primary Blue Team partner.
               </p>
               <div className="flex gap-6">
-                 <Button onClick={() => scrollToSection('services')} className="bg-white text-black hover:bg-gray-100 rounded-full px-8 py-6 font-bold">Explore SOC Services</Button>
-                 <Button onClick={() => scrollToSection('contact')} variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full px-8 py-6 font-bold">Contact Operations</Button>
+                 <Button onClick={() => scrollToSection('services')} className="bg-white text-black hover:bg-gray-100 rounded-full px-10 py-7 font-black uppercase text-sm tracking-tight shadow-2xl border-none">
+                   Explore SOC Services
+                 </Button>
+                 <Button onClick={() => scrollToSection('contact')} variant="outline" className="border-white/30 text-white hover:bg-white/10 rounded-full px-10 py-7 font-black uppercase text-sm tracking-tight backdrop-blur-sm">
+                   Contact Operations
+                 </Button>
               </div>
             </div>
           </div>
@@ -209,7 +213,7 @@ export default function Home() {
             <div className="space-y-12">
               <div className="space-y-6">
                 <h2 className="text-primary font-black uppercase tracking-[0.4em] text-xs flex items-center gap-4"><div className="w-8 h-[1px] bg-primary" /> Our DNA</h2>
-                <h3 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white tracking-tight">Protecting your <span className="italic text-primary">digital frontier.</span></h3>
+                <h3 className="text-5xl md:text-[64px] font-black leading-[1.1] text-white tracking-tight">Protecting your <span className="italic text-primary">digital frontier.</span></h3>
                 <p className="text-gray-400 text-lg leading-relaxed font-normal">Senticore was founded to bridge the gap between complex security data and actionable defense. We provide the elite expertise required to manage the modern threat landscape.</p>
               </div>
               <div className="grid grid-cols-2 gap-12 pt-8 border-t border-white/5">
@@ -242,7 +246,7 @@ export default function Home() {
                     <div key={i} className="space-y-2"><div className="text-5xl md:text-6xl font-bold text-white">{stat.value}</div><div className="text-xs font-bold text-gray-400 tracking-widest uppercase">{stat.label}</div></div>
                   ))}
                 </div>
-                <Button onClick={() => scrollToSection('contact')} className={cn("rounded-full px-10 h-14 font-bold", currentPlatform.btnColor)}>{currentPlatform.cta} <ArrowRight className="w-5 h-5" /></Button>
+                <Button onClick={() => scrollToSection('contact')} className={cn("rounded-full px-10 h-14 font-black uppercase text-sm tracking-widest border-none", currentPlatform.btnColor)}>{currentPlatform.cta} <ArrowRight className="w-5 h-5 ml-2" /></Button>
               </div>
               <div className="text-[180px] font-black text-white/10 italic leading-none select-none">{currentPlatform.watermark}</div>
             </div>
@@ -368,7 +372,7 @@ export default function Home() {
                     <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Security Inquiry</label>
                     <Textarea placeholder="Describe your security requirements..." className="bg-black/50 border-white/10 text-white min-h-[120px] focus:border-primary" />
                   </div>
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-black font-black uppercase tracking-widest h-14 rounded-full shadow-lg flex items-center justify-center gap-3">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-black font-black uppercase tracking-widest h-14 rounded-full shadow-lg flex items-center justify-center gap-3 border-none">
                     Transmit Message <Send className="w-4 h-4" />
                   </Button>
                </form>
