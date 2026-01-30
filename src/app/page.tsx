@@ -277,91 +277,65 @@ export default function Home() {
         </main>
       </div>
 
-      {/* Senticore AI Analyst Section */}
-      <section className="bg-gradient-to-b from-black to-[#0a0a0a] py-24 relative overflow-hidden border-t border-white/10">
+      {/* About the Company Section */}
+      <section className="bg-gradient-to-b from-[#0a0a0a] to-black py-32 border-t border-white/10 relative overflow-hidden">
         <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="max-w-xl">
-              <div className="flex items-center gap-3 mb-6">
-                <Sparkles className="text-primary w-6 h-6" />
-                <p className="text-primary text-sm font-bold tracking-[0.2em] uppercase">
-                  Senticore Precision AI®
-                </p>
-              </div>
-              <h2 className="text-5xl md:text-[64px] font-bold leading-1.1 text-white mb-8">
-                Consult the Security Analyst
-              </h2>
-              <p className="text-gray-300 text-lg leading-relaxed mb-10">
-                Leverage our industry-leading threat models to analyze potential risks, decode anomalies, and receive precision remediation steps instantly.
-              </p>
-              
-              <div className="bg-[#121212] border border-white/10 p-6 rounded-2xl shadow-2xl">
-                <form onSubmit={handleAiSubmit} className="relative">
-                  <input 
-                    type="text" 
-                    value={aiQuery}
-                    onChange={(e) => setAiQuery(e.target.value)}
-                    placeholder="Describe a threat or paste a log snippet..."
-                    className="w-full bg-black border border-white/20 rounded-xl py-4 pl-5 pr-14 text-white placeholder:text-gray-600 focus:outline-none focus:border-primary transition-colors"
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div className="relative aspect-square max-w-lg mx-auto lg:mx-0 group">
+              <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-3xl group-hover:bg-primary/30 transition-all duration-700" />
+              <div className="relative bg-[#121212] border border-white/10 rounded-2xl overflow-hidden h-full shadow-2xl">
+                {PlaceHolderImages.find(img => img.id === 'feature-person-bg') && (
+                  <Image
+                    src={PlaceHolderImages.find(img => img.id === 'feature-person-bg')!.imageUrl}
+                    alt="Senticore Operations"
+                    fill
+                    className="object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700"
+                    data-ai-hint="technology professional"
                   />
-                  <button 
-                    disabled={aiLoading}
-                    type="submit" 
-                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-primary rounded-lg text-white hover:bg-primary/80 transition-all disabled:opacity-50"
-                  >
-                    {aiLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
-                  </button>
-                </form>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                <div className="absolute bottom-8 left-8">
+                  <p className="text-primary text-[10px] font-black uppercase tracking-[0.4em] mb-2">Established 2025</p>
+                  <p className="text-white text-2xl font-bold uppercase tracking-tight">Senticore Global HQ</p>
+                </div>
               </div>
             </div>
 
-            <div className="relative min-h-[400px] flex items-center justify-center">
-              {aiResponse ? (
-                <div className="w-full bg-[#121212] border border-primary/30 rounded-3xl p-10 animate-in fade-in zoom-in duration-500 shadow-[0_0_50px_rgba(241,102,50,0.15)]">
-                  <div className="flex items-center justify-between mb-8">
-                    <div className="flex items-center gap-3">
-                      <Shield className="text-primary w-6 h-6" />
-                      <h3 className="text-xl font-bold text-white">Senticore Analysis</h3>
-                    </div>
-                    <div className={cn(
-                      "px-4 py-1.5 rounded-full text-[11px] font-black uppercase tracking-widest",
-                      aiResponse.severity === 'critical' ? "bg-red-500 text-white" : "bg-primary/20 text-primary border border-primary/30"
-                    )}>
-                      {aiResponse.severity} severity
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="text-gray-500 text-[11px] font-black uppercase tracking-[0.2em] mb-3">Assessment</h4>
-                      <p className="text-gray-200 leading-relaxed italic border-l-2 border-primary pl-4">
-                        "{aiResponse.analysis}"
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h4 className="text-gray-500 text-[11px] font-black uppercase tracking-[0.2em] mb-4">Remediation Steps</h4>
-                      <ul className="grid grid-cols-1 gap-3">
-                        {aiResponse.recommendations.map((rec, i) => (
-                          <li key={i} className="flex items-center gap-3 bg-black/40 border border-white/5 p-4 rounded-xl group hover:border-primary/40 transition-colors">
-                            <div className="w-2 h-2 rounded-full bg-primary" />
-                            <span className="text-sm font-medium text-gray-300">{rec}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+            <div className="space-y-12">
+              <div className="space-y-6">
+                <h2 className="text-primary font-black uppercase tracking-[0.4em] text-xs flex items-center gap-4">
+                  <div className="w-8 h-[1px] bg-primary" /> Our DNA
+                </h2>
+                <h3 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white tracking-tight">
+                  Defending the digital frontier with <span className="italic text-primary">uncompromising precision.</span>
+                </h3>
+              </div>
+
+              <div className="space-y-8 text-gray-400 text-lg leading-relaxed font-normal max-w-2xl">
+                <p>
+                  Senticore Security Global emerged from a simple realization: the modern attack surface is expanding faster than traditional security teams can adapt. We bridged this gap by combining world-class Blue Team expertise with proprietary Precision AI® modeling.
+                </p>
+                <p>
+                  Today, we serve as the primary defensive line for global enterprises, managing complex EDR/XDR environments and providing 24/7 SOC operations that identify and contain threats in minutes, not days.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-12 pt-8 border-t border-white/5">
+                <div className="space-y-3">
+                  <div className="text-4xl font-black text-white italic tracking-tighter">Global</div>
+                  <div className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Distributed Operations</div>
                 </div>
-              ) : (
-                <div className="text-center space-y-8 max-w-sm">
-                  <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto border border-primary/20 animate-pulse">
-                    <Sparkles className="text-primary w-10 h-10" />
-                  </div>
-                  <p className="text-gray-500 font-bold uppercase tracking-[0.2em] text-sm">
-                    {aiLoading ? "Consulting Senticore Knowledge Base..." : "Ready to Analyze Security Logs"}
-                  </p>
+                <div className="space-y-3">
+                  <div className="text-4xl font-black text-white italic tracking-tighter">24/7</div>
+                  <div className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Always-On Defense</div>
                 </div>
-              )}
+              </div>
+
+              <div className="pt-4">
+                <Button className="bg-transparent border border-white/20 hover:bg-white/5 text-white rounded-full px-10 py-6 font-bold text-sm tracking-wide transition-all group">
+                  Learn About Our Mission <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
