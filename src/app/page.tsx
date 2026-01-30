@@ -2,15 +2,15 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Cloud, Trophy, Plus, Clock, Bug, Lock, User, Globe, Sparkles, Hexagon, Play, Send, Loader2, Linkedin, Twitter, Youtube, Facebook, Mail, Instagram } from 'lucide-react';
+import { Search, ChevronDown, X, ArrowRight, Shield, Activity, Bug, Lock, Globe, Mail, Linkedin, Instagram, Twitter, Send, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
-import { analyzeThreat, type AnalyzeThreatOutput } from '@/ai/flows/analyze-security-threat';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 /**
  * A unique, professional logo for Senticore.
- * Combines a geometric hexagon (stability) with a shielded core (security).
  */
 const SenticoreLogo = ({ className = "w-10 h-10", iconOnly = false }: { className?: string, iconOnly?: boolean }) => (
   <div className={cn("flex items-center gap-3 group cursor-pointer", !iconOnly && "w-auto")}>
@@ -36,9 +36,6 @@ export default function Home() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [activePlatformTab, setActivePlatformTab] = useState('soc');
   const [activeEngageTab, setActiveEngageTab] = useState('Executives');
-  const [aiQuery, setAiQuery] = useState('');
-  const [aiLoading, setAiLoading] = useState(false);
-  const [aiResponse, setAiResponse] = useState<AnalyzeThreatOutput | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
@@ -53,28 +50,20 @@ export default function Home() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  async function handleAiSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!aiQuery.trim() || aiLoading) return;
-
-    setAiLoading(true);
-    setAiResponse(null);
-    try {
-      const result = await analyzeThreat({ query: aiQuery });
-      setAiResponse(result);
-    } catch (error) {
-      console.error('AI Analysis failed:', error);
-    } finally {
-      setAiLoading(false);
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
-  }
+    setActiveMenu(null);
+  };
 
   const navItems = [
-    { name: 'Why Senticore?', hasMenu: false },
-    { name: 'Services', hasMenu: true },
-    { name: 'Global Intel', hasMenu: false },
-    { name: 'Proven Success', hasMenu: false },
-    { name: 'Contact Us', hasMenu: false },
+    { name: 'Why Senticore?', id: 'about' },
+    { name: 'Services', id: 'services' },
+    { name: 'Global Intel', id: 'intel' },
+    { name: 'Proven Success', id: 'proven-success' },
+    { name: 'Contact Us', id: 'contact' },
   ];
 
   const platforms = [
@@ -83,7 +72,7 @@ export default function Home() {
       name: 'SOC as a Service', 
       icon: <Shield className={cn("w-5 h-5 transition-colors", activePlatformTab === 'soc' ? "text-yellow-400" : "text-gray-400")} />,
       largeTitle: 'NEXT-GEN SOC AS A SERVICE',
-      description: 'Our primary Blue Team (L1/L2) operations provide comprehensive log monitoring, SIEM management, and real-time alert analysis. We handle incident escalation with precision, ensuring your infrastructure is monitored 24/7 by elite security analysts.',
+      description: 'Our primary Blue Team (L1/L2) operations provide comprehensive log monitoring, SIEM management, and real-time alert analysis. We handle incident escalation with precision.',
       stats: [
         { value: '24/7', label: 'ELITE MONITORING' },
         { value: '15 MIN', label: 'RESPONSE SLA' }
@@ -92,28 +81,25 @@ export default function Home() {
       themeColor: 'text-yellow-400',
       btnColor: 'bg-yellow-400 hover:bg-yellow-500 text-black',
       underlineColor: 'bg-yellow-400',
-      watermark: 'L1/L2',
-      watermarkLabel: ['BLUE TEAM', 'SOC', 'OPERATIONS']
+      watermark: 'L1/L2'
     },
     { 
       id: 'endpoint', 
       name: 'EDR / XDR Management', 
       icon: <Activity className={cn("w-5 h-5 transition-colors", activePlatformTab === 'endpoint' ? "text-accent" : "text-gray-400")} />,
       largeTitle: 'ADVANCED ENDPOINT DEFENSE',
-      description: 'Go beyond basic antivirus with our EDR and XDR management. We provide full-spectrum endpoint protection and automated response capabilities to isolate threats before they can move laterally through your network.',
+      description: 'Go beyond basic antivirus with our EDR and XDR management. We provide full-spectrum endpoint protection and automated response capabilities.',
       stats: [
-        { value: '100%', label: 'ENDPOINT VISIBILITY' },
-        { value: '99.9%', label: 'THREAT BLOCK RATE' }
+        { value: '100%', label: 'VISIBILITY' },
+        { value: '99.9%', label: 'BLOCK RATE' }
       ],
       cta: 'Secure Your Endpoints',
       themeColor: 'text-accent',
       btnColor: 'bg-accent hover:bg-[#00c853] text-black',
       underlineColor: 'bg-accent',
       awards: [
-        { title: 'Detection', subtitle: 'Real-time threat hunting and automated containment' },
-        { title: 'Remediation', subtitle: 'Zero-touch restoration of compromised systems' },
-        { title: 'Analytics', subtitle: 'Behavioral modeling for unknown exploit detection' },
-        { title: 'Reporting', subtitle: 'Detailed incident lifecycle and root cause analysis' }
+        { title: 'Detection', subtitle: 'Real-time threat hunting' },
+        { title: 'Remediation', subtitle: 'Zero-touch restoration' }
       ]
     },
     { 
@@ -121,20 +107,18 @@ export default function Home() {
       name: 'Vulnerability Assessment', 
       icon: <Bug className={cn("w-5 h-5 transition-colors", activePlatformTab === 'vulnerability' ? "text-accent" : "text-gray-400")} />,
       largeTitle: 'RISK & REMEDIATION ADVICE',
-      description: 'Continuous scanning and risk reporting tailored to your business needs. We don\'t just find bugs; we provide actionable remediation advice to help your team close security gaps and reduce your attack surface.',
+      description: 'Continuous scanning and risk reporting tailored to your business needs. We provide actionable remediation advice to close security gaps.',
       stats: [
-        { value: 'VA/PT', label: 'CERTIFIED EXPERTS' },
-        { value: '80%', label: 'FASTER REMEDIATION' }
+        { value: 'VA/PT', label: 'EXPERTS' },
+        { value: '80%', label: 'FASTER FIXES' }
       ],
       cta: 'Get a Risk Report',
       themeColor: 'text-accent',
       btnColor: 'bg-accent hover:bg-[#00c853] text-black',
       underlineColor: 'bg-accent',
       awards: [
-        { title: 'Web Pentest', subtitle: 'Focused testing for web applications and APIs' },
-        { title: 'Network PT', subtitle: 'Internal and external network security reviews' },
-        { title: 'Risk Scoring', subtitle: 'Contextual prioritization of security patches' },
-        { title: 'Compliance', subtitle: 'Support for ISO 27001, SOC2, and GDPR readiness' }
+        { title: 'Web Pentest', subtitle: 'API security reviews' },
+        { title: 'Compliance', subtitle: 'SOC2 readiness support' }
       ]
     },
   ];
@@ -142,71 +126,35 @@ export default function Home() {
   const currentPlatform = platforms.find(p => p.id === activePlatformTab) || platforms[0];
 
   const engageCards = [
-    {
-      title: 'Incident Response',
-      description: 'Under attack? Our IR experts handle breach analysis and recovery, getting your business back online with minimum data loss.',
-      cta: 'Start Emergency Recovery',
-      imageId: 'under-attack'
-    },
-    {
-      title: 'Cloud Security Review',
-      description: 'Comprehensive AWS and Azure security reviews. We ensure your cloud configuration follows industry best practices.',
-      cta: 'Audit Your Cloud',
-      imageId: 'executive-briefing'
-    },
-    {
-      title: 'Purple Team Hunting',
-      description: 'Advanced collaborative exercises between red and blue teams to stress-test your existing security controls.',
-      cta: 'Schedule Hunting',
-      imageId: 'ignite-on-tour'
-    },
-    {
-      title: 'AI Security Services',
-      description: 'Secure your AI transformation. We specialize in LLM security, prompt injection prevention, and data leakage protection.',
-      cta: 'Secure Your AI',
-      imageId: 'ai-platforms'
-    }
+    { title: 'Incident Response', description: 'Under attack? Our IR experts handle breach analysis and recovery.', cta: 'Start Recovery', imageId: 'under-attack' },
+    { title: 'Cloud Security Review', description: 'Comprehensive AWS and Azure security reviews.', cta: 'Audit Your Cloud', imageId: 'executive-briefing' },
+    { title: 'Purple Team Hunting', description: 'Collaborative exercises to stress-test your existing security controls.', cta: 'Schedule Hunting', imageId: 'ignite-on-tour' },
+    { title: 'AI Security Services', description: 'Secure your AI transformation. LLM security and data leakage protection.', cta: 'Secure Your AI', imageId: 'ai-platforms' }
   ];
 
   const perspectives = [
-    {
-      type: 'RESEARCH',
-      title: 'The State of SOC Operations: Moving from Reactive to Proactive in 2025',
-      imageId: 'article-network',
-      theme: 'light'
-    },
-    {
-      type: 'GUIDE',
-      title: 'Defending Against Prompt Injection: A Security Framework for AI Teams',
-      imageId: 'article-ai',
-      theme: 'dark-red'
-    }
+    { type: 'RESEARCH', title: 'The State of SOC Operations: Proactive in 2025', imageId: 'article-network', theme: 'light' },
+    { type: 'GUIDE', title: 'Defending Against Prompt Injection', imageId: 'article-ai', theme: 'dark-red' }
   ];
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white font-body selection:bg-primary/30">
       {/* Top Banner */}
       <div className="bg-[#1a1a1a] text-white text-center py-2 text-[13px] border-b border-white/5">
-        <p className="font-medium tracking-wide">
-          Senticore SOC Launch — Elite Blue Team Monitoring Now Available Globally
-        </p>
+        <p className="font-medium tracking-wide">Senticore SOC Launch — Elite Blue Team Monitoring Now Available Globally</p>
       </div>
 
       {/* Utility Nav */}
       <div className="bg-white text-[#444] py-2 px-6 flex justify-between items-center text-[13px] border-b border-gray-200">
         <div className="flex items-center gap-6">
-          <button className="flex items-center gap-1 hover:text-black transition-colors uppercase font-normal">
-            EN <ChevronDown className="w-3.5 h-3.5 opacity-60" />
-          </button>
-          <button className="hover:text-black transition-colors">
-            <Search className="w-4 h-4" />
-          </button>
+          <button className="flex items-center gap-1 hover:text-black transition-colors uppercase font-normal">EN <ChevronDown className="w-3.5 h-3.5 opacity-60" /></button>
+          <button className="hover:text-black transition-colors"><Search className="w-4 h-4" /></button>
         </div>
         <div className="flex items-center gap-6 font-normal">
           <a href="mailto:contact@senticore.com" className="hover:text-black transition-colors flex items-center gap-2">
             <Mail className="w-4 h-4" /> contact@senticore.com
           </a>
-          <button className="bg-white border border-gray-300 px-5 py-1.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm text-gray-600 font-medium">
+          <button onClick={() => scrollToSection('contact')} className="bg-white border border-gray-300 px-5 py-1.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm text-gray-600 font-medium">
             Emergency IR?
           </button>
         </div>
@@ -214,25 +162,12 @@ export default function Home() {
 
       {/* Hero Container */}
       <div className="relative flex flex-col min-h-[700px]">
-        {/* Background Layer */}
         <div className="absolute inset-0 z-0">
-          {heroBg && (
-            <Image
-              src={heroBg.imageUrl}
-              alt={heroBg.description}
-              fill
-              className="object-cover opacity-50"
-              priority
-              data-ai-hint={heroBg.imageHint}
-            />
-          )}
-          <div className="absolute inset-0 opacity-20 pointer-events-none" 
-               style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+          {heroBg && <Image src={heroBg.imageUrl} alt={heroBg.description} fill className="object-cover opacity-50" priority data-ai-hint={heroBg.imageHint} />}
+          <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 0)', backgroundSize: '24px 24px' }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
         </div>
 
-        {/* Header */}
         <header className="relative z-[60]" ref={menuRef}>
           <nav className="py-6 px-10 flex items-center justify-between">
             <div className="flex items-center gap-12">
@@ -241,35 +176,28 @@ export default function Home() {
                 {navItems.map((item) => (
                   <button 
                     key={item.name}
-                    onClick={() => setActiveMenu(activeMenu === item.name ? null : item.name)}
-                    className={cn(
-                      "hover:text-primary transition-colors py-2 relative text-[13px] tracking-wide uppercase font-bold",
-                      activeMenu === item.name ? "text-primary" : "text-gray-200"
-                    )}
+                    onClick={() => scrollToSection(item.id)}
+                    className="hover:text-primary transition-colors py-2 relative text-[13px] tracking-wide uppercase font-bold text-gray-200"
                   >
                     {item.name}
-                    {activeMenu === item.name && (
-                      <div className="absolute -bottom-[2px] left-0 right-0 h-[3px] bg-primary" />
-                    )}
                   </button>
                 ))}
               </div>
             </div>
-            <Button className="bg-[#f16632] hover:bg-[#d95528] text-white rounded-full px-10 py-6 font-bold text-sm tracking-wide shadow-lg">
+            <Button onClick={() => scrollToSection('contact')} className="bg-[#f16632] hover:bg-[#d95528] text-white rounded-full px-10 py-6 font-bold text-sm tracking-wide shadow-lg">
               Get in Touch
             </Button>
           </nav>
         </header>
 
-        {/* Hero Content */}
         <main className="flex-grow flex items-center pb-20 overflow-hidden relative z-10">
           <div className="container mx-auto px-10 max-w-[1400px]">
             <div className="max-w-5xl">
               <h1 className="text-5xl md:text-[68px] font-bold leading-[1.05] mb-10 tracking-tight text-white">
-                Senticore Launches Global SOC Operations, Redefining Real-Time Threat Defense
+                Senticore Launches Global SOC Operations
               </h1>
               <p className="text-xl md:text-2xl text-gray-200/90 max-w-4xl leading-relaxed mb-12 font-normal">
-                Our elite Blue Team (L1/L2) provides unified log monitoring, SIEM management, and precision incident response for the global enterprise.
+                Elite Blue Team (L1/L2) monitoring, SIEM management, and precision incident response for the global enterprise.
               </p>
               <div className="h-[1px] w-full bg-white/20" />
             </div>
@@ -277,381 +205,171 @@ export default function Home() {
         </main>
       </div>
 
-      {/* About the Company Section */}
-      <section className="bg-gradient-to-b from-[#0a0a0a] to-black py-32 border-t border-white/10 relative overflow-hidden">
+      {/* About Section */}
+      <section id="about" className="bg-gradient-to-b from-[#0a0a0a] to-black py-32 border-t border-white/10 relative overflow-hidden scroll-mt-20">
         <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div className="relative aspect-square max-w-lg mx-auto lg:mx-0 group">
               <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-3xl group-hover:bg-primary/30 transition-all duration-700" />
               <div className="relative bg-[#121212] border border-white/10 rounded-2xl overflow-hidden h-full shadow-2xl">
                 {PlaceHolderImages.find(img => img.id === 'feature-person-bg') && (
-                  <Image
-                    src={PlaceHolderImages.find(img => img.id === 'feature-person-bg')!.imageUrl}
-                    alt="Senticore Operations"
-                    fill
-                    className="object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700"
-                    data-ai-hint="technology professional"
-                  />
+                  <Image src={PlaceHolderImages.find(img => img.id === 'feature-person-bg')!.imageUrl} alt="Operations" fill className="object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700" />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                 <div className="absolute bottom-8 left-8">
                   <p className="text-primary text-[10px] font-black uppercase tracking-[0.4em] mb-2">Established 2025</p>
-                  <p className="text-white text-2xl font-bold uppercase tracking-tight">Senticore Global HQ</p>
+                  <p className="text-white text-2xl font-bold uppercase tracking-tight">Senticore Global DNA</p>
                 </div>
               </div>
             </div>
-
             <div className="space-y-12">
               <div className="space-y-6">
-                <h2 className="text-primary font-black uppercase tracking-[0.4em] text-xs flex items-center gap-4">
-                  <div className="w-8 h-[1px] bg-primary" /> Our DNA
-                </h2>
-                <h3 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white tracking-tight">
-                  Defending the digital frontier with <span className="italic text-primary">uncompromising precision.</span>
-                </h3>
+                <h2 className="text-primary font-black uppercase tracking-[0.4em] text-xs flex items-center gap-4"><div className="w-8 h-[1px] bg-primary" /> Our DNA</h2>
+                <h3 className="text-5xl md:text-[64px] font-bold leading-[1.1] text-white tracking-tight">Defending with <span className="italic text-primary">uncompromising precision.</span></h3>
+                <p className="text-gray-400 text-lg leading-relaxed font-normal">Senticore Security Global provides world-class Blue Team expertise with proprietary Precision AI® modeling. We manage complex EDR/XDR environments and 24/7 SOC operations.</p>
               </div>
-
-              <div className="space-y-8 text-gray-400 text-lg leading-relaxed font-normal max-w-2xl">
-                <p>
-                  Senticore Security Global emerged from a simple realization: the modern attack surface is expanding faster than traditional security teams can adapt. We bridged this gap by combining world-class Blue Team expertise with proprietary Precision AI® modeling.
-                </p>
-                <p>
-                  Today, we serve as the primary defensive line for global enterprises, managing complex EDR/XDR environments and providing 24/7 SOC operations that identify and contain threats in minutes, not days.
-                </p>
-              </div>
-
               <div className="grid grid-cols-2 gap-12 pt-8 border-t border-white/5">
-                <div className="space-y-3">
-                  <div className="text-4xl font-black text-white italic tracking-tighter">Global</div>
-                  <div className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Distributed Operations</div>
-                </div>
-                <div className="space-y-3">
-                  <div className="text-4xl font-black text-white italic tracking-tighter">24/7</div>
-                  <div className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Always-On Defense</div>
-                </div>
-              </div>
-
-              <div className="pt-4">
-                <Button className="bg-transparent border border-white/20 hover:bg-white/5 text-white rounded-full px-10 py-6 font-bold text-sm tracking-wide transition-all group">
-                  Learn About Our Mission <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                <div className="space-y-3"><div className="text-4xl font-black text-white italic tracking-tighter">Global</div><div className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Operations</div></div>
+                <div className="space-y-3"><div className="text-4xl font-black text-white italic tracking-tighter">24/7</div><div className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Always-On</div></div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Tab Section */}
-      <section className="bg-[#0a0a0a] py-24 border-t border-white/5 overflow-hidden">
+      {/* Services Section */}
+      <section id="services" className="bg-[#0a0a0a] py-24 border-t border-white/5 overflow-hidden scroll-mt-20">
         <div className="container mx-auto px-10 max-w-[1400px]">
-          {/* Main Tabs */}
           <div className="flex flex-wrap items-center gap-12 border-b border-white/10 mb-20">
             {platforms.map((platform) => (
-              <button
-                key={platform.id}
-                onClick={() => setActivePlatformTab(platform.id)}
-                className={cn(
-                  "flex items-center gap-4 pb-6 transition-all relative group",
-                  activePlatformTab === platform.id ? "opacity-100" : "opacity-60 hover:opacity-100"
-                )}
-              >
-                {platform.icon}
-                <span className={cn(
-                  "text-lg font-bold transition-colors",
-                  activePlatformTab === platform.id ? "text-white" : "text-gray-300"
-                )}>
-                  {platform.name}
-                </span>
-                {activePlatformTab === platform.id && (
-                  <div className={cn("absolute bottom-0 left-0 right-0 h-1 shadow-[0_0_15px_rgba(255,255,255,0.2)]", currentPlatform.underlineColor)} />
-                )}
+              <button key={platform.id} onClick={() => setActivePlatformTab(platform.id)} className={cn("flex items-center gap-4 pb-6 transition-all relative group", activePlatformTab === platform.id ? "opacity-100" : "opacity-60 hover:opacity-100")}>
+                {platform.icon} <span className={cn("text-lg font-bold transition-colors", activePlatformTab === platform.id ? "text-white" : "text-gray-300")}>{platform.name}</span>
+                {activePlatformTab === platform.id && <div className={cn("absolute bottom-0 left-0 right-0 h-1", currentPlatform.underlineColor)} />}
               </button>
             ))}
           </div>
-
-          {/* Platform Content Area */}
-          <div key={activePlatformTab} className="animate-in fade-in slide-in-from-bottom-4 duration-700 relative">
-            {activePlatformTab === 'soc' && (
-              <div className="mb-8 flex items-center gap-3">
-                 <div className="px-3 py-1 bg-accent/20 border border-accent/30 rounded text-accent text-[10px] font-black uppercase tracking-[0.2em]">
-                    Available Now
-                 </div>
-              </div>
-            )}
-            <h3 className={cn("text-6xl md:text-[90px] font-black tracking-[0.02em] uppercase leading-none opacity-90 mb-16 max-w-6xl", currentPlatform.themeColor)}>
-              {currentPlatform.largeTitle}
-            </h3>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative">
-              <div className="space-y-12 relative z-10">
-                <p className="text-gray-300 text-xl md:text-[18px] leading-relaxed max-w-xl font-normal opacity-90">
-                  {currentPlatform.description}
-                </p>
-
+          <div key={activePlatformTab} className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <h3 className={cn("text-6xl md:text-[90px] font-black tracking-[0.02em] uppercase leading-none mb-16", currentPlatform.themeColor)}>{currentPlatform.largeTitle}</h3>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div className="space-y-12">
+                <p className="text-gray-300 text-xl md:text-[18px] leading-relaxed max-w-xl font-normal">{currentPlatform.description}</p>
                 <div className="flex flex-wrap gap-20">
                   {currentPlatform.stats.map((stat, i) => (
-                    <div key={i} className="space-y-2">
-                      <div className="text-5xl md:text-6xl font-bold text-white">{stat.value}</div>
-                      <div className="text-xs font-bold text-gray-400 tracking-widest uppercase">{stat.label}</div>
-                    </div>
+                    <div key={i} className="space-y-2"><div className="text-5xl md:text-6xl font-bold text-white">{stat.value}</div><div className="text-xs font-bold text-gray-400 tracking-widest uppercase">{stat.label}</div></div>
                   ))}
                 </div>
-
-                <Button className={cn("rounded-full px-10 h-14 font-bold text-[15px] flex items-center gap-3 shadow-xl transition-all", currentPlatform.btnColor)}>
-                  {currentPlatform.cta} <ArrowRight className="w-5 h-5" />
-                </Button>
+                <Button onClick={() => scrollToSection('contact')} className={cn("rounded-full px-10 h-14 font-bold", currentPlatform.btnColor)}>Get Quote <ArrowRight className="w-5 h-5" /></Button>
               </div>
-
-              {/* Graphic/Details Section */}
-              <div className="relative flex flex-col items-center justify-center lg:items-end">
-                {currentPlatform.awards ? (
-                  <div className="w-full max-w-2xl">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
-                      {currentPlatform.awards.map((award, i) => (
-                        <div key={i} className={cn(
-                          "p-6 rounded-lg text-black flex flex-col gap-4 min-h-[140px] hover:scale-[1.02] transition-transform cursor-pointer shadow-lg",
-                          currentPlatform.id === 'vulnerability' ? "bg-accent" : "bg-accent/90"
-                        )}>
-                          <Lock className="w-8 h-8 opacity-60" />
-                          <div>
-                            <h4 className="text-lg font-bold tracking-tight mb-1">{award.title}</h4>
-                            <p className="text-[13px] font-medium leading-tight opacity-90">{award.subtitle}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="relative">
-                    <div className="relative z-10 text-center lg:text-left flex flex-col items-center lg:items-start">
-                      <div className="text-[180px] md:text-[220px] font-black text-white/10 leading-none tracking-tighter italic select-none">
-                        {currentPlatform.watermark}
-                      </div>
-                      <div className="mt-[-20px] space-y-1">
-                        {currentPlatform.watermarkLabel?.map((line, idx) => (
-                          <div key={idx} className="text-3xl md:text-4xl font-black text-white/20 uppercase tracking-[0.15em] leading-tight select-none">
-                            {line}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
+              <div className="text-[180px] font-black text-white/10 italic leading-none">{currentPlatform.watermark}</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Speed and Scale Section */}
-      <section className="bg-black py-24 relative overflow-hidden">
-        <div className="container mx-auto px-10 max-w-[1400px]">
-          <div className="mb-16">
-            <h2 className="text-5xl md:text-[64px] font-bold leading-tight mb-4 tracking-tight">
-              Defending global infrastructure at <span className="text-primary italic">speed and scale.</span>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-            <div className="lg:col-span-6 bg-[#0d0d0d] border border-white/5 rounded-xl p-10 relative overflow-hidden group hover:border-primary/30 transition-all duration-500 flex flex-col justify-between shadow-2xl">
-              <div className="relative z-10">
-                <div className="text-7xl font-bold text-primary mb-1 tracking-tighter">1.2 B</div>
-                <div className="text-white/60 text-[13px] font-bold uppercase tracking-[0.2em]">Security Events Analyzed Daily</div>
-              </div>
-            </div>
-            <div className="lg:col-span-3 bg-[#0d0d0d] border border-white/5 rounded-xl p-10 relative overflow-hidden group hover:border-primary/30 transition-all duration-500 flex flex-col justify-between shadow-2xl">
-              <div className="relative z-10">
-                <div className="text-5xl font-bold text-primary mb-1 tracking-tighter">4.5 K</div>
-                <div className="text-white/60 text-[11px] font-bold uppercase tracking-[0.2em]">Malicious IPs Blocked</div>
-              </div>
-            </div>
-            <div className="lg:col-span-3 bg-[#0d0d0d] border border-white/5 rounded-xl p-10 relative overflow-hidden group hover:border-primary/30 transition-all duration-500 flex flex-col justify-between shadow-2xl">
-              <div className="relative z-10">
-                <div className="text-5xl font-bold text-primary mb-1 tracking-tighter">150+</div>
-                <div className="text-white/60 text-[11px] font-bold uppercase tracking-[0.2em]">Active Breach Responses</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Proven Success Section - Full Width Video */}
-      <section id="proven-success" className="bg-[#050505] py-24 border-t border-white/5 relative overflow-hidden">
+      {/* Proven Success Section */}
+      <section id="proven-success" className="bg-[#050505] py-24 border-t border-white/5 relative overflow-hidden scroll-mt-20">
         <div className="container mx-auto px-10 max-w-[1400px] mb-20 text-center">
-          <h2 className="text-5xl md:text-[80px] font-black leading-none tracking-tight uppercase mb-8">
-            Proven <span className="text-primary italic">Success</span>
-          </h2>
-          <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light max-w-4xl mx-auto">
-            Senticore delivers measurable security outcomes for the world's most targeted industries. Witness our global Blue Team in action.
-          </p>
+          <h2 className="text-5xl md:text-[80px] font-black leading-none tracking-tight uppercase mb-8">Proven <span className="text-primary italic">Success</span></h2>
         </div>
-
-        {/* Full Width Video Container */}
-        <div className="relative w-full aspect-video md:aspect-[21/9] overflow-hidden border-y border-white/10 shadow-[0_0_120px_rgba(241,102,50,0.1)]">
-          <iframe
-            src="https://www.youtube.com/embed/NBfcGrHR6P0?autoplay=1&mute=1&loop=1&playlist=NBfcGrHR6P0&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&enablejsapi=1"
-            className="absolute inset-0 w-full h-[115%] -top-[7.5%] pointer-events-none"
-            allow="autoplay; encrypted-media"
-            title="Senticore Operations Video"
-          />
+        <div className="relative w-full aspect-video md:aspect-[21/9] overflow-hidden border-y border-white/10">
+          <iframe src="https://www.youtube.com/embed/NBfcGrHR6P0?autoplay=1&mute=1&loop=1&playlist=NBfcGrHR6P0&controls=0&showinfo=0&rel=0" className="absolute inset-0 w-full h-[115%] -top-[7.5%] pointer-events-none" allow="autoplay; encrypted-media" title="Senticore Operations Video" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/20 pointer-events-none" />
-          
-          <div className="absolute bottom-12 left-12 right-12 flex items-center justify-between pointer-events-none">
-            <div className="flex items-center gap-6">
-              <div className="w-16 h-16 rounded-2xl border border-white/20 bg-black/40 backdrop-blur-xl flex items-center justify-center">
-                <Shield className="text-primary w-8 h-8" />
-              </div>
-              <div>
-                <div className="text-xs font-black text-white/50 uppercase tracking-[0.3em] mb-1">Live Operation Feed</div>
-                <div className="text-2xl font-bold text-white uppercase tracking-tight">Global Threat Hunting Strategy 2025</div>
-              </div>
-            </div>
-            <div className="hidden md:flex items-center gap-4">
-               <div className="flex items-center gap-2 px-4 py-2 bg-red-500/20 border border-red-500/30 rounded-full">
-                  <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                  <span className="text-[10px] font-black uppercase tracking-widest text-red-500">Secure Protocol Active</span>
-               </div>
-               <div className="text-white/40 text-sm font-mono tracking-widest uppercase">08:42:12</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="container mx-auto px-10 max-w-[1400px]">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-20 pt-20 border-t border-white/5">
-            <div className="space-y-4">
-              <div className="text-6xl font-black text-white tracking-tighter">99.9%</div>
-              <p className="text-xs font-bold text-primary uppercase tracking-[0.3em] border-l-2 border-primary pl-4">Threat Containment Rate</p>
-              <p className="text-sm text-gray-500 leading-relaxed">Verified precision in isolating high-risk vectors before lateral movement occurs.</p>
-            </div>
-            <div className="space-y-4">
-              <div className="text-6xl font-black text-white tracking-tighter">&lt; 15m</div>
-              <p className="text-xs font-bold text-primary uppercase tracking-[0.3em] border-l-2 border-primary pl-4">Average Response SLA</p>
-              <p className="text-sm text-gray-500 leading-relaxed">Industry-leading response times powered by Senticore's global L1/L2 distribution.</p>
-            </div>
-            <div className="space-y-4">
-              <div className="text-6xl font-black text-white tracking-tighter">1.5M</div>
-              <p className="text-xs font-bold text-primary uppercase tracking-[0.3em] border-l-2 border-primary pl-4">Daily Anomalies Resolved</p>
-              <p className="text-sm text-gray-500 leading-relaxed">Seamless AI-driven filtering ensures only critical alerts reach your leadership team.</p>
-            </div>
-          </div>
-
-          <div className="mt-20 flex justify-center">
-            <Button className="bg-white text-black hover:bg-gray-200 rounded-full px-16 py-8 font-black text-sm uppercase tracking-[0.2em] shadow-2xl hover:scale-105 transition-all">
-              View Detailed Case Studies
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Engage with Us Section */}
-      <section className="bg-black py-24 border-t border-white/5">
-        <div className="container mx-auto px-10 max-w-[1400px]">
-          <div className="flex justify-center mb-16">
-            <div className="bg-[#121212] p-1 rounded-full border border-white/10 flex items-center">
-              {['Executives', 'Security Teams', 'Partners', 'Compliance'].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveEngageTab(tab)}
-                  className={cn(
-                    "px-8 py-3 rounded-full text-sm font-bold transition-all uppercase tracking-wider",
-                    activeEngageTab === tab 
-                      ? "bg-primary text-white shadow-lg" 
-                      : "text-gray-400 hover:text-white"
-                  )}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {engageCards.map((card, i) => {
-              const imgData = PlaceHolderImages.find(img => img.id === card.imageId);
-              return (
-                <div key={i} className="bg-[#121212] border border-white/5 rounded-2xl overflow-hidden flex flex-col md:flex-row h-full group hover:border-primary/30 transition-all duration-500 shadow-xl">
-                  <div className="relative w-full md:w-[45%] h-[240px] md:h-auto overflow-hidden">
-                    {imgData && (
-                      <Image
-                        src={imgData.imageUrl}
-                        alt={imgData.description}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        data-ai-hint={imgData.imageHint}
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#121212]/10 md:to-[#121212]/40" />
-                  </div>
-
-                  <div className="p-8 md:p-10 flex flex-col justify-center flex-grow">
-                    <h3 className="text-2xl font-bold text-white mb-4 leading-tight">
-                      {card.title}
-                    </h3>
-                    <p className="text-gray-400 text-[15px] leading-relaxed mb-8 flex-grow">
-                      {card.description}
-                    </p>
-                    <button className="flex items-center gap-3 text-primary font-bold text-sm tracking-wide uppercase group/btn transition-colors hover:text-primary/80">
-                      {card.cta} <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="absolute bottom-12 left-12 flex items-center gap-6">
+            <div className="w-16 h-16 rounded-2xl border border-white/20 bg-black/40 backdrop-blur-xl flex items-center justify-center"><Shield className="text-primary w-8 h-8" /></div>
+            <div><div className="text-xs font-black text-white/50 uppercase tracking-[0.3em]">Live Feed</div><div className="text-2xl font-bold text-white uppercase">Global Threat Hunting Strategy</div></div>
           </div>
         </div>
       </section>
 
       {/* Perspectives Section */}
-      <section className="bg-black py-24 relative overflow-hidden border-t border-white/5">
-        <div className="absolute inset-0 opacity-10 pointer-events-none" 
-             style={{ backgroundImage: 'repeating-linear-gradient(45deg, #ffffff 0, #ffffff 1px, transparent 0, transparent 40px)', backgroundSize: '60px 60px' }} />
-        <div className="container mx-auto px-10 max-w-[1400px] relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-            <div className="max-w-3xl">
-              <div className="w-12 h-0.5 bg-primary mb-6" />
-              <h2 className="text-5xl md:text-[64px] font-bold leading-tight tracking-tight">
-                Global security demands <br />
-                <span className="text-primary italic">perspectives</span> you can trust.
-              </h2>
-            </div>
-            <button className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm font-bold uppercase tracking-[0.2em] group">
-              View Intel Library <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </button>
+      <section id="intel" className="bg-black py-24 border-t border-white/5 scroll-mt-20">
+        <div className="container mx-auto px-10 max-w-[1400px]">
+          <h2 className="text-5xl font-bold mb-16">Global Security <span className="text-primary italic">Perspectives</span></h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {perspectives.map((article, i) => (
+              <div key={i} className={cn("rounded-sm overflow-hidden flex flex-col group cursor-pointer", article.theme === 'light' ? "bg-white text-black" : "bg-[#4a140b] text-white")}>
+                <div className="p-10 flex-grow"><div className="text-[11px] font-black uppercase mb-10 opacity-60">{article.type}</div><h3 className="text-2xl font-bold leading-tight">{article.title}</h3></div>
+                <div className="relative aspect-[16/10] overflow-hidden grayscale group-hover:grayscale-0 transition-all">
+                  {PlaceHolderImages.find(img => img.id === article.imageId) && <Image src={PlaceHolderImages.find(img => img.id === article.imageId)!.imageUrl} alt="Article" fill className="object-cover" />}
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {perspectives.map((article, i) => {
-              const imgData = PlaceHolderImages.find(img => img.id === article.imageId);
-              return (
-                <div key={i} className={cn(
-                  "flex flex-col h-full rounded-sm overflow-hidden transition-all duration-500 group cursor-pointer hover:translate-y-[-4px]",
-                  article.theme === 'light' ? "bg-white text-black" : "bg-[#4a140b] text-white"
-                )}>
-                  <div className="p-10 flex-grow flex flex-col">
-                    <div className={cn("text-[11px] font-black tracking-[0.3em] uppercase mb-10 opacity-60")}>
-                      {article.type}
-                    </div>
-                    <h3 className="text-2xl md:text-[28px] font-bold leading-tight mb-12">
-                      {article.title}
-                    </h3>
+      {/* Contact Section */}
+      <section id="contact" className="bg-[#080808] py-32 border-t border-white/10 scroll-mt-20">
+        <div className="container mx-auto px-10 max-w-[1400px]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+            <div className="space-y-12">
+              <div className="space-y-6">
+                <h2 className="text-primary font-black uppercase tracking-[0.4em] text-xs">Contact Operations</h2>
+                <h3 className="text-5xl font-bold text-white tracking-tight">Request a <span className="text-primary italic">Security Consultation</span></h3>
+                <p className="text-gray-400 text-lg leading-relaxed max-w-lg">Our experts are available to discuss your security posture, SOC requirements, or emergency incident response needs.</p>
+              </div>
+              
+              <div className="space-y-8 pt-8 border-t border-white/5">
+                <div className="flex items-center gap-6 group">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-black transition-all">
+                    <Mail className="w-5 h-5" />
                   </div>
-                  <div className="relative aspect-[16/10] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-                    {imgData && (
-                      <Image
-                        src={imgData.imageUrl}
-                        alt={imgData.description}
-                        fill
-                        className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                        data-ai-hint={imgData.imageHint}
-                      />
-                    )}
+                  <div>
+                    <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Email Operations</div>
+                    <div className="text-lg font-bold text-white">contact@senticore.com</div>
                   </div>
                 </div>
-              );
-            })}
-            <div className="hidden md:flex flex-col items-center justify-center border border-white/5 bg-[#0a0a0a]/40 rounded-sm p-10 text-center">
-               <Globe className="w-12 h-12 text-primary mb-6 opacity-40" />
-               <div className="text-white/20 font-bold uppercase tracking-[0.3em] text-xs">Senticore Global Intelligence Network</div>
+                <div className="flex items-center gap-6 group">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-black transition-all">
+                    <Globe className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Global HQ</div>
+                    <div className="text-lg font-bold text-white">Distributed Network Operations</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-6 group">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-black transition-all">
+                    <Linkedin className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Professional Connect</div>
+                    <div className="text-lg font-bold text-white">Senticore Security Global</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-[#121212] p-10 rounded-2xl border border-white/5 shadow-2xl relative overflow-hidden">
+               <div className="absolute top-0 right-0 p-6 opacity-10">
+                  <ShieldCheck className="w-32 h-32 text-primary" />
+               </div>
+               <form className="relative z-10 space-y-6">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Full Name</label>
+                      <Input placeholder="John Doe" className="bg-black/50 border-white/10 text-white h-12 focus:border-primary" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Enterprise Email</label>
+                      <Input type="email" placeholder="john@company.com" className="bg-black/50 border-white/10 text-white h-12 focus:border-primary" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Service Interest</label>
+                    <div className="grid grid-cols-2 gap-4">
+                       <button type="button" className="px-4 py-2 bg-black border border-white/10 rounded-md text-xs font-bold text-gray-300 hover:border-primary hover:text-white transition-all">SOC as a Service</button>
+                       <button type="button" className="px-4 py-2 bg-black border border-white/10 rounded-md text-xs font-bold text-gray-300 hover:border-primary hover:text-white transition-all">Incident Response</button>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Security Inquiry</label>
+                    <Textarea placeholder="Describe your security requirements..." className="bg-black/50 border-white/10 text-white min-h-[120px] focus:border-primary" />
+                  </div>
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-black font-black uppercase tracking-widest h-14 rounded-full shadow-lg flex items-center justify-center gap-3">
+                    Transmit Message <Send className="w-4 h-4" />
+                  </Button>
+               </form>
             </div>
           </div>
         </div>
@@ -662,76 +380,18 @@ export default function Home() {
         <div className="container mx-auto px-10 max-w-[1400px]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-8">
-              <div className="mb-10">
-                <h3 className="text-black font-bold text-base mb-4 inline-block border-b-2 border-gray-100 pb-2 w-full max-w-[200px]">
-                  Services & Operations
-                </h3>
+              <h3 className="text-black font-bold text-base mb-10 border-b-2 border-gray-100 pb-2 inline-block w-full max-w-[200px]">Services</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <ul className="space-y-3 text-[13px]"><li>SOC as a Service</li><li>SIEM Management</li><li>Log Monitoring</li></ul>
+                <ul className="space-y-3 text-[13px]"><li>EDR Management</li><li>XDR Operations</li><li>Vulnerability Assessment</li></ul>
+                <ul className="space-y-3 text-[13px]"><li>Incident Response</li><li>Cloud Security</li><li>AI LLM Security</li></ul>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
-                <div className="space-y-10">
-                  <div>
-                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Managed SOC</h4>
-                    <ul className="space-y-3 text-[13px]">
-                      <li><a href="#" className="hover:text-black transition-colors">SOC as a Service (L1/L2)</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">SIEM Management</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">Log Monitoring</a></li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Endpoint Defense</h4>
-                    <ul className="space-y-3 text-[13px]">
-                      <li><a href="#" className="hover:text-black transition-colors">EDR Management</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">XDR Operations</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="space-y-10">
-                  <div>
-                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Assessments</h4>
-                    <ul className="space-y-3 text-[13px]">
-                      <li><a href="#" className="hover:text-black transition-colors">Vulnerability Assessment</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">Penetration Testing</a></li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Incident Response</h4>
-                    <ul className="space-y-3 text-[13px]">
-                      <li><a href="#" className="hover:text-black transition-colors">Breach Analysis</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">Forensics Recovery</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="space-y-10">
-                  <div>
-                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Cloud & AI Security</h4>
-                    <ul className="space-y-3 text-[13px]">
-                      <li><a href="#" className="hover:text-black transition-colors">Cloud Reviews</a></li>
-                      <li><a href="#" className="hover:text-black transition-colors">AI LLM Security</a></li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-black font-bold text-[13px] mb-6 uppercase tracking-tight">Advanced</h4>
-                    <ul className="space-y-3 text-[13px]">
-                      <li><a href="#" className="hover:text-black transition-colors">Purple Team Hunting</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="lg:col-span-2">
-              <h3 className="text-black font-bold text-base mb-10 border-b-2 border-gray-100 pb-2 inline-block w-full">Company</h3>
-              <ul className="space-y-4 text-[13px] font-medium">
-                <li><a href="#" className="hover:text-black transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-black transition-colors">Careers</a></li>
-                <li><a href="mailto:contact@senticore.com" className="hover:text-black transition-colors">Contact</a></li>
-              </ul>
             </div>
             <div className="lg:col-span-2">
               <h3 className="text-black font-bold text-base mb-10 border-b-2 border-gray-100 pb-2 inline-block w-full">Connect</h3>
-              <ul className="space-y-4 text-[13px] font-medium">
+              <ul className="space-y-4 text-[13px]">
                 <li><a href="#" className="hover:text-black transition-colors flex items-center gap-2"><Linkedin className="w-4 h-4" /> LinkedIn</a></li>
                 <li><a href="#" className="hover:text-black transition-colors flex items-center gap-2"><Instagram className="w-4 h-4" /> Instagram</a></li>
-                <li><a href="#" className="hover:text-black transition-colors flex items-center gap-2"><Twitter className="w-4 h-4" /> Twitter / X</a></li>
                 <li><a href="mailto:contact@senticore.com" className="hover:text-black transition-colors flex items-center gap-2"><Mail className="w-4 h-4" /> Email Us</a></li>
               </ul>
             </div>
@@ -742,25 +402,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      {/* Cookie Banner */}
-      {showCookies && (
-        <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 p-5 z-[100]">
-          <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6 max-w-[1400px]">
-            <p className="text-[14px] text-gray-200/90 leading-normal font-normal flex-grow">
-              Senticore uses essential cookies to ensure global security and personalized insights. <a href="#" className="text-accent hover:underline font-medium">Privacy statement</a>
-            </p>
-            <div className="flex items-center gap-6 shrink-0">
-              <Button onClick={() => setShowCookies(false)} className="bg-[#00c853] hover:bg-[#00e676] text-black text-[13px] px-8 h-11 rounded-[4px] font-bold tracking-tight uppercase">
-                Manage Cookie Settings
-              </Button>
-              <button onClick={() => setShowCookies(false)} className="text-gray-400 hover:text-white p-2">
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
