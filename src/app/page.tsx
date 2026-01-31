@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Search, ChevronDown, ArrowRight, Shield, Activity, Bug, Lock, Mail, Linkedin, Instagram, Send, ShieldCheck, Target, Zap, Cpu, Terminal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -23,7 +24,7 @@ const SenticoreLogo = ({ className = "w-10 h-10", iconOnly = false }: { classNam
       </svg>
     </div>
     {!iconOnly && (
-      <div className="flex flex-col">
+      <div className="flex flex-col text-left">
         <span className="text-2xl font-black tracking-tighter text-white uppercase leading-none">Senti<span className="text-primary">core</span></span>
         <span className="text-[9px] tracking-[0.4em] text-zinc-400 font-bold uppercase mt-1 border-t border-white/10 pt-1">Security Global</span>
       </div>
@@ -376,15 +377,35 @@ export default function Home() {
       <footer className="bg-zinc-950 text-zinc-400 py-20 border-t border-white/5">
         <div className="container mx-auto px-10 max-w-[1400px]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-8">
+            <div className="lg:col-span-6">
               <h3 className="text-white font-bold text-base mb-10 border-b-2 border-white/10 pb-2 inline-block w-full max-w-[200px]">Core Services</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <ul className="space-y-3 text-[13px]"><li>SOC as a Service</li><li>SIEM Management</li><li>Log Monitoring</li><li>Alert Analysis</li></ul>
-                <ul className="space-y-3 text-[13px]"><li>EDR Management</li><li>XDR Operations</li><li>Vulnerability Assessment</li><li>Risk Reporting</li></ul>
-                <ul className="space-y-3 text-[13px]"><li>Incident Response</li><li>Cloud Security</li><li>AI LLM Security</li><li>Pentesting</li></ul>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <ul className="space-y-3 text-[13px]">
+                  <li>SOC as a Service</li>
+                  <li>SIEM Management</li>
+                  <li>Log Monitoring</li>
+                  <li>Alert Analysis</li>
+                  <li>EDR Management</li>
+                </ul>
+                <ul className="space-y-3 text-[13px]">
+                  <li>Vulnerability Assessment</li>
+                  <li>Incident Response</li>
+                  <li>Cloud Security</li>
+                  <li>AI LLM Security</li>
+                  <li>Pentesting</li>
+                </ul>
               </div>
             </div>
-            <div className="lg:col-span-2 lg:offset-1">
+            <div className="lg:col-span-3">
+              <h3 className="text-white font-bold text-base mb-10 border-b-2 border-white/10 pb-2 inline-block w-full">Legal</h3>
+              <ul className="space-y-4 text-[13px]">
+                <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
+                <li><Link href="/privacy" className="hover:text-primary transition-colors">Cookie Policy</Link></li>
+                <li><button onClick={() => scrollToSection('contact')} className="hover:text-primary transition-colors">Compliance Audit</button></li>
+              </ul>
+            </div>
+            <div className="lg:col-span-3">
               <h3 className="text-white font-bold text-base mb-10 border-b-2 border-white/10 pb-2 inline-block w-full">Connect</h3>
               <ul className="space-y-4 text-[13px]">
                 <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-2"><Linkedin className="w-4 h-4" /> LinkedIn</a></li>
