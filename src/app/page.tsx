@@ -10,9 +10,20 @@ import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from "@/hooks/use-toast";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 /**
- * A unique, professional logo for Senticore.
+ * Professional, unique logo for Senticore.
  */
 const SenticoreLogo = ({ className = "w-10 h-10", iconOnly = false }: { className?: string, iconOnly?: boolean }) => (
   <div className={cn("flex items-center gap-3 group cursor-pointer", !iconOnly && "w-auto")}>
@@ -33,12 +44,27 @@ const SenticoreLogo = ({ className = "w-10 h-10", iconOnly = false }: { classNam
   </div>
 );
 
+const formSchema = z.object({
+  fullName: z.string().min(2, { message: "Full name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid enterprise email address." }),
+  message: z.string().min(10, { message: "Inquiry must be at least 10 characters." }),
+});
+
 export default function Home() {
   const [activePlatformTab, setActivePlatformTab] = useState('soc');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      message: "",
+    },
+  });
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
 
@@ -49,16 +75,12 @@ export default function Home() {
     }
   };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    
     // Simulate high-security encryption and transmission delay
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
     setIsSubmitting(false);
     setIsSubmitted(true);
-    
     toast({
       title: "Transmission Secure",
       description: "Your message has been successfully encrypted and transmitted to our Global SOC.",
@@ -386,32 +408,61 @@ export default function Home() {
                     </Button>
                  </div>
                ) : (
-                 <form className="relative z-10 space-y-8" onSubmit={handleFormSubmit}>
-                    <div className="grid grid-cols-2 gap-8">
-                      <div className="space-y-3">
-                        <label className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Full Name</label>
-                        <Input required placeholder="John Doe" className="bg-black/80 border-white/10 text-white h-14 rounded-xl focus:border-primary text-base placeholder:opacity-30" />
-                      </div>
-                      <div className="space-y-3">
-                        <label className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Enterprise Email</label>
-                        <Input required type="email" placeholder="john@company.com" className="bg-black/80 border-white/10 text-white h-14 rounded-xl focus:border-primary text-base placeholder:opacity-30" />
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      <label className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Security Inquiry</label>
-                      <Textarea required placeholder="Describe your security requirements..." className="bg-black/80 border-white/10 text-white min-h-[160px] rounded-xl focus:border-primary text-base placeholder:opacity-30" />
-                    </div>
-                    <Button 
-                      disabled={isSubmitting}
-                      className="w-full bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.4em] h-16 rounded-full shadow-2xl flex items-center justify-center gap-4 border-none text-sm transition-all hover:scale-[1.02]"
-                    >
-                      {isSubmitting ? (
-                        <>Encrypting Transmission... <Activity className="w-5 h-5 animate-pulse" /></>
-                      ) : (
-                        <>Transmit Secure Message <Send className="w-5 h-5" /></>
-                      )}
-                    </Button>
-                 </form>
+                 <Form {...form}>
+                   <form onSubmit={form.handleSubmit(onSubmit)} className="relative z-10 space-y-8">
+                     <div className="grid grid-cols-2 gap-8">
+                       <FormField
+                         control={form.control}
+                         name="fullName"
+                         render={({ field }) => (
+                           <FormItem className="space-y-3">
+                             <FormLabel className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Full Name</FormLabel>
+                             <FormControl>
+                               <Input placeholder="John Doe" className="bg-black/80 border-white/10 text-white h-14 rounded-xl focus:border-primary text-base placeholder:opacity-30" {...field} />
+                             </FormControl>
+                             <FormMessage className="text-primary text-[10px] font-bold uppercase" />
+                           </FormItem>
+                         )}
+                       />
+                       <FormField
+                         control={form.control}
+                         name="email"
+                         render={({ field }) => (
+                           <FormItem className="space-y-3">
+                             <FormLabel className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Enterprise Email</FormLabel>
+                             <FormControl>
+                               <Input type="email" placeholder="john@company.com" className="bg-black/80 border-white/10 text-white h-14 rounded-xl focus:border-primary text-base placeholder:opacity-30" {...field} />
+                             </FormControl>
+                             <FormMessage className="text-primary text-[10px] font-bold uppercase" />
+                           </FormItem>
+                         )}
+                       />
+                     </div>
+                     <FormField
+                       control={form.control}
+                       name="message"
+                       render={({ field }) => (
+                         <FormItem className="space-y-3">
+                           <FormLabel className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Security Inquiry</FormLabel>
+                           <FormControl>
+                             <Textarea placeholder="Describe your security requirements..." className="bg-black/80 border-white/10 text-white min-h-[160px] rounded-xl focus:border-primary text-base placeholder:opacity-30" {...field} />
+                           </FormControl>
+                           <FormMessage className="text-primary text-[10px] font-bold uppercase" />
+                         </FormItem>
+                       )}
+                     />
+                     <Button 
+                       disabled={isSubmitting}
+                       className="w-full bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.4em] h-16 rounded-full shadow-2xl flex items-center justify-center gap-4 border-none text-sm transition-all hover:scale-[1.02]"
+                     >
+                       {isSubmitting ? (
+                         <>Encrypting Transmission... <Activity className="w-5 h-5 animate-pulse" /></>
+                       ) : (
+                         <>Transmit Secure Message <Send className="w-5 h-5" /></>
+                       )}
+                     </Button>
+                   </form>
+                 </Form>
                )}
             </div>
           </div>
