@@ -3,12 +3,13 @@
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Search, ChevronDown, ArrowRight, Shield, Activity, Bug, Lock, Mail, Linkedin, Instagram, Send, ShieldCheck, Target, Zap, Cpu, Terminal } from 'lucide-react';
+import { Search, ChevronDown, ArrowRight, Shield, Activity, Bug, Lock, Mail, Linkedin, Instagram, Send, ShieldCheck, Target, Zap, Cpu, Terminal, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useToast } from "@/hooks/use-toast";
 
 /**
  * A unique, professional logo for Senticore.
@@ -34,6 +35,9 @@ const SenticoreLogo = ({ className = "w-10 h-10", iconOnly = false }: { classNam
 
 export default function Home() {
   const [activePlatformTab, setActivePlatformTab] = useState('soc');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
   const menuRef = useRef<HTMLDivElement>(null);
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
@@ -43,6 +47,22 @@ export default function Home() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate high-security encryption and transmission delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    
+    toast({
+      title: "Transmission Secure",
+      description: "Your message has been successfully encrypted and transmitted to our Global SOC.",
+    });
   };
 
   const navItems = [
@@ -349,25 +369,50 @@ export default function Home() {
                <div className="absolute top-0 right-0 p-8 opacity-5">
                   <ShieldCheck className="w-48 h-48 text-primary" />
                </div>
-               <form className="relative z-10 space-y-8" onSubmit={(e) => e.preventDefault()}>
-                  <div className="grid grid-cols-2 gap-8">
-                    <div className="space-y-3">
-                      <label className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Full Name</label>
-                      <Input placeholder="John Doe" className="bg-black/80 border-white/10 text-white h-14 rounded-xl focus:border-primary text-base placeholder:opacity-30" />
+               
+               {isSubmitted ? (
+                 <div className="relative z-10 py-20 flex flex-col items-center text-center animate-in fade-in zoom-in duration-500">
+                    <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-8 border border-primary/30">
+                      <CheckCircle2 className="w-10 h-10 text-primary" />
+                    </div>
+                    <h4 className="text-3xl font-black text-white uppercase tracking-tight mb-4">Transmission Successful</h4>
+                    <p className="text-zinc-400 text-lg max-w-sm mb-10">Your secure message has been encrypted and delivered to our Global SOC. An analyst will review your inquiry shortly.</p>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => setIsSubmitted(false)}
+                      className="border-white/10 text-white hover:bg-white/5 rounded-full px-8 font-black uppercase text-[11px] tracking-widest"
+                    >
+                      Send Another Message
+                    </Button>
+                 </div>
+               ) : (
+                 <form className="relative z-10 space-y-8" onSubmit={handleFormSubmit}>
+                    <div className="grid grid-cols-2 gap-8">
+                      <div className="space-y-3">
+                        <label className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Full Name</label>
+                        <Input required placeholder="John Doe" className="bg-black/80 border-white/10 text-white h-14 rounded-xl focus:border-primary text-base placeholder:opacity-30" />
+                      </div>
+                      <div className="space-y-3">
+                        <label className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Enterprise Email</label>
+                        <Input required type="email" placeholder="john@company.com" className="bg-black/80 border-white/10 text-white h-14 rounded-xl focus:border-primary text-base placeholder:opacity-30" />
+                      </div>
                     </div>
                     <div className="space-y-3">
-                      <label className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Enterprise Email</label>
-                      <Input type="email" placeholder="john@company.com" className="bg-black/80 border-white/10 text-white h-14 rounded-xl focus:border-primary text-base placeholder:opacity-30" />
+                      <label className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Security Inquiry</label>
+                      <Textarea required placeholder="Describe your security requirements..." className="bg-black/80 border-white/10 text-white min-h-[160px] rounded-xl focus:border-primary text-base placeholder:opacity-30" />
                     </div>
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Security Inquiry</label>
-                    <Textarea placeholder="Describe your security requirements..." className="bg-black/80 border-white/10 text-white min-h-[160px] rounded-xl focus:border-primary text-base placeholder:opacity-30" />
-                  </div>
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.4em] h-16 rounded-full shadow-2xl flex items-center justify-center gap-4 border-none text-sm transition-all hover:scale-[1.02]">
-                    Transmit Secure Message <Send className="w-5 h-5" />
-                  </Button>
-               </form>
+                    <Button 
+                      disabled={isSubmitting}
+                      className="w-full bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.4em] h-16 rounded-full shadow-2xl flex items-center justify-center gap-4 border-none text-sm transition-all hover:scale-[1.02]"
+                    >
+                      {isSubmitting ? (
+                        <>Encrypting Transmission... <Activity className="w-5 h-5 animate-pulse" /></>
+                      ) : (
+                        <>Transmit Secure Message <Send className="w-5 h-5" /></>
+                      )}
+                    </Button>
+                 </form>
+               )}
             </div>
           </div>
         </div>
