@@ -1,6 +1,7 @@
+
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { 
@@ -21,7 +22,9 @@ import {
   Cpu, 
   Terminal, 
   CheckCircle2,
-  Globe
+  Globe,
+  Loader2,
+  X
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -46,6 +49,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useLanguage } from '@/context/language-context';
 import { translations } from '@/lib/translations';
 
@@ -80,6 +89,9 @@ export default function Home() {
   const [activePlatformTab, setActivePlatformTab] = useState('soc');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -109,6 +121,15 @@ export default function Home() {
       title: t.contact.success,
       description: t.contact.successSub,
     });
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    setIsSearching(true);
+    setTimeout(() => {
+      setIsSearching(false);
+    }, 2000);
   };
 
   const navItems = [
@@ -192,7 +213,7 @@ export default function Home() {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          <button className="hover:text-primary transition-colors text-zinc-900"><Search className="w-4 h-4" /></button>
+          <button onClick={() => setIsSearchOpen(true)} className="hover:text-primary transition-colors text-zinc-900"><Search className="w-4 h-4" /></button>
         </div>
         <div className="flex items-center gap-6 font-bold text-zinc-900">
           <a href="mailto:contact@redwallcyber.com" className="hover:text-primary transition-colors flex items-center gap-2 hidden md:flex">
@@ -440,6 +461,84 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Search Command Center */}
+      <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
+        <DialogContent className="bg-[#0a0a0a] border-white/10 text-white max-w-3xl p-0 overflow-hidden shadow-[0_0_50px_rgba(255,0,0,0.1)]">
+          <DialogHeader className="p-6 border-b border-white/5 bg-black/40">
+            <div className="flex items-center gap-4">
+              <Search className="w-5 h-5 text-primary" />
+              <form onSubmit={handleSearch} className="flex-grow">
+                <Input 
+                  autoFocus
+                  placeholder={t.search.placeholder} 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="bg-transparent border-none text-xl focus-visible:ring-0 placeholder:opacity-30 h-10 p-0"
+                />
+              </form>
+              <button onClick={() => setIsSearchOpen(false)} className="opacity-40 hover:opacity-100 transition-opacity">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </DialogHeader>
+          
+          <div className="p-8 min-h-[400px]">
+            {isSearching ? (
+              <div className="flex flex-col items-center justify-center h-64 space-y-6">
+                <Loader2 className="w-10 h-10 text-primary animate-spin" />
+                <p className="text-zinc-500 font-black uppercase tracking-[0.3em] text-[11px] animate-pulse">
+                  {t.search.analyzing}
+                </p>
+              </div>
+            ) : searchQuery ? (
+              <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="space-y-4">
+                  <h4 className="text-[11px] font-black text-zinc-600 uppercase tracking-[0.4em]">{t.search.results}</h4>
+                  <div className="p-6 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between group hover:border-primary/40 transition-all cursor-pointer">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-black transition-colors">
+                        <Terminal className="w-4 h-4" />
+                      </div>
+                      <span className="text-lg font-bold">Threat Intelligence Report: {searchQuery}</span>
+                    </div>
+                    <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all" />
+                  </div>
+                </div>
+                <div className="p-12 text-center">
+                   <p className="text-zinc-500 text-sm italic">{t.search.noResults}</p>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-10">
+                <div className="space-y-6">
+                  <h4 className="text-[11px] font-black text-zinc-600 uppercase tracking-[0.4em]">{t.search.quickLinks}</h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    {navItems.map((item) => (
+                      <button 
+                        key={item.id}
+                        onClick={() => {
+                          scrollToSection(item.id);
+                          setIsSearchOpen(false);
+                        }}
+                        className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.08] hover:border-white/20 transition-all text-left group"
+                      >
+                        <Zap className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+                        <span className="font-bold uppercase text-[11px] tracking-widest">{item.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          
+          <div className="p-4 bg-black/60 border-t border-white/5 flex justify-between items-center text-[10px] text-zinc-600 font-black uppercase tracking-[0.2em]">
+            <span>Redwall Precision AI v4.0</span>
+            <span>ESC to close</span>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
