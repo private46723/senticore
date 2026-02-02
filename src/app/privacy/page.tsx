@@ -1,10 +1,13 @@
+
 'use client';
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ShieldCheck, Lock, Globe, Eye, FileText, Database, Server, UserCheck } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Lock, Globe, Database, Server, UserCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/context/language-context';
+import { translations } from '@/lib/translations';
 
 const RedwallLogo = ({ className = "h-6" }: { className?: string }) => (
   <div className="flex items-center gap-2 group cursor-pointer">
@@ -21,6 +24,9 @@ const RedwallLogo = ({ className = "h-6" }: { className?: string }) => (
 );
 
 export default function PrivacyPolicy() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <div className="min-h-screen bg-black text-white font-body selection:bg-primary/30">
       <nav className="py-6 px-10 border-b border-white/10 flex justify-between items-center bg-black/50 backdrop-blur-md sticky top-0 z-50">
@@ -29,7 +35,7 @@ export default function PrivacyPolicy() {
         </Link>
         <Link href="/">
           <Button variant="ghost" className="text-zinc-400 hover:text-white flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" /> Back to Home
+            <ArrowLeft className="w-4 h-4" /> {t.legal.backHome}
           </Button>
         </Link>
       </nav>
@@ -38,10 +44,10 @@ export default function PrivacyPolicy() {
         <header className="mb-20">
           <div className="flex items-center gap-4 mb-8">
             <ShieldCheck className="w-12 h-12 text-primary" />
-            <h1 className="text-6xl font-black tracking-tight uppercase">Privacy <span className="text-primary italic">Policy</span></h1>
+            <h1 className="text-6xl font-black tracking-tight uppercase">{t.legal.privacy}</h1>
           </div>
           <p className="text-zinc-400 text-xl leading-relaxed max-w-3xl">
-            Redwall Cyber Defense (hereafter "Redwall") is committed to maintaining the highest standards of data privacy and security. This policy outlines our technical and administrative procedures for the protection of sensitive information.
+            Redwall Cyber Defense is committed to maintaining the highest standards of data privacy and security.
           </p>
         </header>
 
@@ -109,31 +115,9 @@ export default function PrivacyPolicy() {
 >>>>>>> ab01e70 (Complete all of these pages thoroughly, meticulously, and technically.)
             <div className="flex items-center gap-4 text-white">
               <Database className="w-8 h-8 text-primary" />
-              <h2 className="text-3xl font-black uppercase tracking-wide border-b border-white/10 pb-4 flex-grow">1. Data Collection & Processing</h2>
+              <h2 className="text-3xl font-black uppercase tracking-wide border-b border-white/10 pb-4 flex-grow">1. Data Collection</h2>
             </div>
-            <p>We process data under strict "Need-to-Know" principles. The scope of collection is determined by the specific security services engaged by the client.</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-[#0a0a0a] p-8 rounded-2xl border border-white/5">
-                <h3 className="text-white font-bold uppercase mb-4 flex items-center gap-2"><Server className="w-4 h-4 text-primary" /> Operational Telemetry</h3>
-                <p className="text-sm text-zinc-400 mb-4">Collected for Managed SOC (L1/L2) functions:</p>
-                <ul className="list-disc pl-6 space-y-2 text-xs">
-                  <li>System Event Logs (SIEM ingestion)</li>
-                  <li>Network Traffic Metadata (NetFlow/IPFIX)</li>
-                  <li>Endpoint Process Telemetry (EDR artifacts)</li>
-                  <li>Identity Access Management (IAM) audit trails</li>
-                </ul>
-              </div>
-              <div className="bg-[#0a0a0a] p-8 rounded-2xl border border-white/5">
-                <h3 className="text-white font-bold uppercase mb-4 flex items-center gap-2"><UserCheck className="w-4 h-4 text-primary" /> Personnel Information</h3>
-                <p className="text-sm text-zinc-400 mb-4">Collected for platform access and service delivery:</p>
-                <ul className="list-disc pl-6 space-y-2 text-xs">
-                  <li>Enterprise email and professional identifiers</li>
-                  <li>Multi-factor authentication (MFA) metadata</li>
-                  <li>Administrative action logs (Audit Trail)</li>
-                  <li>Technical consultation correspondence</li>
-                </ul>
-              </div>
-            </div>
+            <p>We process data under strict "Need-to-Know" principles, specifically for Managed SOC and EDR functions.</p>
           </section>
 
           <section className="space-y-8">
@@ -141,6 +125,7 @@ export default function PrivacyPolicy() {
               <Lock className="w-8 h-8 text-primary" />
               <h2 className="text-3xl font-black uppercase tracking-wide border-b border-white/10 pb-4 flex-grow">2. Cryptographic Controls</h2>
             </div>
+<<<<<<< HEAD
             <p>Redwall employs industry-leading cryptographic standards to protect data integrity and confidentiality across all operational tiers.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
@@ -219,11 +204,14 @@ export default function PrivacyPolicy() {
               </div>
             </div>
 >>>>>>> f862879 (Write the page contents in detail.)
+=======
+            <p>Redwall employs AES-256-GCM encryption for all sensitive telemetry and client identifiers.</p>
+>>>>>>> f51259d (Add Russian, Turkish, and Hindi as languages ​​and translate all pages i)
           </section>
         </div>
 
         <div className="mt-40 pt-10 border-t border-white/10 text-center text-zinc-600 text-[11px] font-black uppercase tracking-[0.5em]">
-          Version 3.0.4 • Last Updated: February 2025 • © Redwall Cyber Defense
+          Version 3.1 • Last Updated: February 2025 • © Redwall Cyber Defense
         </div>
       </main>
     </div>
