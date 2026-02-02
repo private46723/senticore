@@ -17,6 +17,22 @@ export const translations = {
       cta1: 'Explore SOC Services',
       cta2: 'Contact Operations'
     },
+    threatHunter: {
+      sectionTitle: 'Operational Tools',
+      title: 'Precision AI® Threat Hunter',
+      sub: 'Intercept and analyze suspicious activity in real-time. Our L1/L2 AI engine provides immediate technical context and remediation paths.',
+      cta: 'Launch AI Analyzer',
+      modalTitle: 'Precision AI Threat Analysis',
+      modalSub: 'Submit log data or suspicious activity for deep-packet inspection.',
+      placeholder: 'Paste security log, suspicious URL, or query...',
+      analyzeBtn: 'Execute Deep Scan',
+      analyzing: 'Analyzing telemetry...',
+      severity: 'Severity Level',
+      analysis: 'Technical Analysis',
+      recommendations: 'Remediation Steps',
+      close: 'Close Terminal',
+      error: 'Analysis Failed. SOC fallback triggered.'
+    },
     about: {
       title: 'Elite Blue Team Operations',
       sub: 'Redwall is more than a service provider; we are your tactical partner in the digital theater of war. Our personnel are veterans of global security operations.',
@@ -93,6 +109,22 @@ export const translations = {
       contact: 'Связаться с нами',
       emergency: 'Срочный IR?',
       getInTouch: 'Связаться'
+    },
+    threatHunter: {
+      sectionTitle: 'Операционные инструменты',
+      title: 'Precision AI® Threat Hunter',
+      sub: 'Перехватывайте и анализируйте подозрительную активность в режиме реального времени. Наш механизм L1/L2 предоставляет немедленный контекст.',
+      cta: 'Запустить ИИ-анализатор',
+      modalTitle: 'ИИ-анализ угроз',
+      modalSub: 'Отправьте данные журнала для глубокой проверки пакетов.',
+      placeholder: 'Вставьте лог, URL или запрос...',
+      analyzeBtn: 'Выполнить глубокое сканирование',
+      analyzing: 'Анализ телеметрии...',
+      severity: 'Уровень серьезности',
+      analysis: 'Технический анализ',
+      recommendations: 'Меры по устранению',
+      close: 'Закрыть терминал',
+      error: 'Ошибка анализа. Запущен резервный SOC.'
     },
     hero: {
       title: 'Защита глобальных предприятий с',
@@ -178,6 +210,22 @@ export const translations = {
       emergency: 'Acil IR?',
       getInTouch: 'İletişime Geç'
     },
+    threatHunter: {
+      sectionTitle: 'Operasyonel Araçlar',
+      title: 'Precision AI® Tehdit Avcısı',
+      sub: 'Şüpheli aktiviteleri gerçek zamanlı olarak yakalayın ve analiz edin. L1/L2 motorumuz teknik bağlam sağlar.',
+      cta: 'AI Analizörünü Başlat',
+      modalTitle: 'AI Tehdit Analizi',
+      modalSub: 'Derin paket incelemesi için günlük verilerini gönderin.',
+      placeholder: 'Güvenlik günlüğü, URL veya sorgu yapıştırın...',
+      analyzeBtn: 'Derin Tarama Yürüt',
+      analyzing: 'Telemetri analiz ediliyor...',
+      severity: 'Kritiklik Seviyesi',
+      analysis: 'Teknik Analiz',
+      recommendations: 'İyileştirme Adımları',
+      close: 'Terminali Kapat',
+      error: 'Analiz Başarısız. SOC yedekleme tetiklendi.'
+    },
     hero: {
       title: 'Küresel İşletmeleri Şununla Savunuyoruz:',
       precision: 'Hassasiyet.',
@@ -261,6 +309,22 @@ export const translations = {
       contact: 'संपर्क करें',
       emergency: 'आपातकालीन IR?',
       getInTouch: 'संपर्क करें'
+    },
+    threatHunter: {
+      sectionTitle: 'परिचालन उपकरण',
+      title: 'Precision AI® थ्रेट हंटर',
+      sub: 'वास्तविक समय में संदिग्ध गतिविधि का विश्लेषण करें। हमारा इंजन तत्काल तकनीकी संदर्भ प्रदान करता है।',
+      cta: 'AI विश्लेषक लॉन्च करें',
+      modalTitle: 'AI खतरे का विश्लेषण',
+      modalSub: 'गहरी जाँच के लिए लॉग डेटा जमा करें।',
+      placeholder: 'सुरक्षा लॉग, संदिग्ध URL या प्रश्न पेस्ट करें...',
+      analyzeBtn: 'गहरा स्कैन निष्पादित करें',
+      analyzing: 'टेलीमेट्री का विश्लेषण...',
+      severity: 'गंभीरता स्तर',
+      analysis: 'तकनीकी विश्लेषण',
+      recommendations: 'सुधार के कदम',
+      close: 'टर्मिनल बंद करें',
+      error: 'विश्लेषण विफल। SOC फॉलबैक सक्रिय।'
     },
     hero: {
       title: 'वैश्विक उद्यम की रक्षा करें',

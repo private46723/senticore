@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
@@ -23,7 +24,10 @@ import {
   X,
   Play,
   FileText,
-  AlertTriangle
+  AlertTriangle,
+  Radar,
+  ScanSearch,
+  Crosshair
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -52,9 +56,11 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { useLanguage } from '@/context/language-context';
 import { translations } from '@/lib/translations';
+import { analyzeThreat, type AnalyzeThreatOutput } from '@/ai/flows/analyze-security-threat';
 
 const RedwallLogo = ({ className = "h-8", iconOnly = false }: { className?: string, iconOnly?: boolean }) => (
   <div className={cn("flex items-center gap-2 group cursor-pointer", !iconOnly && "w-auto")}>
@@ -90,6 +96,12 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const { toast } = useToast();
+
+  // Threat Hunter State
+  const [isHunterOpen, setIsHunterOpen] = useState(false);
+  const [threatInput, setThreatInput] = useState('');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState<AnalyzeThreatOutput | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -128,6 +140,23 @@ export default function Home() {
     setTimeout(() => {
       setIsSearching(false);
     }, 2000);
+  };
+
+  const handleAnalyzeThreat = async () => {
+    if (!threatInput.trim()) return;
+    setIsAnalyzing(true);
+    try {
+      const result = await analyzeThreat({ query: threatInput });
+      setAnalysisResult(result);
+    } catch (error) {
+      console.error(error);
+      toast({
+        variant: "destructive",
+        title: t.threatHunter.error,
+      });
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   const navItems = [
@@ -219,14 +248,51 @@ export default function Home() {
                  <Button onClick={() => scrollToSection('services')} className="bg-white text-black hover:bg-gray-100 rounded-full px-12 py-8 font-black uppercase text-sm tracking-widest shadow-2xl border-none">
                    {t.hero.cta1}
                  </Button>
-                 <Button onClick={() => scrollToSection('contact')} variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full px-12 py-8 font-black uppercase text-sm tracking-widest backdrop-blur-md">
-                   {t.hero.cta2}
+                 <Button onClick={() => setIsHunterOpen(true)} variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full px-12 py-8 font-black uppercase text-sm tracking-widest backdrop-blur-md flex items-center gap-3">
+                   <Radar className="w-5 h-5 text-primary" /> {t.threatHunter.cta}
                  </Button>
               </div>
             </div>
           </div>
         </main>
       </div>
+
+      {/* Threat Hunter Section */}
+      <section className="bg-zinc-900/30 py-32 border-y border-white/5 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none">
+           <Radar className="w-full h-full text-primary animate-pulse" />
+        </div>
+        <div className="container mx-auto px-12 max-w-[1400px] relative z-10">
+           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <div>
+                 <h2 className="text-primary font-black uppercase tracking-[0.5em] text-[11px] mb-8">{t.threatHunter.sectionTitle}</h2>
+                 <h3 className="text-6xl font-black text-white tracking-tighter mb-8 uppercase leading-[0.9]">{t.threatHunter.title}</h3>
+                 <p className="text-zinc-400 text-xl leading-relaxed max-w-xl mb-12">
+                   {t.threatHunter.sub}
+                 </p>
+                 <Button 
+                   onClick={() => setIsHunterOpen(true)}
+                   className="bg-primary hover:bg-primary/90 text-white rounded-full px-12 py-8 font-black uppercase text-sm tracking-widest shadow-2xl flex items-center gap-4 group"
+                 >
+                   {t.threatHunter.cta} <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                 </Button>
+              </div>
+              <div className="bg-black/60 border border-white/10 p-2 rounded-3xl backdrop-blur-xl shadow-2xl">
+                 <div className="aspect-video bg-[#050505] rounded-2xl overflow-hidden relative border border-white/5 flex items-center justify-center group cursor-pointer" onClick={() => setIsHunterOpen(true)}>
+                    <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors" />
+                    <div className="relative z-10 flex flex-col items-center gap-6">
+                       <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                          <ScanSearch className="w-10 h-10" />
+                       </div>
+                       <span className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-500 group-hover:text-primary transition-colors">Initialize Diagnostic Scan</span>
+                    </div>
+                    {/* Visual noise/grid effect */}
+                    <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+                 </div>
+              </div>
+           </div>
+        </div>
+      </section>
 
       {/* About Section */}
       <section id="about" className="bg-black py-40 border-t border-white/5 scroll-mt-20">
@@ -520,6 +586,112 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Threat Hunter Dialog (Popup) */}
+      <Dialog open={isHunterOpen} onOpenChange={(open) => {
+        setIsHunterOpen(open);
+        if (!open) {
+          setAnalysisResult(null);
+          setThreatInput('');
+        }
+      }}>
+        <DialogContent className="bg-[#0a0a0a] border-white/10 text-white max-w-4xl p-0 overflow-hidden shadow-[0_0_50px_rgba(255,0,0,0.2)]">
+          <DialogHeader className="p-8 border-b border-white/5 bg-black/40">
+            <div className="flex items-center gap-4">
+               <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary shadow-[0_0_15px_rgba(255,0,0,0.3)]">
+                  <Terminal className="w-6 h-6" />
+               </div>
+               <div>
+                  <DialogTitle className="text-2xl font-black uppercase tracking-tight text-white mb-1">
+                    {t.threatHunter.modalTitle}
+                  </DialogTitle>
+                  <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest">{t.threatHunter.modalSub}</p>
+               </div>
+            </div>
+          </DialogHeader>
+
+          <div className="p-8 space-y-8">
+            {!analysisResult ? (
+              <div className="space-y-6 animate-in fade-in duration-500">
+                <div className="relative">
+                  <div className="absolute top-4 left-4 text-primary opacity-40">
+                    <Terminal className="w-5 h-5" />
+                  </div>
+                  <Textarea 
+                    placeholder={t.threatHunter.placeholder}
+                    value={threatInput}
+                    onChange={(e) => setThreatInput(e.target.value)}
+                    className="bg-black/80 border-white/10 text-white min-h-[200px] rounded-xl focus:border-primary text-base font-mono pl-12 placeholder:opacity-20"
+                  />
+                </div>
+                <Button 
+                  onClick={handleAnalyzeThreat}
+                  disabled={isAnalyzing || !threatInput.trim()}
+                  className="w-full bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.4em] h-16 rounded-full shadow-2xl flex items-center justify-center gap-4 transition-all hover:scale-[1.01]"
+                >
+                  {isAnalyzing ? (
+                    <><Loader2 className="w-5 h-5 animate-spin" /> {t.threatHunter.analyzing}</>
+                  ) : (
+                    <><Crosshair className="w-5 h-5" /> {t.threatHunter.analyzeBtn}</>
+                  )}
+                </Button>
+              </div>
+            ) : (
+              <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-700">
+                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div className="md:col-span-1 p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
+                       <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-4">{t.threatHunter.severity}</div>
+                       <div className={cn(
+                         "text-2xl font-black uppercase italic tracking-tighter",
+                         analysisResult.severity === 'critical' || analysisResult.severity === 'high' ? 'text-primary' : 'text-accent'
+                       )}>
+                         {analysisResult.severity}
+                       </div>
+                    </div>
+                    <div className="md:col-span-3 p-8 rounded-2xl bg-white/[0.02] border border-white/10">
+                       <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-6 flex items-center gap-3">
+                         <Activity className="w-4 h-4 text-primary" /> {t.threatHunter.analysis}
+                       </div>
+                       <p className="text-zinc-300 leading-relaxed font-medium">
+                         {analysisResult.analysis}
+                       </p>
+                    </div>
+                 </div>
+
+                 <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/10">
+                    <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-6 flex items-center gap-3">
+                      <ShieldCheck className="w-4 h-4 text-primary" /> {t.threatHunter.recommendations}
+                    </div>
+                    <ul className="space-y-4">
+                       {analysisResult.recommendations.map((rec, i) => (
+                         <li key={i} className="flex items-start gap-4 text-zinc-400 group">
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 group-hover:scale-150 transition-transform" />
+                            <span className="text-sm font-medium">{rec}</span>
+                         </li>
+                       ))}
+                    </ul>
+                 </div>
+
+                 <Button 
+                   onClick={() => setAnalysisResult(null)}
+                   variant="outline"
+                   className="w-full border-white/10 text-white hover:bg-white/5 rounded-full h-14 font-black uppercase text-[11px] tracking-[0.3em]"
+                 >
+                   {t.threatHunter.close}
+                 </Button>
+              </div>
+            )}
+          </div>
+
+          <div className="p-4 bg-black/60 border-t border-white/5 flex justify-between items-center text-[10px] text-zinc-600 font-black uppercase tracking-[0.2em]">
+            <span>Redwall Precision AI v4.0</span>
+            <div className="flex items-center gap-4">
+               <span className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-primary animate-pulse" /> ENGINE ONLINE</span>
+               <span>ESC TO CLOSE</span>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Search Command Center */}
       <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
