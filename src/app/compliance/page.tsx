@@ -2,8 +2,23 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, FileCheck, ShieldCheck, ClipboardCheck, Globe, Activity, Terminal } from 'lucide-react';
+import { ArrowLeft, ClipboardCheck, Activity, Terminal, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+
+const RedwallLogo = ({ className = "h-6" }: { className?: string }) => (
+  <div className="flex items-center gap-2 group cursor-pointer">
+    <div className={cn("flex items-center", className)}>
+      <span className="text-xl font-black tracking-tighter text-primary">Red</span>
+      <div className="relative mx-1 w-5 h-6 flex items-center justify-center">
+        <svg viewBox="0 0 100 120" className="w-full h-full fill-primary">
+           <path d="M50 0 L90 20 V60 C90 90 50 115 50 115 C50 115 10 90 10 60 V20 L50 0Z" />
+        </svg>
+      </div>
+      <span className="text-xl font-black tracking-tighter text-zinc-300">Wall</span>
+    </div>
+  </div>
+);
 
 export default function ComplianceAudit() {
   const frameworks = [
@@ -24,14 +39,7 @@ export default function ComplianceAudit() {
     <div className="min-h-screen bg-black text-white font-body selection:bg-primary/30">
       <nav className="py-6 px-10 border-b border-white/10 flex justify-between items-center bg-black/50 backdrop-blur-md sticky top-0 z-50">
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-8 h-8 relative">
-            <svg viewBox="0 0 100 100" className="w-full h-full fill-primary">
-              <path d="M50 5 L90 27.5 V72.5 L50 95 L10 72.5 V27.5 L50 5Z" fillOpacity="0.1" stroke="currentColor" strokeWidth="2" className="text-primary" />
-              <path d="M50 15 L82 32.5 V67.5 L50 85 L18 32.5 V32.5 L50 15Z" className="fill-primary" />
-              <path d="M50 25 L72 37.5 V62.5 L50 75 L28 62.5 V37.5 L50 25Z" fill="white" />
-            </svg>
-          </div>
-          <span className="text-xl font-black uppercase tracking-tighter">Senti<span className="text-primary">core</span></span>
+          <RedwallLogo />
         </Link>
         <Link href="/">
           <Button variant="ghost" className="text-zinc-400 hover:text-white flex items-center gap-2">
@@ -47,7 +55,7 @@ export default function ComplianceAudit() {
             <h1 className="text-6xl font-black tracking-tight uppercase">Compliance <span className="text-primary italic">Audit</span></h1>
           </div>
           <p className="text-zinc-400 text-xl leading-relaxed max-w-3xl">
-            Senticore's Compliance Audit Service bridges the gap between complex regulatory requirements and technical operational reality. We provide continuous control monitoring and automated evidence collection for the modern enterprise.
+            Redwall's Compliance Audit Service bridges the gap between complex regulatory requirements and technical operational reality. We provide continuous control monitoring and automated evidence collection for the modern enterprise.
           </p>
         </header>
 
@@ -88,7 +96,7 @@ export default function ComplianceAudit() {
               <h3 className="text-3xl font-black text-white uppercase tracking-tight flex items-center gap-4">
                 <Globe className="w-8 h-8 text-primary" /> Global GRC Dashboard
               </h3>
-              <p className="text-zinc-400 max-w-2xl">Senticore enterprise clients receive real-time access to our GRC (Governance, Risk, and Compliance) dashboard, providing a live view of control effectiveness and audit readiness across the entire global infrastructure.</p>
+              <p className="text-zinc-400 max-w-2xl">Redwall enterprise clients receive real-time access to our GRC (Governance, Risk, and Compliance) dashboard, providing a live view of control effectiveness and audit readiness across the entire global infrastructure.</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-8">
                 <div>
                   <p className="text-3xl font-black text-white tracking-tighter">0.0%</p>
@@ -108,7 +116,7 @@ export default function ComplianceAudit() {
         </div>
 
         <div className="mt-40 pt-10 border-t border-white/10 text-center text-zinc-600 text-[11px] font-black uppercase tracking-[0.5em]">
-          Audit Framework v1.9.2 • ISO/SOC/HIPAA Compliant • © Senticore Global
+          Audit Framework v1.9.2 • ISO/SOC/HIPAA Compliant • © Redwall Cyber Defense
         </div>
       </main>
     </div>

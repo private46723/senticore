@@ -1,6 +1,6 @@
 'use server';
 /**
- * @fileOverview A cybersecurity threat analysis AI agent for Senticore.
+ * @fileOverview A cybersecurity threat analysis AI agent for Redwall Cyber Defense.
  *
  * - analyzeThreat - A function that handles the threat analysis process.
  * - AnalyzeThreatInput - The input type for the analyzeThreat function.
@@ -30,7 +30,7 @@ const prompt = ai.definePrompt({
   name: 'analyzeThreatPrompt',
   input: { schema: AnalyzeThreatInputSchema },
   output: { schema: AnalyzeThreatOutputSchema },
-  prompt: `You are an elite cybersecurity analyst at Senticore Security Global, specializing in Precision AI® threat hunting.
+  prompt: `You are an elite cybersecurity analyst at Redwall Cyber Defense, specializing in Precision AI® threat hunting.
   
   Analyze the following security query or log snippet:
   
@@ -47,7 +47,7 @@ const analyzeThreatFlow = ai.defineFlow(
   },
   async (input) => {
     const { output } = await prompt(input);
-    if (!output) throw new Error('Senticore AI failed to generate analysis');
+    if (!output) throw new Error('Redwall AI failed to generate analysis');
     return output;
   }
 );

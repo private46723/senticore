@@ -4,20 +4,28 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ShieldCheck, Lock, Globe, Eye, FileText, Database, Server, UserCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+
+const RedwallLogo = ({ className = "h-6" }: { className?: string }) => (
+  <div className="flex items-center gap-2 group cursor-pointer">
+    <div className={cn("flex items-center", className)}>
+      <span className="text-xl font-black tracking-tighter text-primary">Red</span>
+      <div className="relative mx-1 w-5 h-6 flex items-center justify-center">
+        <svg viewBox="0 0 100 120" className="w-full h-full fill-primary">
+           <path d="M50 0 L90 20 V60 C90 90 50 115 50 115 C50 115 10 90 10 60 V20 L50 0Z" />
+        </svg>
+      </div>
+      <span className="text-xl font-black tracking-tighter text-zinc-300">Wall</span>
+    </div>
+  </div>
+);
 
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-black text-white font-body selection:bg-primary/30">
       <nav className="py-6 px-10 border-b border-white/10 flex justify-between items-center bg-black/50 backdrop-blur-md sticky top-0 z-50">
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-8 h-8 relative">
-            <svg viewBox="0 0 100 100" className="w-full h-full fill-primary">
-              <path d="M50 5 L90 27.5 V72.5 L50 95 L10 72.5 V27.5 L50 5Z" fillOpacity="0.1" stroke="currentColor" strokeWidth="2" className="text-primary" />
-              <path d="M50 15 L82 32.5 V67.5 L50 85 L18 32.5 V32.5 L50 15Z" className="fill-primary" />
-              <path d="M50 25 L72 37.5 V62.5 L50 75 L28 62.5 V37.5 L50 25Z" fill="white" />
-            </svg>
-          </div>
-          <span className="text-xl font-black uppercase tracking-tighter">Senti<span className="text-primary">core</span></span>
+          <RedwallLogo />
         </Link>
         <Link href="/">
           <Button variant="ghost" className="text-zinc-400 hover:text-white flex items-center gap-2">
@@ -33,7 +41,7 @@ export default function PrivacyPolicy() {
             <h1 className="text-6xl font-black tracking-tight uppercase">Privacy <span className="text-primary italic">Policy</span></h1>
           </div>
           <p className="text-zinc-400 text-xl leading-relaxed max-w-3xl">
-            Senticore Security Global (hereafter "Senticore") is committed to maintaining the highest standards of data privacy and security. This policy outlines our technical and administrative procedures for the protection of sensitive information.
+            Redwall Cyber Defense (hereafter "Redwall") is committed to maintaining the highest standards of data privacy and security. This policy outlines our technical and administrative procedures for the protection of sensitive information.
           </p>
         </header>
 
@@ -73,7 +81,7 @@ export default function PrivacyPolicy() {
               <Lock className="w-8 h-8 text-primary" />
               <h2 className="text-3xl font-black uppercase tracking-wide border-b border-white/10 pb-4 flex-grow">2. Cryptographic Controls</h2>
             </div>
-            <p>Senticore employs industry-leading cryptographic standards to protect data integrity and confidentiality across all operational tiers.</p>
+            <p>Redwall employs industry-leading cryptographic standards to protect data integrity and confidentiality across all operational tiers.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { title: "At Rest", detail: "AES-256-GCM encryption with hardware-based key management (HSM)." },
@@ -93,7 +101,7 @@ export default function PrivacyPolicy() {
               <Globe className="w-8 h-8 text-primary" />
               <h2 className="text-3xl font-black uppercase tracking-wide border-b border-white/10 pb-4 flex-grow">3. Sovereignty & Sub-processors</h2>
             </div>
-            <p>Senticore utilizes globally distributed infrastructure with strict data residency controls. Clients may request data pinning to specific geographic regions (e.g., EU-West, US-East).</p>
+            <p>Redwall utilizes globally distributed infrastructure with strict data residency controls. Clients may request data pinning to specific geographic regions (e.g., EU-West, US-East).</p>
             <div className="bg-[#0a0a0a] p-8 rounded-2xl border border-white/5 overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead>
@@ -143,7 +151,7 @@ export default function PrivacyPolicy() {
             <div className="flex flex-wrap gap-12">
               <div>
                 <p className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1">Email</p>
-                <p className="text-primary font-bold">compliance@senticore.com</p>
+                <p className="text-primary font-bold">compliance@redwallcyber.com</p>
               </div>
               <div>
                 <p className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1">Response Window</p>
@@ -154,7 +162,7 @@ export default function PrivacyPolicy() {
         </div>
 
         <div className="mt-40 pt-10 border-t border-white/10 text-center text-zinc-600 text-[11px] font-black uppercase tracking-[0.5em]">
-          Version 3.0.4 • Last Updated: February 2025 • © Senticore Security Global
+          Version 3.0.4 • Last Updated: February 2025 • © Redwall Cyber Defense
         </div>
       </main>
     </div>

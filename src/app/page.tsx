@@ -41,24 +41,24 @@ import {
 } from "@/components/ui/form";
 
 /**
- * Professional, unique logo for Senticore.
+ * Professional Logo for Redwall Cyber Defense.
  */
-const SenticoreLogo = ({ className = "w-10 h-10", iconOnly = false }: { className?: string, iconOnly?: boolean }) => (
-  <div className={cn("flex items-center gap-3 group cursor-pointer", !iconOnly && "w-auto")}>
-    <div className={cn("relative flex items-center justify-center transition-transform duration-500 group-hover:scale-110", className)}>
-      <svg viewBox="0 0 100 100" className="w-full h-full fill-primary drop-shadow-[0_0_8px_rgba(241,102,50,0.4)]">
-        <path d="M50 5 L90 27.5 V72.5 L50 95 L10 72.5 V27.5 L50 5Z" fillOpacity="0.1" stroke="currentColor" strokeWidth="2" className="text-primary" />
-        <path d="M50 15 L82 32.5 V67.5 L50 85 L18 32.5 V32.5 L50 15Z" className="fill-primary" />
-        <path d="M50 25 L72 37.5 V62.5 L50 75 L28 62.5 V37.5 L50 25Z" fill="white" />
-        <circle cx="50" cy="50" r="8" className="fill-primary animate-pulse" />
-      </svg>
-    </div>
-    {!iconOnly && (
-      <div className="flex flex-col text-left">
-        <span className="text-2xl font-black tracking-tighter text-white uppercase leading-none">Senti<span className="text-primary">core</span></span>
-        <span className="text-[9px] tracking-[0.4em] text-zinc-400 font-bold uppercase mt-1 border-t border-white/10 pt-1">Security Global</span>
+const RedwallLogo = ({ className = "h-8", iconOnly = false }: { className?: string, iconOnly?: boolean }) => (
+  <div className={cn("flex items-center gap-2 group cursor-pointer", !iconOnly && "w-auto")}>
+    <div className={cn("flex items-center", className)}>
+      <span className="text-3xl font-black tracking-tighter text-primary">Red</span>
+      <div className="relative mx-1 w-8 h-10 flex items-center justify-center">
+        <svg viewBox="0 0 100 120" className="w-full h-full fill-primary drop-shadow-[0_0_8px_rgba(255,0,0,0.4)]">
+           <path d="M50 0 L90 20 V60 C90 90 50 115 50 115 C50 115 10 90 10 60 V20 L50 0Z" />
+        </svg>
       </div>
-    )}
+      {!iconOnly && (
+        <div className="flex flex-col">
+          <span className="text-3xl font-black tracking-tighter text-zinc-300">Wall</span>
+          <span className="text-[8px] tracking-[0.3em] text-zinc-500 font-bold uppercase -mt-1">Cyber Defense</span>
+        </div>
+      )}
+    </div>
   </div>
 );
 
@@ -104,7 +104,7 @@ export default function Home() {
   };
 
   const navItems = [
-    { name: 'Why Senticore?', id: 'about' },
+    { name: 'About Redwall', id: 'about' },
     { name: 'Services', id: 'services' },
     { name: 'Global Intel', id: 'intel' },
     { name: 'Proven Success', id: 'proven-success' },
@@ -183,7 +183,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-black text-white font-body selection:bg-primary/30">
       {/* Top Banner */}
       <div className="bg-[#1a1a1a] text-white text-center py-2 text-[13px] border-b border-white/5">
-        <p className="font-medium tracking-wide">Senticore SOC Launch — Elite Blue Team Monitoring Now Available Globally</p>
+        <p className="font-medium tracking-wide">Redwall Cyber Defense — Elite Blue Team Monitoring Now Available Globally</p>
       </div>
 
       {/* Utility Nav */}
@@ -193,8 +193,8 @@ export default function Home() {
           <button className="hover:text-primary transition-colors text-zinc-900"><Search className="w-4 h-4" /></button>
         </div>
         <div className="flex items-center gap-6 font-bold text-zinc-900">
-          <a href="mailto:contact@senticore.com" className="hover:text-primary transition-colors flex items-center gap-2">
-            <Mail className="w-4 h-4" /> contact@senticore.com
+          <a href="mailto:contact@redwallcyber.com" className="hover:text-primary transition-colors flex items-center gap-2">
+            <Mail className="w-4 h-4" /> contact@redwallcyber.com
           </a>
           <button onClick={() => scrollToSection('contact')} className="bg-white border border-gray-300 px-5 py-1.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm text-zinc-900 font-black uppercase text-[11px]">
             Emergency IR?
@@ -213,7 +213,7 @@ export default function Home() {
         <header className="relative z-[60]">
           <nav className="py-8 px-12 flex items-center justify-between">
             <div className="flex items-center gap-16">
-              <SenticoreLogo className="w-12 h-12" />
+              <RedwallLogo className="h-10" />
               <div className="hidden lg:flex items-center gap-10 text-[15px] font-medium">
                 {navItems.map((item) => (
                   <button 
@@ -267,7 +267,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                 <div className="absolute bottom-10 left-10">
                   <p className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-3">Established 2025</p>
-                  <p className="text-white text-3xl font-black uppercase tracking-tight">Senticore DNA</p>
+                  <p className="text-white text-3xl font-black uppercase tracking-tight">Redwall DNA</p>
                 </div>
               </div>
             </div>
@@ -275,7 +275,7 @@ export default function Home() {
               <div className="space-y-8">
                 <h2 className="text-primary font-black uppercase tracking-[0.5em] text-[11px] flex items-center gap-6"><div className="w-12 h-[1px] bg-primary" /> Our DNA</h2>
                 <h3 className="text-5xl md:text-[72px] font-black leading-[1.05] text-white tracking-tight">Protecting your <span className="italic text-primary">digital frontier.</span></h3>
-                <p className="text-zinc-400 text-xl leading-relaxed font-normal">Senticore was engineered to bridge the critical gap between complex security data and actionable defense. We provide the elite expertise required to manage the modern threat landscape with technical precision, operational agility, and global scale.</p>
+                <p className="text-zinc-400 text-xl leading-relaxed font-normal">Redwall Cyber Defense was engineered to bridge the critical gap between complex security data and actionable defense. We provide the elite expertise required to manage the modern threat landscape with technical precision, operational agility, and global scale.</p>
               </div>
               <div className="grid grid-cols-2 gap-16 pt-12 border-t border-white/10">
                 <div className="space-y-4"><div className="text-5xl font-black text-white italic tracking-tighter">Global</div><div className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Operational Reach</div></div>
@@ -368,7 +368,7 @@ export default function Home() {
             src="https://www.youtube.com/embed/NBfcGrHR6P0?autoplay=1&mute=1&loop=1&playlist=NBfcGrHR6P0&controls=0&showinfo=0&rel=0" 
             className="absolute inset-0 w-full h-[120%] -top-[10%] pointer-events-none scale-105" 
             allow="autoplay; encrypted-media" 
-            title="Senticore Operations Video" 
+            title="Redwall Operations Video" 
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 pointer-events-none" />
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-12">
@@ -379,7 +379,7 @@ export default function Home() {
           </div>
           <div className="absolute bottom-16 left-16 flex items-center gap-8">
             <div className="w-20 h-20 rounded-2xl border border-white/20 bg-black/60 backdrop-blur-2xl flex items-center justify-center shadow-2xl"><Shield className="text-primary w-10 h-10" /></div>
-            <div><div className="text-[11px] font-black text-primary uppercase tracking-[0.5em] mb-1">Live Feed</div><div className="text-3xl font-black text-white uppercase tracking-tighter">Operational Center Alpha</div></div>
+            <div><div className="text-[11px] font-black text-primary uppercase tracking-[0.5em] mb-1">Live Feed</div><div className="text-3xl font-black text-white uppercase tracking-tighter">Operational Center Red</div></div>
           </div>
         </div>
       </section>
@@ -436,7 +436,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em] mb-2">Email Operations</div>
-                    <div className="text-xl font-black text-white uppercase tracking-tight">contact@senticore.com</div>
+                    <div className="text-xl font-black text-white uppercase tracking-tight">contact@redwallcyber.com</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-8 group">
@@ -445,7 +445,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em] mb-2">LinkedIn</div>
-                    <div className="text-xl font-black text-white uppercase tracking-tight">Senticore Security Global</div>
+                    <div className="text-xl font-black text-white uppercase tracking-tight">Redwall Cyber Defense</div>
                   </div>
                 </div>
               </div>
@@ -570,13 +570,13 @@ export default function Home() {
               <ul className="space-y-5 text-[14px] font-medium">
                 <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-3"><Linkedin className="w-5 h-5" /> LinkedIn</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-3"><Instagram className="w-5 h-5" /> Instagram</a></li>
-                <li><a href="mailto:contact@senticore.com" className="hover:text-primary transition-colors flex items-center gap-3"><Mail className="w-5 h-5" /> Email Operations</a></li>
+                <li><a href="mailto:contact@redwallcyber.com" className="hover:text-primary transition-colors flex items-center gap-3"><Mail className="w-5 h-5" /> Email Operations</a></li>
               </ul>
             </div>
           </div>
           <div className="mt-32 pt-12 border-t border-white/10 flex items-center justify-between">
-            <SenticoreLogo className="w-12 h-12" />
-            <p className="text-[12px] text-zinc-600 font-black uppercase tracking-[0.5em]">© 2025 Senticore Security Global. All rights reserved.</p>
+            <RedwallLogo className="h-10" />
+            <p className="text-[12px] text-zinc-600 font-black uppercase tracking-[0.5em]">© 2025 Redwall Cyber Defense. All rights reserved.</p>
           </div>
         </div>
       </footer>
