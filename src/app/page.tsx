@@ -58,40 +58,7 @@ import {
 import { useLanguage } from '@/context/language-context';
 import { translations } from '@/lib/translations';
 import { analyzeThreat, type AnalyzeThreatOutput } from '@/ai/flows/analyze-security-threat';
-
-const RedwallLogo = ({ className = "h-8", iconOnly = false }: { className?: string, iconOnly?: boolean }) => (
-  <div className={cn("flex items-center gap-2 group cursor-pointer", !iconOnly && "w-auto")}>
-    <div className={cn("flex items-center", className)}>
-      <span className="text-3xl font-black tracking-tighter text-primary">Red</span>
-      <div className="relative mx-1 w-8 h-10 flex items-center justify-center">
-        <svg viewBox="0 0 100 120" className="w-full h-full fill-primary drop-shadow-[0_0_12px_rgba(255,0,0,0.5)]">
-           <path d="M50 0 L90 20 V60 C90 90 50 115 50 115 C50 115 10 90 10 60 V20 L50 0Z" />
-        </svg>
-      </div>
-      {!iconOnly && (
-        <div className="flex flex-col">
-          <span className="text-3xl font-black tracking-tighter text-zinc-100">Wall</span>
-          <span className="text-[7px] tracking-[0.4em] text-zinc-500 font-black uppercase -mt-1">Cyber Defense</span>
-        </div>
-      )}
-    </div>
-  </div>
-);
-
-const TacticalCorner = () => (
-  <>
-    <div className="tactical-corner-tl" />
-    <div className="tactical-corner-tr" />
-    <div className="tactical-corner-bl" />
-    <div className="tactical-corner-br" />
-  </>
-);
-
-const HUDMetadata = ({ text, className }: { text: string, className?: string }) => (
-  <span className={cn("text-[7px] font-black text-zinc-800 uppercase tracking-[0.3em] pointer-events-none select-none", className)}>
-    {text}
-  </span>
-);
+import { RedwallLogo, TacticalCorner, HUDMetadata } from '@/components/redwall-tactical';
 
 const formSchema = z.object({
   fullName: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -173,7 +140,6 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-black text-white font-body selection:bg-primary/30 w-full overflow-x-hidden">
       <div className="scanline" />
       
-      {/* HUD Header */}
       <nav className="fixed top-0 left-0 right-0 z-[100] bg-black/60 backdrop-blur-xl border-b border-white/10 py-4 px-6 md:px-12 flex justify-between items-center">
         <div className="flex items-center gap-12 lg:gap-20">
           <RedwallLogo className="h-10" />
@@ -218,7 +184,6 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero: Precision Defense */}
       <section className="relative min-h-screen flex items-center pt-24 overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 z-0 opacity-10">
            <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent" />
@@ -262,7 +227,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Vertical HUD Elements */}
         <div className="absolute top-1/2 right-12 -translate-y-1/2 flex flex-col items-center gap-8 hidden lg:flex">
            <span className="text-[10px] font-black text-zinc-700 uppercase tracking-[0.6em] vertical-rl">OPS STATUS: ACTIVE</span>
            <div className="w-px h-64 bg-gradient-to-t from-primary via-primary/20 to-transparent" />
@@ -270,7 +234,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About & Mission Data */}
       <section id="about" className="py-32 md:py-48 bg-[#050505] relative overflow-hidden border-b border-white/5">
         <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
            <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
@@ -332,7 +295,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Global Capabilities Grid */}
       <section id="services" className="py-32 md:py-48 border-t border-white/10 bg-black">
         <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
           <div className="mb-24 space-y-10 relative">
@@ -365,7 +327,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Operational SOC Feed - Full Width */}
       <section id="proven-success" className="bg-black py-0 border-y border-white/10 overflow-hidden">
         <div className="w-full relative aspect-video group">
           <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none group-hover:bg-black/20 transition-all duration-1000" />
@@ -391,7 +352,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Threat Intelligence Terminal */}
       <section id="intel" className="py-32 md:py-48 bg-[#050505]">
         <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
           <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-24">
@@ -427,7 +387,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Operational Contact Grid */}
       <section id="contact" className="py-32 md:py-48 bg-black">
         <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-32">
@@ -499,13 +458,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Enterprise HUD Footer */}
       <footer className="bg-black py-24 md:py-48 border-t border-white/10">
          <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-24">
                <div className="space-y-12">
                   <RedwallLogo className="h-12" />
-                  <p className="text-zinc-600 text-lg font-medium leading-relaxed border-l border-primary/20 pl-6 italic">Global authority in managed SOC services and AI-driven security orchestration.</p>
+                  <p className="text-zinc-600 text-lg font-medium leading-relaxed border-l border-primary/20 pl-6 italic">{t.nav.about} SOC services and AI-driven security orchestration.</p>
                </div>
                <div>
                   <h5 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-12 flex items-center gap-4">
@@ -559,7 +517,6 @@ export default function Home() {
          </div>
       </footer>
 
-      {/* Analyzer Modal: HUD Terminal */}
       <Dialog open={isHunterOpen} onOpenChange={setIsHunterOpen}>
         <DialogContent className="bg-black border-white/10 text-white max-w-5xl p-0 rounded-none overflow-hidden">
            <DialogHeader className="p-12 border-b border-white/10 bg-[#050505] relative">
@@ -625,7 +582,6 @@ export default function Home() {
         </DialogContent>
       </Dialog>
 
-      {/* Global Intel Search */}
       <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
          <DialogContent className="bg-black border-white/10 text-white max-w-5xl p-0 rounded-none overflow-hidden">
             <div className="p-16 space-y-16">
