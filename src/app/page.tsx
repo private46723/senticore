@@ -1,9 +1,28 @@
+
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Search, ChevronDown, ArrowRight, Shield, Activity, Bug, Lock, Mail, Linkedin, Instagram, Send, ShieldCheck, Target, Zap, Cpu, Terminal, CheckCircle2 } from 'lucide-react';
+import { 
+  Search, 
+  ChevronDown, 
+  ArrowRight, 
+  Shield, 
+  Activity, 
+  Bug, 
+  Lock, 
+  Mail, 
+  Linkedin, 
+  Instagram, 
+  Send, 
+  ShieldCheck, 
+  Target, 
+  Zap, 
+  Cpu, 
+  Terminal, 
+  CheckCircle2 
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
@@ -55,7 +74,6 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
-  const menuRef = useRef<HTMLDivElement>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -94,7 +112,7 @@ export default function Home() {
     { name: 'Contact Us', id: 'contact' },
   ];
 
-  const platforms = [
+  const platforms = useMemo(() => [
     { 
       id: 'soc', 
       name: 'SOC as a Service', 
@@ -143,9 +161,11 @@ export default function Home() {
       underlineColor: 'bg-cyan-400',
       watermark: 'VA'
     },
-  ];
+  ], [activePlatformTab]);
 
-  const currentPlatform = platforms.find((p) => p.id === activePlatformTab) || platforms[0];
+  const currentPlatform = useMemo(() => 
+    platforms.find((p) => p.id === activePlatformTab) || platforms[0]
+  , [platforms, activePlatformTab]);
 
   const specializedServices = [
     { title: 'Penetration Testing', description: 'Advanced web application and network infrastructure testing to validate existing security controls and discover hidden exploit paths.', icon: <Target className="w-6 h-6 text-primary" />, status: 'Limited Availability' },
@@ -170,10 +190,10 @@ export default function Home() {
       {/* Utility Nav */}
       <div className="bg-white text-zinc-800 py-2 px-6 flex justify-between items-center text-[13px] border-b border-gray-200">
         <div className="flex items-center gap-6">
-          <button className="flex items-center gap-1 hover:text-primary transition-colors uppercase font-bold">EN <ChevronDown className="w-3.5 h-3.5 opacity-60" /></button>
-          <button className="hover:text-primary transition-colors"><Search className="w-4 h-4" /></button>
+          <button className="flex items-center gap-1 hover:text-primary transition-colors uppercase font-bold text-zinc-900">EN <ChevronDown className="w-3.5 h-3.5 opacity-60" /></button>
+          <button className="hover:text-primary transition-colors text-zinc-900"><Search className="w-4 h-4" /></button>
         </div>
-        <div className="flex items-center gap-6 font-bold">
+        <div className="flex items-center gap-6 font-bold text-zinc-900">
           <a href="mailto:contact@senticore.com" className="hover:text-primary transition-colors flex items-center gap-2">
             <Mail className="w-4 h-4" /> contact@senticore.com
           </a>
@@ -191,16 +211,16 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-black/60 to-black" />
         </div>
 
-        <header className="relative z-[60]" ref={menuRef}>
+        <header className="relative z-[60]">
           <nav className="py-8 px-12 flex items-center justify-between">
             <div className="flex items-center gap-16">
               <SenticoreLogo className="w-12 h-12" />
               <div className="hidden lg:flex items-center gap-10 text-[15px] font-medium">
                 {navItems.map((item) => (
                   <button 
-                    key={item.name}
+                    key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="hover:text-primary transition-colors py-2 relative text-[13px] tracking-[0.1em] uppercase font-black text-zinc-100"
+                    className="hover:text-primary transition-colors py-2 relative text-[13px] tracking-[0.1em] uppercase font-black text-white"
                   >
                     {item.name}
                   </button>
@@ -272,25 +292,57 @@ export default function Home() {
         <div className="container mx-auto px-12 max-w-[1400px]">
           <div className="flex flex-wrap items-center gap-16 border-b border-white/10 mb-24">
             {platforms.map((platform) => (
-              <button key={platform.id} onClick={() => setActivePlatformTab(platform.id)} className={cn("flex items-center gap-5 pb-8 transition-all relative group", activePlatformTab === platform.id ? "opacity-100" : "opacity-40 hover:opacity-100")}>
-                {platform.icon} <span className={cn("text-xl font-black transition-colors uppercase tracking-widest", activePlatformTab === platform.id ? "text-white" : "text-zinc-500")}>{platform.name}</span>
-                {activePlatformTab === platform.id && <div className={cn("absolute bottom-0 left-0 right-0 h-[3px]", currentPlatform.underlineColor)} />}
+              <button 
+                key={platform.id} 
+                onClick={() => setActivePlatformTab(platform.id)} 
+                className={cn(
+                  "flex items-center gap-5 pb-8 transition-all relative group", 
+                  activePlatformTab === platform.id ? "opacity-100" : "opacity-40 hover:opacity-100"
+                )}
+              >
+                {platform.icon} 
+                <span className={cn(
+                  "text-xl font-black transition-colors uppercase tracking-widest", 
+                  activePlatformTab === platform.id ? "text-white" : "text-zinc-500"
+                )}>
+                  {platform.name}
+                </span>
+                {activePlatformTab === platform.id && (
+                  <div className={cn("absolute bottom-0 left-0 right-0 h-[3px]", platform.underlineColor)} />
+                )}
               </button>
             ))}
           </div>
           <div key={activePlatformTab} className="animate-in fade-in slide-in-from-bottom-6 duration-700">
-            <h3 className={cn("text-6xl md:text-[100px] font-black tracking-[-0.03em] uppercase leading-[0.9] mb-20", currentPlatform.themeColor)}>{currentPlatform.largeTitle}</h3>
+            <h3 className={cn("text-6xl md:text-[100px] font-black tracking-[-0.03em] uppercase leading-[0.9] mb-20", currentPlatform.themeColor)}>
+              {currentPlatform.largeTitle}
+            </h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
               <div className="space-y-16">
-                <p className="text-zinc-300 text-xl md:text-2xl leading-relaxed max-w-2xl font-normal">{currentPlatform.description}</p>
+                <p className="text-zinc-300 text-xl md:text-2xl leading-relaxed max-w-2xl font-normal">
+                  {currentPlatform.description}
+                </p>
                 <div className="flex flex-wrap gap-24">
                   {currentPlatform.stats.map((stat, i) => (
-                    <div key={i} className="space-y-4"><div className="text-6xl md:text-7xl font-black text-white italic tracking-tighter">{stat.value}</div><div className="text-[11px] font-black text-zinc-500 tracking-[0.4em] uppercase">{stat.label}</div></div>
+                    <div key={i} className="space-y-4">
+                      <div className="text-6xl md:text-7xl font-black text-white italic tracking-tighter">{stat.value}</div>
+                      <div className="text-[11px] font-black text-zinc-500 tracking-[0.4em] uppercase">{stat.label}</div>
+                    </div>
                   ))}
                 </div>
-                <Button onClick={() => scrollToSection('contact')} className={cn("rounded-full px-12 h-16 font-black uppercase text-sm tracking-widest border-none !text-black transition-all hover:scale-105 shadow-2xl", currentPlatform.btnColor)}>{currentPlatform.cta} <ArrowRight className="w-6 h-6 ml-3" /></Button>
+                <Button 
+                  onClick={() => scrollToSection('contact')} 
+                  className={cn(
+                    "rounded-full px-12 h-16 font-black uppercase text-sm tracking-widest border-none transition-all hover:scale-105 shadow-2xl", 
+                    currentPlatform.btnColor
+                  )}
+                >
+                  {currentPlatform.cta} <ArrowRight className="w-6 h-6 ml-3" />
+                </Button>
               </div>
-              <div className="text-[220px] font-black text-white/[0.03] italic leading-none select-none text-right flex items-end justify-end">{currentPlatform.watermark}</div>
+              <div className="text-[220px] font-black text-white/[0.03] italic leading-none select-none text-right flex items-end justify-end">
+                {currentPlatform.watermark}
+              </div>
             </div>
           </div>
           
@@ -333,7 +385,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Perspectives Section */}
+      {/* Global Intel Section */}
       <section id="intel" className="bg-black py-32 border-t border-white/5 scroll-mt-20">
         <div className="container mx-auto px-12 max-w-[1400px]">
           <div className="flex justify-between items-end mb-20">
@@ -343,9 +395,23 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {perspectives.map((article, i) => (
               <div key={i} className={cn("rounded-xl overflow-hidden flex flex-col group cursor-pointer transition-all duration-500 hover:-translate-y-3 shadow-2xl border border-white/5", article.theme === 'light' ? "bg-white text-black" : "bg-[#1a0a05] text-white")}>
-                <div className="p-12 flex-grow"><div className="text-[11px] font-black uppercase mb-12 tracking-[0.4em] opacity-60">{article.type}</div><h3 className="text-3xl font-black leading-tight tracking-tight uppercase">{article.title}</h3></div>
+                <div className="p-12 flex-grow">
+                  <div className="text-[11px] font-black uppercase mb-12 tracking-[0.4em] opacity-60">
+                    {article.type}
+                  </div>
+                  <h3 className="text-3xl font-black leading-tight tracking-tight uppercase">
+                    {article.title}
+                  </h3>
+                </div>
                 <div className="relative aspect-[16/9] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-                  {PlaceHolderImages.find(img => img.id === article.imageId) && <Image src={PlaceHolderImages.find(img => img.id === article.imageId)!.imageUrl} alt="Article" fill className="object-cover scale-105 group-hover:scale-100 transition-transform duration-1000" />}
+                  {PlaceHolderImages.find(img => img.id === article.imageId) && (
+                    <Image 
+                      src={PlaceHolderImages.find(img => img.id === article.imageId)!.imageUrl} 
+                      alt="Article" 
+                      fill 
+                      className="object-cover scale-105 group-hover:scale-100 transition-transform duration-1000" 
+                    />
+                  )}
                 </div>
               </div>
             ))}
