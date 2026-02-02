@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
@@ -13,9 +12,6 @@ import {
   Bug, 
   Lock, 
   Mail, 
-  Linkedin, 
-  Instagram, 
-  Send, 
   ShieldCheck, 
   Target, 
   Zap, 
@@ -24,7 +20,10 @@ import {
   CheckCircle2,
   Globe,
   Loader2,
-  X
+  X,
+  Play,
+  FileText,
+  AlertTriangle
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -53,7 +52,6 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle,
 } from "@/components/ui/dialog";
 import { useLanguage } from '@/context/language-context';
 import { translations } from '@/lib/translations';
@@ -86,7 +84,6 @@ const formSchema = z.object({
 export default function Home() {
   const { language, setLanguage } = useLanguage();
   const t = translations[language];
-  const [activePlatformTab, setActivePlatformTab] = useState('soc');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -104,6 +101,7 @@ export default function Home() {
   });
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
+  const successVideoBg = PlaceHolderImages.find(img => img.id === 'video-case-study');
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -140,50 +138,6 @@ export default function Home() {
     { name: t.nav.contact, id: 'contact' },
   ];
 
-  const platforms = useMemo(() => [
-    { 
-      id: 'soc', 
-      name: language === 'en' ? 'SOC as a Service' : (language === 'ru' ? 'SOC как услуга' : (language === 'tr' ? 'Hizmet Olarak SOC' : 'SOC एक सेवा के रूप में')), 
-      icon: <Shield className={cn("w-5 h-5 transition-colors", activePlatformTab === 'soc' ? "text-primary" : "text-zinc-400")} />,
-      largeTitle: 'BLUE TEAM L1/L2 OPERATIONS',
-      description: 'Our primary 24/7 Security Operations Center provides elite log monitoring, SIEM management, and real-time alert analysis.',
-      stats: [{ value: '24/7', label: 'MONITORING' }, { value: '15m', label: 'SLA RESPONSE' }],
-      cta: 'Request SOC Consultation',
-      themeColor: 'text-primary',
-      btnColor: 'bg-primary hover:bg-primary/90 text-white',
-      underlineColor: 'bg-primary',
-      watermark: 'READY'
-    },
-    { 
-      id: 'endpoint', 
-      name: language === 'en' ? 'EDR / XDR Management' : (language === 'ru' ? 'Управление EDR / XDR' : (language === 'tr' ? 'EDR / XDR Yönetimi' : 'EDR / XDR प्रबंधन')),
-      icon: <Activity className={cn("w-5 h-5 transition-colors", activePlatformTab === 'endpoint' ? "text-accent" : "text-zinc-400")} />,
-      largeTitle: 'ENDPOINT DEFENSE & RESPONSE',
-      description: 'Advanced management of your EDR/XDR stack across global deployments. Proactive threat hunting and remediation.',
-      stats: [{ value: '100%', label: 'VISIBILITY' }, { value: '99.9%', label: 'PROTECTION' }],
-      cta: 'Secure Your Fleet',
-      themeColor: 'text-accent',
-      btnColor: 'bg-accent hover:bg-[#00c853] text-black',
-      underlineColor: 'bg-accent',
-      watermark: 'EDR'
-    },
-    { 
-      id: 'vulnerability', 
-      name: language === 'en' ? 'Vulnerability Assessment' : (language === 'ru' ? 'Оценка уязвимостей' : (language === 'tr' ? 'Zafiyet Değerlendirmesi' : 'भेद्यता मूल्यांकन')),
-      icon: <Bug className={cn("w-5 h-5 transition-colors", activePlatformTab === 'vulnerability' ? "text-cyan-400" : "text-zinc-400")} />,
-      largeTitle: 'RISK REPORTS & REMEDIATION',
-      description: 'Continuous asset discovery and detailed risk assessment. We provide technical remediation playbooks.',
-      stats: [{ value: 'VA/PT', label: 'EXPERTS' }, { value: 'ZERO', label: 'MISSED GAPS' }],
-      cta: 'Get Risk Audit',
-      themeColor: 'text-cyan-400',
-      btnColor: 'bg-cyan-400 hover:bg-cyan-500 text-black',
-      underlineColor: 'bg-cyan-400',
-      watermark: 'VA'
-    },
-  ], [activePlatformTab, language]);
-
-  const currentPlatform = useMemo(() => platforms.find((p) => p.id === activePlatformTab) || platforms[0], [platforms, activePlatformTab]);
-
   const languages = [
     { code: 'en', name: 'English', flag: '🇺🇸' },
     { code: 'ru', name: 'Русский', flag: '🇷🇺' },
@@ -193,11 +147,8 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white font-body selection:bg-primary/30">
-      <div className="bg-[#1a1a1a] text-white text-center py-2 text-[13px] border-b border-white/5">
-        <p className="font-medium tracking-wide">Redwall Cyber Defense — Elite Blue Team Monitoring Now Available Globally</p>
-      </div>
-
-      <div className="bg-white text-zinc-800 py-2 px-6 flex justify-between items-center text-[13px] border-b border-gray-200">
+      {/* Utility Bar */}
+      <div className="bg-white text-zinc-800 py-2 px-6 flex justify-between items-center text-[13px] border-b border-gray-200 sticky top-0 z-[60]">
         <div className="flex items-center gap-6">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -205,7 +156,7 @@ export default function Home() {
                 <Globe className="w-4 h-4" /> {language.toUpperCase()} <ChevronDown className="w-3.5 h-3.5 opacity-60" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-white border-gray-200">
+            <DropdownMenuContent className="bg-white border-gray-200 z-[100]">
               {languages.map((lang) => (
                 <DropdownMenuItem key={lang.code} onClick={() => setLanguage(lang.code as any)} className="flex items-center gap-3 cursor-pointer hover:bg-gray-50 text-zinc-900 font-bold uppercase text-xs py-3 px-4">
                   <span>{lang.flag}</span> {lang.name}
@@ -225,6 +176,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Hero Section */}
       <div className="relative flex flex-col min-h-[850px]">
         <div className="absolute inset-0 z-0">
           {heroBg && <Image src={heroBg.imageUrl} alt={heroBg.description} fill className="object-cover opacity-50" priority data-ai-hint={heroBg.imageHint} />}
@@ -276,64 +228,163 @@ export default function Home() {
         </main>
       </div>
 
-      <section id="services" className="bg-[#050505] py-32 border-t border-white/5 overflow-hidden scroll-mt-20">
+      {/* About Section */}
+      <section id="about" className="bg-black py-40 border-t border-white/5 scroll-mt-20">
         <div className="container mx-auto px-12 max-w-[1400px]">
-          <div className="flex flex-wrap items-center gap-16 border-b border-white/10 mb-24">
-            {platforms.map((platform) => (
-              <button 
-                key={platform.id} 
-                onClick={() => setActivePlatformTab(platform.id)} 
-                className={cn(
-                  "flex items-center gap-5 pb-8 transition-all relative group", 
-                  activePlatformTab === platform.id ? "opacity-100" : "opacity-40 hover:opacity-100"
-                )}
-              >
-                {platform.icon} 
-                <span className={cn(
-                  "text-xl font-black transition-colors uppercase tracking-widest", 
-                  activePlatformTab === platform.id ? "text-white" : "text-zinc-500"
-                )}>
-                  {platform.name}
-                </span>
-                {activePlatformTab === platform.id && (
-                  <div className={cn("absolute bottom-0 left-0 right-0 h-[3px]", platform.underlineColor)} />
-                )}
-              </button>
-            ))}
-          </div>
-          <div key={activePlatformTab} className="animate-in fade-in slide-in-from-bottom-6 duration-700">
-            <h3 className={cn("text-6xl md:text-[100px] font-black tracking-[-0.03em] uppercase leading-[0.9] mb-20", currentPlatform.themeColor)}>
-              {currentPlatform.largeTitle}
-            </h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-              <div className="space-y-16">
-                <p className="text-zinc-300 text-xl md:text-2xl leading-relaxed max-w-2xl font-normal">
-                  {currentPlatform.description}
-                </p>
-                <div className="flex flex-wrap gap-24">
-                  {currentPlatform.stats.map((stat, i) => (
-                    <div key={i} className="space-y-4">
-                      <div className="text-6xl md:text-7xl font-black text-white italic tracking-tighter">{stat.value}</div>
-                      <div className="text-[11px] font-black text-zinc-500 tracking-[0.4em] uppercase">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+            <div className="space-y-12">
+              <h2 className="text-primary font-black uppercase tracking-[0.5em] text-[11px]">{t.nav.about}</h2>
+              <h3 className="text-6xl font-black text-white tracking-tighter leading-[1.1] uppercase">{t.about.title}</h3>
+              <p className="text-zinc-400 text-xl leading-relaxed max-w-2xl">{t.about.sub}</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-12 border-t border-white/10">
+                {[t.about.stat1, t.about.stat2, t.about.stat3].map((stat, i) => (
+                  <div key={i} className="space-y-4">
+                    <div className="text-4xl font-black text-white italic">{stat.value}</div>
+                    <div className="text-[10px] font-black text-zinc-500 tracking-[0.3em] uppercase">{stat.label}</div>
+                  </div>
+                ))}
               </div>
-              <div className="text-[220px] font-black text-white/[0.03] italic leading-none select-none text-right flex items-end justify-end hidden lg:flex">
-                {currentPlatform.watermark}
-              </div>
+            </div>
+            <div className="relative aspect-square">
+               <div className="absolute inset-0 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
+               <div className="relative z-10 w-full h-full border border-white/10 rounded-3xl overflow-hidden bg-zinc-900/50 backdrop-blur-3xl flex items-center justify-center p-20">
+                  <div className="relative w-full h-full">
+                     <svg viewBox="0 0 100 100" className="w-full h-full opacity-20 fill-primary">
+                        <path d="M50 0 L93.3 25 V75 L50 100 L6.7 75 V25 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                        <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                        <path d="M50 20 V80 M20 50 H80" stroke="currentColor" strokeWidth="0.5" />
+                     </svg>
+                     <div className="absolute inset-0 flex items-center justify-center">
+                        <RedwallLogo iconOnly className="h-40" />
+                     </div>
+                  </div>
+               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Specialized Services Grid */}
+      <section id="services" className="bg-[#050505] py-32 border-t border-white/5 overflow-hidden scroll-mt-20">
+        <div className="container mx-auto px-12 max-w-[1400px]">
+          <div className="mb-32">
+            <h2 className="text-primary font-black uppercase tracking-[0.5em] text-[11px] mb-8">{t.nav.services}</h2>
+            <h3 className="text-6xl font-black text-white tracking-tighter mb-8 uppercase">{t.services.title}</h3>
+            <p className="text-zinc-400 text-xl leading-relaxed max-w-3xl">{t.services.sub}</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {t.services.items.map((service: any) => (
+              <div key={service.id} className="group p-10 bg-[#0a0a0a] border border-white/5 rounded-3xl hover:border-primary/50 transition-all duration-500 flex flex-col h-full">
+                <div className="flex justify-between items-start mb-12">
+                  <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-black transition-all duration-500">
+                    <Target className="w-6 h-6" />
+                  </div>
+                  <span className="text-[9px] font-black px-3 py-1 rounded-full border border-white/10 text-zinc-500 group-hover:border-primary/30 group-hover:text-primary transition-colors">
+                    {service.status}
+                  </span>
+                </div>
+                <h4 className="text-xl font-black text-white mb-4 uppercase tracking-tight">{service.title}</h4>
+                <p className="text-zinc-500 text-sm leading-relaxed mb-12 flex-grow">{service.desc}</p>
+                <div className="pt-6 border-t border-white/5">
+                   <button className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 group-hover:text-primary transition-colors flex items-center gap-2">
+                     Learn More <ArrowRight className="w-3 h-3" />
+                   </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Global Intel Section */}
+      <section id="intel" className="bg-black py-40 border-t border-white/5 scroll-mt-20">
+        <div className="container mx-auto px-12 max-w-[1400px]">
+          <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-24">
+             <div className="space-y-8">
+                <h2 className="text-primary font-black uppercase tracking-[0.5em] text-[11px]">{t.nav.intel}</h2>
+                <h3 className="text-6xl font-black text-white tracking-tighter uppercase">{t.intel.title}</h3>
+                <p className="text-zinc-400 text-xl max-w-xl">{t.intel.sub}</p>
+             </div>
+             <Button variant="outline" className="border-white/10 text-white hover:bg-white/5 rounded-full px-10 h-14 font-black uppercase text-[11px] tracking-widest">
+                View Intelligence Archive
+             </Button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            {t.intel.news.map((item: any, i: number) => (
+              <div key={i} className="group cursor-pointer">
+                <div className="aspect-[16/10] bg-zinc-900 rounded-3xl mb-8 overflow-hidden relative border border-white/5">
+                  <div className="absolute top-6 left-6 z-10 bg-primary px-3 py-1 rounded text-[9px] font-black tracking-widest uppercase">
+                    {item.tag}
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60" />
+                  <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-700 opacity-30">
+                     <Image 
+                       src={`https://picsum.photos/seed/${i+50}/600/400`} 
+                       alt="intel" 
+                       fill 
+                       className="object-cover" 
+                       data-ai-hint="cybersecurity network"
+                     />
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-4">
+                   <span>{item.date}</span>
+                   <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                   <span>Precision AI Audit</span>
+                </div>
+                <h4 className="text-2xl font-black text-white group-hover:text-primary transition-colors uppercase leading-tight">{item.title}</h4>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Proven Success Section (Video) */}
+      <section id="proven-success" className="bg-[#050505] py-0 overflow-hidden relative min-h-[800px] flex items-center justify-center">
+        <div className="absolute inset-0 z-0">
+          {successVideoBg && <Image src={successVideoBg.imageUrl} alt="Case Study" fill className="object-cover opacity-30" data-ai-hint="data center" />}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black" />
+          <div className="absolute inset-0 bg-primary/5 mix-blend-overlay" />
+        </div>
+
+        <div className="container mx-auto px-12 max-w-[1400px] relative z-10 text-center">
+           <div className="max-w-4xl mx-auto space-y-12">
+              <div className="w-24 h-24 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center mx-auto mb-16 group cursor-pointer hover:bg-primary hover:text-black transition-all duration-500">
+                 <Play className="w-8 h-8 fill-current ml-1" />
+              </div>
+              <h3 className="text-6xl md:text-8xl font-black text-white tracking-tighter uppercase leading-[0.9]">
+                 {t.proven.title}
+              </h3>
+              <p className="text-2xl text-zinc-300 font-medium">
+                 {t.proven.sub}
+              </p>
+              <div className="pt-12">
+                 <Button className="bg-white text-black hover:bg-gray-100 rounded-full px-16 h-18 font-black uppercase text-sm tracking-widest shadow-2xl">
+                    Watch Operational Overview
+                 </Button>
+              </div>
+           </div>
+        </div>
+        
+        <div className="absolute bottom-0 left-0 right-0 p-12 flex justify-between items-center text-[10px] font-black text-zinc-600 uppercase tracking-[0.4em] z-20">
+           <div className="flex items-center gap-8">
+              <span>LATENCY: 14MS</span>
+              <span>UPTIME: 99.998%</span>
+           </div>
+           <div>EST. 2025 // REDWALL GLOBAL OPS</div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
       <section id="contact" className="bg-[#050505] py-40 border-t border-white/10 scroll-mt-20">
         <div className="container mx-auto px-12 max-w-[1400px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-32">
             <div className="space-y-16">
               <div className="space-y-8">
                 <h2 className="text-primary font-black uppercase tracking-[0.5em] text-[11px]">{t.nav.contact}</h2>
-                <h3 className="text-6xl font-black text-white tracking-tighter leading-[1.1]">{t.contact.title}</h3>
+                <h3 className="text-6xl font-black text-white tracking-tighter leading-[1.1] uppercase">{t.contact.title}</h3>
                 <p className="text-zinc-400 text-xl leading-relaxed max-w-xl">{t.contact.sub}</p>
               </div>
               
@@ -421,7 +472,7 @@ export default function Home() {
                        {isSubmitting ? (
                          <>{t.contact.encrypting} <Activity className="w-5 h-5 animate-pulse" /></>
                        ) : (
-                         <>{t.contact.transmit} <Send className="w-5 h-5" /></>
+                         <>{t.contact.transmit} <ArrowRight className="w-5 h-5" /></>
                        )}
                      </Button>
                    </form>
@@ -432,6 +483,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="bg-black text-zinc-500 py-32 border-t border-white/10">
         <div className="container mx-auto px-12 max-w-[1400px]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
@@ -442,6 +494,13 @@ export default function Home() {
                   <li className="hover:text-primary transition-colors cursor-pointer">Managed SOC (L1/L2)</li>
                   <li className="hover:text-primary transition-colors cursor-pointer">EDR/XDR Fleet Management</li>
                   <li className="hover:text-primary transition-colors cursor-pointer">Vulnerability Lifecycle</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Penetration Testing</li>
+                </ul>
+                <ul className="space-y-4 text-[14px] font-medium">
+                  <li className="hover:text-primary transition-colors cursor-pointer">Incident Response</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Cloud Security Reviews</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">AI Security Audits</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Purple Team Operations</li>
                 </ul>
               </div>
             </div>
