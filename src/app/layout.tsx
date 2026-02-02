@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Senticore | Global Security Operations & Managed SOC',
+  title: 'Redwall | Global Cyber Defense & Managed SOC',
   description: 'Next-generation Blue Team (L1/L2) security monitoring, EDR management, and AI-driven threat intelligence for the modern enterprise.',
 };
 
