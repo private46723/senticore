@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from 'react';
@@ -538,7 +537,7 @@ export default function Home() {
       <footer className="bg-black py-24 md:py-48 border-t border-white/10">
 >>>>>>> 6806554 (I didn't like it,Maybe you could add some lines around the edges or some)
          <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-24">
                <div className="space-y-12">
                   <RedwallLogo className="h-12" />
                   <p className="text-zinc-600 text-lg font-medium leading-relaxed border-l border-primary/20 pl-6 italic">{t.nav.about} SOC services and AI-driven security orchestration.</p>
@@ -591,6 +590,7 @@ export default function Home() {
                   </ul>
                </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                <div className="space-y-6">
 >>>>>>> 2fb8fb4 (Create another design)
                   <div className="p-6 border border-white/5 bg-[#050505]">
@@ -610,6 +610,8 @@ export default function Home() {
                      <div className="text-xs font-bold text-zinc-300 flex justify-between">AUSTIN, TX <span className="text-accent">ACTIVE</span></div>
                   </div>
                </div>
+=======
+>>>>>>> 6deba0b (remove this part)
             </div>
             <div className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-12 text-[9px] font-black text-zinc-700 uppercase tracking-[0.8em]">
                <span>{t.footer.rights}</span>
