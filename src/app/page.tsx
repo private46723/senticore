@@ -245,15 +245,6 @@ export default function Home() {
                  </h2>
                  <h3 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none uppercase italic">{t.about.title}</h3>
                  <p className="text-zinc-500 text-xl md:text-2xl font-medium leading-relaxed">{t.about.sub}</p>
-                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-12 border-t border-white/10">
-                    {[t.about.stat1, t.about.stat2, t.about.stat3].map((stat, i) => (
-                      <div key={i} className="space-y-3 p-6 border border-white/5 bg-black/50 relative">
-                        <div className="text-4xl font-black text-white italic">{stat.value}</div>
-                        <HUDMetadata text={stat.label} />
-                        <div className="absolute top-0 right-0 w-2 h-2 bg-primary/20" />
-                      </div>
-                    ))}
-                 </div>
               </div>
               
               <div className="relative aspect-video lg:aspect-square flex items-center justify-center p-4">
