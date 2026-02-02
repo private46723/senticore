@@ -412,32 +412,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Video Case Study Section - Now Directly Embedded & Autoplay */}
+      {/* Video Case Study Section - Now Full Width */}
       <section id="proven-success" className="bg-black py-24 md:py-48 border-t border-white/5 scroll-mt-20 overflow-hidden">
         <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">
-            <div className="space-y-8 md:space-y-12">
-              <h2 className="text-primary font-black uppercase tracking-[0.6em] text-[10px]">Operational Protocol</h2>
-              <h3 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.95] uppercase italic">{t.proven.title}</h3>
-              <p className="text-zinc-400 text-lg md:text-2xl font-medium leading-relaxed max-w-xl">{t.proven.sub}</p>
-              <div className="pt-8 flex items-center gap-6">
-                 <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-                 <span className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em]">Global Ops Streaming V4.0</span>
-              </div>
+          <div className="mb-16 md:mb-24 space-y-8">
+            <div className="flex items-center gap-4 text-primary font-black uppercase tracking-[0.4em] text-[10px]">
+              <div className="w-8 h-px bg-primary" /> Operational Protocol
             </div>
-            <div className="relative aspect-video w-full group overflow-hidden">
-              <div className="absolute inset-0 border border-white/10 z-20 pointer-events-none group-hover:border-primary/30 transition-colors" />
-              <div className="absolute -inset-4 bg-primary/5 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-              <iframe 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed/NBfcGrHR6P0?start=1&autoplay=1&mute=1&loop=1&playlist=NBfcGrHR6P0&rel=0" 
-                title="Redwall Operational Protocol" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowFullScreen
-                className="w-full h-full relative z-10"
-              ></iframe>
+            <h3 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.95] uppercase italic">{t.proven.title}</h3>
+            <p className="text-zinc-400 text-lg md:text-2xl font-medium leading-relaxed max-w-3xl">{t.proven.sub}</p>
+          </div>
+          
+          <div className="relative w-full aspect-video group overflow-hidden shadow-[0_0_100px_rgba(255,0,0,0.1)] border border-white/5">
+            <div className="absolute inset-0 border border-white/10 z-20 pointer-events-none group-hover:border-primary/30 transition-colors" />
+            <div className="absolute -inset-10 bg-primary/5 blur-[120px] opacity-20 pointer-events-none" />
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube.com/embed/NBfcGrHR6P0?start=1&autoplay=1&mute=1&loop=1&playlist=NBfcGrHR6P0&rel=0" 
+              title="Redwall Operational Protocol" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowFullScreen
+              className="w-full h-full relative z-10 grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
+            ></iframe>
+          </div>
+
+          <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-8 border-t border-white/5 pt-10">
+            <div className="flex items-center gap-6">
+               <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+               <span className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em]">Global Ops Streaming V4.0</span>
+            </div>
+            <div className="flex items-center gap-8 text-[9px] font-black text-zinc-800 uppercase tracking-[0.4em]">
+              <span className="flex items-center gap-2"><div className="w-1 h-1 bg-zinc-800 rounded-full" /> Latency: 24ms</span>
+              <span className="flex items-center gap-2"><div className="w-1 h-1 bg-zinc-800 rounded-full" /> Encrypted Feed: AES-256</span>
+              <span className="hidden lg:block">Classification: L4-RESTRICTED</span>
             </div>
           </div>
         </div>
