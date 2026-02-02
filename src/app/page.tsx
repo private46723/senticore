@@ -709,9 +709,6 @@ export default function Home() {
                   className="bg-transparent border-none text-xl focus-visible:ring-0 placeholder:opacity-30 h-10 p-0"
                 />
               </form>
-              <button onClick={() => setIsSearchOpen(false)} className="opacity-40 hover:opacity-100 transition-opacity">
-                <X className="w-5 h-5" />
-              </button>
             </div>
           </DialogHeader>
           
