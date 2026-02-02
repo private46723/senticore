@@ -308,19 +308,51 @@ export default function Home() {
               </div>
             </div>
             <div className="relative aspect-square">
+               {/* Decorative Spinning Rings */}
                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-[80%] h-[80%] border border-white/5 rounded-full animate-[spin_20s_linear_infinite]" />
-                  <div className="absolute w-[60%] h-[60%] border border-white/10 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+                  <div className="w-[90%] h-[90%] border border-white/5 rounded-full animate-[spin_30s_linear_infinite]" />
+                  <div className="absolute w-[70%] h-[70%] border border-white/10 rounded-full animate-[spin_20s_linear_infinite_reverse] opacity-20" />
                </div>
-               <div className="relative z-10 w-full h-full border border-white/5 bg-black/40 backdrop-blur-2xl flex items-center justify-center p-8 md:p-12 lg:p-20 shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]">
-                  <div className="relative w-full h-full flex items-center justify-center">
-                     <svg viewBox="0 0 100 100" className="w-full h-full absolute opacity-20 text-zinc-600">
-                        <path d="M50 0 V100 M0 50 H100" stroke="currentColor" strokeWidth="0.5" />
-                        <path d="M50 5 L88.97 27.5 V72.5 L50 95 L11.03 72.5 V27.5 Z" fill="none" stroke="currentColor" strokeWidth="1" />
-                        <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
+               
+               <div className="relative z-10 w-full h-full bg-black flex items-center justify-center">
+                  <div className="relative w-[90%] h-[90%] flex items-center justify-center">
+                     {/* The Tactical Graphic from Screenshot */}
+                     <svg viewBox="0 0 100 100" className="w-full h-full absolute text-zinc-900">
+                        {/* Axis Lines */}
+                        <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" strokeWidth="0.2" />
+                        <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" strokeWidth="0.2" />
+                        
+                        {/* Hexagon */}
+                        <path 
+                          d="M50 10 L84.64 30 V70 L50 90 L15.36 70 V30 Z" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="0.5" 
+                        />
+                        
+                        {/* Dashed Circle */}
+                        <circle 
+                          cx="50" 
+                          cy="50" 
+                          r="28" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="0.3" 
+                          strokeDasharray="2 2" 
+                        />
+                        
+                        {/* Vertical Center Line */}
+                        <line x1="50" y1="10" x2="50" y2="90" stroke="currentColor" strokeWidth="0.5" />
                      </svg>
-                     <div className="relative z-20 transform scale-110 md:scale-125">
-                        <RedwallLogo iconOnly className="h-20 md:h-40" />
+                     
+                     {/* Central "Red [Shield]" branding */}
+                     <div className="relative z-20 flex items-center gap-2">
+                        <span className="text-5xl md:text-8xl font-black tracking-tighter text-primary">Red</span>
+                        <div className="relative w-12 h-14 md:w-24 md:h-28">
+                          <svg viewBox="0 0 100 120" className="w-full h-full fill-primary drop-shadow-[0_0_30px_rgba(255,0,0,0.6)]">
+                            <path d="M50 0 L90 20 V60 C90 90 50 115 50 115 C50 115 10 90 10 60 V20 L50 0Z" />
+                          </svg>
+                        </div>
                      </div>
                   </div>
                </div>
