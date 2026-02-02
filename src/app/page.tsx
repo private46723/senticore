@@ -103,6 +103,9 @@ export default function Home() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalyzeThreatOutput | null>(null);
 
+  // Video State
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -423,7 +426,10 @@ export default function Home() {
 
         <div className="container mx-auto px-6 md:px-12 max-w-[1400px] relative z-10 text-center">
            <div className="max-w-4xl mx-auto space-y-12 md:space-y-16">
-              <div className="w-16 h-16 md:w-24 md:h-24 border border-primary/40 flex items-center justify-center mx-auto mb-8 md:mb-16 group cursor-pointer hover:bg-primary hover:text-black transition-all duration-700 shadow-[0_0_30px_rgba(255,0,0,0.2)]">
+              <div 
+                onClick={() => setIsVideoOpen(true)}
+                className="w-16 h-16 md:w-24 md:h-24 border border-primary flex items-center justify-center mx-auto mb-8 md:mb-16 group cursor-pointer hover:bg-primary hover:text-black transition-all duration-700 shadow-[0_0_30px_rgba(255,0,0,0.4)]"
+              >
                  <Play className="w-6 h-6 md:w-8 md:h-8 fill-current ml-1" />
               </div>
               <h3 className="text-4xl md:text-7xl lg:text-[100px] font-black text-white tracking-tighter uppercase leading-[0.85] italic">
@@ -433,7 +439,10 @@ export default function Home() {
                  {t.proven.sub}
               </p>
               <div className="pt-8 md:pt-12">
-                 <Button className="bg-white text-black hover:bg-zinc-200 rounded-none px-10 md:px-16 h-16 md:h-20 font-black uppercase text-xs tracking-[0.4em] shadow-2xl">
+                 <Button 
+                   onClick={() => setIsVideoOpen(true)}
+                   className="bg-white text-black hover:bg-zinc-200 rounded-none px-10 md:px-16 h-16 md:h-20 font-black uppercase text-xs tracking-[0.4em] shadow-2xl"
+                 >
                     Operational Protocol Video
                  </Button>
               </div>
@@ -484,7 +493,7 @@ export default function Home() {
                       <CheckCircle2 className="w-10 h-10 md:w-12 md:h-12 text-primary" />
                     </div>
                     <h4 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-4 md:mb-6 italic">{t.contact.success}</h4>
-                    <p className="text-zinc-500 text-lg md:text-xl max-w-sm mb-10 md:mb-12 font-medium">{t.contact.successSub}</p>
+                    <p className="text-zinc-500 text-lg md:text-xl max-sm mb-10 md:mb-12 font-medium">{t.contact.successSub}</p>
                     <Button 
                       variant="outline" 
                       onClick={() => setIsSubmitted(false)}
@@ -716,6 +725,22 @@ export default function Home() {
                <span>ESC TO CLOSE</span>
             </div>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Video Protocol Dialog */}
+      <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
+        <DialogContent className="bg-black border-white/10 p-0 max-w-5xl aspect-video overflow-hidden rounded-none shadow-[0_0_100px_rgba(255,0,0,0.3)]">
+          <iframe 
+            width="100%" 
+            height="100%" 
+            src="https://www.youtube.com/embed/JpfEBQn2CjM?start=82&autoplay=1" 
+            title="Redwall Operational Protocol" 
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowFullScreen
+            className="w-full h-full"
+          ></iframe>
         </DialogContent>
       </Dialog>
 
