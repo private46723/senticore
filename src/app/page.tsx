@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState } from 'react';
@@ -22,7 +23,8 @@ import {
   ShieldCheck,
   Cpu,
   Lock,
-  Wifi
+  Wifi,
+  Play
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -159,8 +161,10 @@ export default function Home() {
     { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' }
   ];
 
+  const aboutImage = PlaceHolderImages.find(img => img.id === 'about-visual');
+
   return (
-    <div className="flex flex-col min-h-screen bg-black text-white font-body selection:bg-primary/30 w-full">
+    <div className="flex flex-col min-h-screen bg-black text-white font-body selection:bg-primary/30 w-full overflow-x-hidden">
       <div className="scanline" />
       
       {/* HUD Header */}
@@ -172,7 +176,7 @@ export default function Home() {
               <button 
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="hover:text-primary transition-all text-[10px] tracking-[0.4em] uppercase font-black text-zinc-500 hover:tracking-[0.5em] flex items-center gap-2"
+                className="hover:text-primary transition-all text-[10px] tracking-[0.3em] uppercase font-black text-zinc-500 hover:tracking-[0.4em] flex items-center gap-2"
               >
                 <div className="w-1 h-1 bg-primary/20" />
                 {item.name}
@@ -281,30 +285,32 @@ export default function Home() {
                  </div>
               </div>
               
-              <div className="relative aspect-square flex items-center justify-center p-20">
+              <div className="relative aspect-video lg:aspect-square flex items-center justify-center p-4">
                  <div className="absolute inset-0 border border-white/5" />
                  <TacticalCorner />
                  
-                 <div className="relative z-10 w-full h-full flex items-center justify-center">
-                    {/* Tactical Target SVG */}
-                    <svg viewBox="0 0 100 100" className="w-full h-full text-zinc-900 absolute opacity-50">
-                        <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" strokeWidth="0.05" />
-                        <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" strokeWidth="0.05" />
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="0.1" strokeDasharray="2 2" />
-                        <path d="M50 5 L95 27.5 V72.5 L50 95 L5 72.5 V27.5 Z" fill="none" stroke="currentColor" strokeWidth="0.2" />
-                    </svg>
-                    
-                    <div className="flex flex-col items-center gap-6 relative z-20">
-                       <span className="text-5xl md:text-8xl font-black tracking-tighter text-zinc-400 opacity-20 uppercase">Tactical</span>
-                       <div className="relative w-24 h-28 md:w-40 md:h-48 group">
-                          <svg viewBox="0 0 100 120" className="w-full h-full fill-primary drop-shadow-[0_0_60px_rgba(255,0,0,0.4)] group-hover:scale-105 transition-transform duration-700">
-                            <path d="M50 0 L90 20 V60 C90 90 50 115 50 115 C50 115 10 90 10 60 V20 L50 0Z" />
-                          </svg>
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <ShieldCheck className="w-12 h-12 text-black" />
-                          </div>
-                       </div>
-                    </div>
+                 <div className="relative z-10 w-full h-full p-8">
+                   <div className="relative w-full h-full border border-white/10 overflow-hidden">
+                      <TacticalCorner />
+                      <Image 
+                        src={aboutImage?.imageUrl || "/placeholder.svg"} 
+                        alt={aboutImage?.description || "About Visual"}
+                        fill
+                        className="object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                        data-ai-hint={aboutImage?.imageHint}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                      
+                      <div className="absolute bottom-6 left-6 z-20 flex items-center gap-4">
+                        <div className="w-12 h-12 flex items-center justify-center bg-primary text-black">
+                           <ShieldCheck className="w-6 h-6" />
+                        </div>
+                        <div className="flex flex-col">
+                           <span className="text-[8px] font-black text-zinc-500 uppercase tracking-widest">VISUAL_IDENT</span>
+                           <span className="text-xs font-black text-white uppercase italic">PRECISION_DEFENSE_MODE</span>
+                        </div>
+                      </div>
+                   </div>
                  </div>
               </div>
            </div>
@@ -345,9 +351,9 @@ export default function Home() {
       </section>
 
       {/* Operational SOC Feed - Full Width */}
-      <section id="proven-success" className="bg-black py-0 border-y border-white/10">
-        <div className="w-full relative aspect-video overflow-hidden group">
-          <div className="absolute inset-0 bg-black/50 z-10 pointer-events-none group-hover:bg-black/30 transition-all duration-1000" />
+      <section id="proven-success" className="bg-black py-0 border-y border-white/10 overflow-hidden">
+        <div className="w-full relative aspect-video group">
+          <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none group-hover:bg-black/20 transition-all duration-1000" />
           
           <div className="absolute top-12 left-12 z-20 space-y-6 p-8 bg-black/40 backdrop-blur-md border border-white/10">
              <TacticalCorner />
@@ -357,16 +363,16 @@ export default function Home() {
              <h3 className="text-3xl md:text-6xl font-black text-white tracking-tighter uppercase italic">{t.proven.title}</h3>
           </div>
           
-          <iframe 
-            width="100%" 
-            height="100%" 
-            src="https://www.youtube.com/embed/NBfcGrHR6P0?autoplay=1&mute=1&loop=1&playlist=NBfcGrHR6P0&controls=0&showinfo=0&rel=0&iv_load_policy=3" 
-            title="Redwall Operational Protocol" 
-            frameBorder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowFullScreen
-            className="w-full h-full grayscale opacity-60 scale-105 pointer-events-none"
-          ></iframe>
+          <div className="w-full h-full relative">
+            <iframe 
+              src="https://www.youtube.com/embed/NBfcGrHR6P0?autoplay=1&mute=1&loop=1&playlist=NBfcGrHR6P0&controls=0&showinfo=0&rel=0&iv_load_policy=3&start=1" 
+              title="Redwall Operational Protocol" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen
+              className="absolute inset-0 w-full h-full object-cover scale-[1.35] grayscale opacity-70 pointer-events-none"
+            ></iframe>
+          </div>
         </div>
       </section>
 
@@ -481,16 +487,16 @@ export default function Home() {
       {/* Enterprise HUD Footer */}
       <footer className="bg-black py-24 md:py-48 border-t border-white/10">
          <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-24">
                <div className="space-y-12">
                   <RedwallLogo className="h-12" />
                   <p className="text-zinc-600 text-lg font-medium leading-relaxed border-l border-primary/20 pl-6 italic">Global authority in managed SOC services and AI-driven security orchestration.</p>
                </div>
                <div>
-                  <h5 className="text-white font-black text-[10px] uppercase tracking-[0.5em] mb-12 flex items-center gap-4">
+                  <h5 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-12 flex items-center gap-4">
                     <div className="w-2 h-2 bg-primary" /> CORE_OPS
                   </h5>
-                  <ul className="space-y-6 text-[10px] font-black text-zinc-600 uppercase tracking-[0.3em]">
+                  <ul className="space-y-6 text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em]">
                      <li className="text-zinc-200 hover:text-primary transition-colors cursor-pointer flex items-center gap-3">
                        <div className="w-1.5 h-1.5 border border-primary/50" /> Managed SOC (L1/L2)
                      </li>
@@ -506,10 +512,10 @@ export default function Home() {
                   </ul>
                </div>
                <div>
-                  <h5 className="text-white font-black text-[10px] uppercase tracking-[0.5em] mb-12 flex items-center gap-4">
+                  <h5 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-12 flex items-center gap-4">
                     <div className="w-2 h-2 bg-primary" /> GOVERNANCE
                   </h5>
-                  <ul className="space-y-6 text-[10px] font-black text-zinc-600 uppercase tracking-[0.3em]">
+                  <ul className="space-y-6 text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em]">
                      <li><Link href="/privacy" className="hover:text-primary transition-colors flex items-center gap-3"><div className="w-1.5 h-1.5 border border-zinc-800" /> {t.legal.privacy}</Link></li>
                      <li><Link href="/terms" className="hover:text-primary transition-colors flex items-center gap-3"><div className="w-1.5 h-1.5 border border-zinc-800" /> {t.legal.terms}</Link></li>
                      <li><Link href="/compliance" className="hover:text-primary transition-colors flex items-center gap-3"><div className="w-1.5 h-1.5 border border-zinc-800" /> {t.legal.compliance}</Link></li>
