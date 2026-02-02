@@ -41,6 +41,13 @@ export const translations = {
       terms: 'Terms of Service',
       cookies: 'Cookie Policy',
       compliance: 'Compliance Audit'
+    },
+    search: {
+      placeholder: 'Search Redwall Intelligence...',
+      analyzing: 'Analyzing query with Precision AI...',
+      results: 'Intelligence Results',
+      noResults: 'No immediate matches. Triggering AI deep scan...',
+      quickLinks: 'Quick Access'
     }
   },
   ru: {
@@ -84,6 +91,13 @@ export const translations = {
       terms: 'Условия использования',
       cookies: 'Политика файлов cookie',
       compliance: 'Аудит соответствия'
+    },
+    search: {
+      placeholder: 'Поиск в разведке Redwall...',
+      analyzing: 'Анализ запроса с помощью Precision AI...',
+      results: 'Результаты разведки',
+      noResults: 'Прямых совпадений не найдено. Запуск глубокого сканирования ИИ...',
+      quickLinks: 'Быстрый доступ'
     }
   },
   tr: {
@@ -127,6 +141,13 @@ export const translations = {
       terms: 'Hizmet Şartları',
       cookies: 'Çerez Politikası',
       compliance: 'Uyumluluk Denetimi'
+    },
+    search: {
+      placeholder: 'Redwall İstihbaratında Ara...',
+      analyzing: 'Precision AI ile sorgu analiz ediliyor...',
+      results: 'İstihbarat Sonuçları',
+      noResults: 'Doğrudan eşleşme bulunamadı. AI derin tarama tetikleniyor...',
+      quickLinks: 'Hızlı Erişim'
     }
   },
   hi: {
@@ -170,6 +191,13 @@ export const translations = {
       terms: 'सेवा की शर्तें',
       cookies: 'कुकी नीति',
       compliance: 'अनुपालन ऑडिट'
+    },
+    search: {
+      placeholder: 'रेडवॉल इंटेलिजेंस खोजें...',
+      analyzing: 'प्रेसिजन एआई के साथ क्वेरी का विश्लेषण...',
+      results: 'इंटेलिजेंस परिणाम',
+      noResults: 'कोई तत्काल मिलान नहीं। एआई डीप स्कैन शुरू किया जा रहा है...',
+      quickLinks: 'त्वरित पहुँच'
     }
   }
 };
