@@ -103,9 +103,6 @@ export default function Home() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalyzeThreatOutput | null>(null);
 
-  // Video State
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -116,7 +113,6 @@ export default function Home() {
   });
 
   const heroBg = PlaceHolderImages.find(img => img.id === 'hero-bg');
-  const successVideoBg = PlaceHolderImages.find(img => img.id === 'video-case-study');
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -416,45 +412,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Video Case Study Section */}
-      <section id="proven-success" className="bg-black py-0 relative min-h-[70vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          {successVideoBg && <Image src={successVideoBg.imageUrl} alt="Case Study" fill className="object-cover opacity-20 contrast-150 grayscale" data-ai-hint="data center security" />}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black" />
-          <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
-        </div>
-
-        <div className="container mx-auto px-6 md:px-12 max-w-[1400px] relative z-10 text-center">
-           <div className="max-w-4xl mx-auto space-y-12 md:space-y-16">
-              <div 
-                onClick={() => setIsVideoOpen(true)}
-                className="w-16 h-16 md:w-24 md:h-24 border border-primary flex items-center justify-center mx-auto mb-8 md:mb-16 group cursor-pointer hover:bg-primary hover:text-black transition-all duration-700 shadow-[0_0_30px_rgba(255,0,0,0.4)]"
-              >
-                 <Play className="w-6 h-6 md:w-8 md:h-8 fill-current ml-1" />
+      {/* Video Case Study Section - Now Directly Embedded */}
+      <section id="proven-success" className="bg-black py-24 md:py-48 border-t border-white/5 scroll-mt-20 overflow-hidden">
+        <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">
+            <div className="space-y-8 md:space-y-12">
+              <h2 className="text-primary font-black uppercase tracking-[0.6em] text-[10px]">Operational Protocol</h2>
+              <h3 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.95] uppercase italic">{t.proven.title}</h3>
+              <p className="text-zinc-400 text-lg md:text-2xl font-medium leading-relaxed max-w-xl">{t.proven.sub}</p>
+              <div className="pt-8 flex items-center gap-6">
+                 <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+                 <span className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em]">Global Ops Streaming V4.0</span>
               </div>
-              <h3 className="text-4xl md:text-7xl lg:text-[100px] font-black text-white tracking-tighter uppercase leading-[0.85] italic">
-                 {t.proven.title}
-              </h3>
-              <p className="text-lg md:text-2xl text-zinc-400 font-medium tracking-tight">
-                 {t.proven.sub}
-              </p>
-              <div className="pt-8 md:pt-12">
-                 <Button 
-                   onClick={() => setIsVideoOpen(true)}
-                   className="bg-white text-black hover:bg-zinc-200 rounded-none px-10 md:px-16 h-16 md:h-20 font-black uppercase text-xs tracking-[0.4em] shadow-2xl"
-                 >
-                    Operational Protocol Video
-                 </Button>
-              </div>
-           </div>
-        </div>
-        
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 flex flex-wrap justify-between items-center text-[9px] font-black text-zinc-700 uppercase tracking-[0.4em] md:tracking-[0.6em] z-20 gap-4 md:gap-8">
-           <div className="flex items-center gap-8 md:gap-12">
-              <span className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" /> LATENCY: 11MS</span>
-              <span className="hidden sm:inline-block">GLOBAL UPTIME: 99.9997%</span>
-           </div>
-           <div>EST. 2025 // REDWALL GLOBAL OPERATIONS</div>
+            </div>
+            <div className="relative aspect-video w-full group overflow-hidden">
+              <div className="absolute inset-0 border border-white/10 z-20 pointer-events-none group-hover:border-primary/30 transition-colors" />
+              <div className="absolute -inset-4 bg-primary/5 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/NBfcGrHR6P0?start=1&autoplay=0&mute=0&rel=0" 
+                title="Redwall Operational Protocol" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowFullScreen
+                className="w-full h-full relative z-10"
+              ></iframe>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -725,22 +710,6 @@ export default function Home() {
                <span>ESC TO CLOSE</span>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Video Protocol Dialog */}
-      <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
-        <DialogContent className="bg-black border-white/10 p-0 max-w-5xl aspect-video overflow-hidden rounded-none shadow-[0_0_100px_rgba(255,0,0,0.3)]">
-          <iframe 
-            width="100%" 
-            height="100%" 
-            src="https://www.youtube.com/embed/NBfcGrHR6P0?start=1&autoplay=1&mute=1&enablejsapi=1" 
-            title="Redwall Operational Protocol" 
-            frameBorder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowFullScreen
-            className="w-full h-full"
-          ></iframe>
         </DialogContent>
       </Dialog>
 
