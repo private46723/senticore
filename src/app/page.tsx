@@ -315,13 +315,14 @@ export default function Home() {
                <div className="absolute inset-0 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
                <div className="relative z-10 w-full h-full border border-white/10 rounded-3xl overflow-hidden bg-zinc-900/50 backdrop-blur-3xl flex items-center justify-center p-20">
                   <div className="relative w-full h-full">
-                     <svg viewBox="0 0 100 100" className="w-full h-full opacity-20 fill-primary">
-                        <path d="M50 0 L93.3 25 V75 L50 100 L6.7 75 V25 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                        <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                        <path d="M50 20 V80 M20 50 H80" stroke="currentColor" strokeWidth="0.5" />
+                     {/* Hexagon Crosshair Graphic */}
+                     <svg viewBox="0 0 100 100" className="w-full h-full opacity-30 text-zinc-600">
+                        <path d="M50 5 L88.97 27.5 V72.5 L50 95 L11.03 72.5 V27.5 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                        <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                        <path d="M50 0 V100 M0 50 H100" stroke="currentColor" strokeWidth="0.5" />
                      </svg>
                      <div className="absolute inset-0 flex items-center justify-center">
-                        <RedwallLogo iconOnly className="h-40" />
+                        <RedwallLogo iconOnly className="h-32" />
                      </div>
                   </div>
                </div>
