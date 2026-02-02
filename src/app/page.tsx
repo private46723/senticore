@@ -87,6 +87,12 @@ const TacticalCorner = () => (
   </>
 );
 
+const HUDMetadata = ({ text, className }: { text: string, className?: string }) => (
+  <span className={cn("text-[7px] font-black text-zinc-800 uppercase tracking-[0.3em] pointer-events-none select-none", className)}>
+    {text}
+  </span>
+);
+
 const formSchema = z.object({
   fullName: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid enterprise email." }),
@@ -186,7 +192,7 @@ export default function Home() {
         </div>
         <div className="flex items-center gap-8">
           <div className="hidden xl:flex flex-col items-end mr-8 border-r border-white/10 pr-8">
-            <span className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">NET STATUS</span>
+            <HUDMetadata text="NET STATUS" className="mb-1" />
             <span className="text-[10px] font-bold text-accent flex items-center gap-2"><Wifi className="w-3 h-3" /> SECURED // 128-BIT</span>
           </div>
           <DropdownMenu>
@@ -222,6 +228,7 @@ export default function Home() {
         <div className="container mx-auto px-6 md:px-12 max-w-[1400px] relative z-10">
           <div className="max-w-6xl relative p-12 md:p-20">
             <TacticalCorner />
+            <HUDMetadata text="COORD: 30.2672° N, 97.7431° W" className="absolute top-4 right-8" />
             
             <div className="flex items-center gap-4 text-primary font-black uppercase tracking-[0.6em] text-[11px] mb-12">
               <div className="w-12 h-px bg-primary" /> GLOBAL PRECISION DEFENSE UNIT
@@ -247,7 +254,7 @@ export default function Home() {
                     <Radar className="w-6 h-6 text-primary group-hover:scale-110 transition-transform" />
                  </div>
                  <div className="flex flex-col items-start">
-                   <span className="text-[8px] text-zinc-600 mb-1">SYSTEM ANALYZER v4.0</span>
+                   <HUDMetadata text="SYSTEM ANALYZER v4.0" className="mb-1" />
                    {t.threatHunter.cta}
                  </div>
                </button>
@@ -264,11 +271,12 @@ export default function Home() {
       </section>
 
       {/* About & Mission Data */}
-      <section id="about" className="py-32 md:py-48 bg-[#050505] relative overflow-hidden">
+      <section id="about" className="py-32 md:py-48 bg-[#050505] relative overflow-hidden border-b border-white/5">
         <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
            <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
               <div className="space-y-12 relative p-12">
                  <TacticalCorner />
+                 <HUDMetadata text="OP_INTEL_STREAM" className="absolute top-4 right-8" />
                  <h2 className="text-primary font-black uppercase tracking-[0.6em] text-[11px] flex items-center gap-4">
                    <Shield className="w-4 h-4" /> {t.nav.about}
                  </h2>
@@ -278,7 +286,7 @@ export default function Home() {
                     {[t.about.stat1, t.about.stat2, t.about.stat3].map((stat, i) => (
                       <div key={i} className="space-y-3 p-6 border border-white/5 bg-black/50 relative">
                         <div className="text-4xl font-black text-white italic">{stat.value}</div>
-                        <div className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">{stat.label}</div>
+                        <HUDMetadata text={stat.label} />
                         <div className="absolute top-0 right-0 w-2 h-2 bg-primary/20" />
                       </div>
                     ))}
@@ -290,7 +298,7 @@ export default function Home() {
                  <TacticalCorner />
                  
                  <div className="relative z-10 w-full h-full p-8">
-                   <div className="relative w-full h-full border border-white/10 overflow-hidden">
+                   <div className="relative w-full h-full border border-white/10 overflow-hidden group">
                       <TacticalCorner />
                       <Image 
                         src={aboutImage?.imageUrl || "/placeholder.svg"} 
@@ -301,12 +309,19 @@ export default function Home() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                       
+                      <div className="absolute top-6 right-6 flex flex-col items-end gap-1 opacity-40 group-hover:opacity-100 transition-opacity">
+                        <HUDMetadata text="VISUAL_SCAN_MODE" />
+                        <div className="w-24 h-1 bg-primary/20 overflow-hidden">
+                          <div className="w-1/2 h-full bg-primary animate-[scanline_2s_linear_infinite]" />
+                        </div>
+                      </div>
+
                       <div className="absolute bottom-6 left-6 z-20 flex items-center gap-4">
                         <div className="w-12 h-12 flex items-center justify-center bg-primary text-black">
                            <ShieldCheck className="w-6 h-6" />
                         </div>
                         <div className="flex flex-col">
-                           <span className="text-[8px] font-black text-zinc-500 uppercase tracking-widest">VISUAL_IDENT</span>
+                           <HUDMetadata text="VISUAL_IDENT" />
                            <span className="text-xs font-black text-white uppercase italic">PRECISION_DEFENSE_MODE</span>
                         </div>
                       </div>
@@ -429,7 +444,7 @@ export default function Home() {
                  <div className="absolute top-0 left-0 w-full h-full bg-primary/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-700" />
                  <Mail className="w-12 h-12 text-primary relative z-10" />
                  <div className="relative z-10">
-                    <div className="text-[10px] font-black text-zinc-600 uppercase tracking-widest mb-2">SECURE_CHANNEL: ALPHA</div>
+                    <HUDMetadata text="SECURE_CHANNEL: ALPHA" className="mb-2" />
                     <div className="text-2xl md:text-3xl font-black text-white uppercase italic tracking-tighter">ops@redwallcyber.defense</div>
                  </div>
               </div>
@@ -524,12 +539,12 @@ export default function Home() {
                <div className="space-y-8">
                   <div className="p-8 border border-white/10 bg-[#050505] relative">
                      <div className="tactical-corner-tl" />
-                     <div className="text-[8px] font-black text-zinc-700 uppercase mb-2 tracking-widest">SOC_EMEA_STATUS</div>
+                     <HUDMetadata text="SOC_EMEA_STATUS" className="mb-2" />
                      <div className="text-xs font-bold text-zinc-300 flex justify-between">LONDON, UK <span className="text-accent">ACTIVE</span></div>
                   </div>
                   <div className="p-8 border border-white/10 bg-[#050505] relative">
                      <div className="tactical-corner-tl" />
-                     <div className="text-[8px] font-black text-zinc-700 uppercase mb-2 tracking-widest">SOC_AMER_STATUS</div>
+                     <HUDMetadata text="SOC_AMER_STATUS" className="mb-2" />
                      <div className="text-xs font-bold text-zinc-300 flex justify-between">AUSTIN, TX <span className="text-accent">ACTIVE</span></div>
                   </div>
                </div>
@@ -553,7 +568,7 @@ export default function Home() {
                  <Terminal className="w-14 h-14 text-primary" />
                  <div>
                     <DialogTitle className="text-4xl font-black uppercase italic tracking-tighter mb-2">{t.threatHunter.modalTitle}</DialogTitle>
-                    <p className="text-[9px] font-black uppercase tracking-[0.6em] text-zinc-600">COMMAND_TERMINAL // PRECISION_AI_v4.2</p>
+                    <HUDMetadata text="COMMAND_TERMINAL // PRECISION_AI_v4.2" />
                  </div>
               </div>
            </DialogHeader>
@@ -580,7 +595,7 @@ export default function Home() {
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
                        <div className="p-10 bg-zinc-950 border border-white/10 text-center flex flex-col items-center justify-center relative">
                           <TacticalCorner />
-                          <div className="text-[10px] font-black text-zinc-700 uppercase tracking-widest mb-6">RISK_RATING</div>
+                          <HUDMetadata text="RISK_RATING" className="mb-6" />
                           <div className={cn("text-4xl font-black uppercase italic", analysisResult.severity === 'critical' || analysisResult.severity === 'high' ? 'text-primary' : 'text-accent')}>
                              {analysisResult.severity}
                           </div>
@@ -631,7 +646,7 @@ export default function Home() {
                   {isSearching ? (
                      <div className="flex flex-col items-center justify-center h-full space-y-10 py-24">
                         <Loader2 className="w-16 h-16 text-primary animate-spin" />
-                        <p className="text-[11px] font-black uppercase tracking-[0.8em] text-zinc-700 animate-pulse">SCRUBBING_GLOBAL_TELEMETRY...</p>
+                        <HUDMetadata text="SCRUBBING_GLOBAL_TELEMETRY..." className="animate-pulse" />
                      </div>
                   ) : searchQuery ? (
                      <div className="space-y-12 animate-in fade-in slide-in-from-bottom-12">
@@ -650,7 +665,7 @@ export default function Home() {
                         {navItems.map((item) => (
                            <button key={item.id} onClick={() => { scrollToSection(item.id); setIsSearchOpen(false); }} className="p-10 bg-zinc-950 border border-white/10 hover:border-primary transition-all text-left group relative">
                               <TacticalCorner />
-                              <div className="text-[9px] font-black text-zinc-700 uppercase tracking-widest mb-6 group-hover:text-primary transition-colors">QUICK_ROUTE</div>
+                              <HUDMetadata text="QUICK_ROUTE" className="mb-6 group-hover:text-primary transition-colors" />
                               <div className="text-2xl font-black uppercase italic text-white tracking-tighter">{item.name}</div>
                            </button>
                         ))}
