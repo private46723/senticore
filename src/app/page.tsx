@@ -24,7 +24,8 @@ import {
   Cpu,
   Lock,
   Wifi,
-  Play
+  Linkedin,
+  Instagram
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -404,7 +405,7 @@ export default function Home() {
                  <Mail className="w-12 h-12 text-primary relative z-10" />
                  <div className="relative z-10">
                     <HUDMetadata text="SECURE_CHANNEL: ALPHA" className="mb-2" />
-                    <div className="text-2xl md:text-3xl font-black text-white uppercase italic tracking-tighter">ops@redwallcyber.defense</div>
+                    <div className="text-2xl md:text-3xl font-black text-white uppercase italic tracking-tighter">info@redwallcyber.com</div>
                  </div>
               </div>
             </div>
@@ -464,6 +465,10 @@ export default function Home() {
                <div className="space-y-12">
                   <RedwallLogo className="h-12" />
                   <p className="text-zinc-600 text-lg font-medium leading-relaxed border-l border-primary/20 pl-6 italic">{t.nav.about} SOC services and AI-driven security orchestration.</p>
+                  <div className="pt-4 space-y-4">
+                    <HUDMetadata text="CONTACT_INFO" className="mb-2" />
+                    <div className="text-zinc-300 font-bold flex items-center gap-3"><Mail className="w-4 h-4 text-primary" /> info@redwallcyber.com</div>
+                  </div>
                </div>
                <div>
                   <h5 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-12 flex items-center gap-4">
@@ -486,22 +491,36 @@ export default function Home() {
                </div>
                <div>
                   <h5 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-12 flex items-center gap-4">
-                    <div className="w-2 h-2 bg-primary" /> GOVERNANCE
+                    <div className="w-2 h-2 bg-primary" /> CONNECT_SOCIAL
                   </h5>
                   <ul className="space-y-6 text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em]">
-                     <li><Link href="/privacy" className="hover:text-primary transition-colors flex items-center gap-3"><div className="w-1.5 h-1.5 border border-zinc-800" /> {t.legal.privacy}</Link></li>
-                     <li><Link href="/terms" className="hover:text-primary transition-colors flex items-center gap-3"><div className="w-1.5 h-1.5 border border-zinc-800" /> {t.legal.terms}</Link></li>
-                     <li><Link href="/compliance" className="hover:text-primary transition-colors flex items-center gap-3"><div className="w-1.5 h-1.5 border border-zinc-800" /> {t.legal.compliance}</Link></li>
+                     <li>
+                       <Link href="https://www.linkedin.com/company/redwall-cyber-defense/" target="_blank" className="hover:text-primary transition-colors flex items-center gap-3">
+                         <Linkedin className="w-4 h-4" /> LINKEDIN_PROFILE
+                       </Link>
+                     </li>
+                     <li>
+                       <Link href="https://www.instagram.com/redwallcyber/" target="_blank" className="hover:text-primary transition-colors flex items-center gap-3">
+                         <Instagram className="w-4 h-4" /> INSTAGRAM_FEED
+                       </Link>
+                     </li>
+                     <li className="mt-8 pt-8 border-t border-white/5">
+                       <HUDMetadata text="GOVERNANCE" className="mb-6 block" />
+                       <div className="space-y-6">
+                         <Link href="/privacy" className="hover:text-primary transition-colors flex items-center gap-3"><div className="w-1.5 h-1.5 border border-zinc-800" /> {t.legal.privacy}</Link>
+                         <Link href="/terms" className="hover:text-primary transition-colors flex items-center gap-3"><div className="w-1.5 h-1.5 border border-zinc-800" /> {t.legal.terms}</Link>
+                       </div>
+                     </li>
                   </ul>
                </div>
                <div className="space-y-8">
                   <div className="p-8 border border-white/10 bg-[#050505] relative">
-                     <div className="tactical-corner-tl" />
+                     <TacticalCorner />
                      <HUDMetadata text="SOC_EMEA_STATUS" className="mb-2" />
                      <div className="text-xs font-bold text-zinc-300 flex justify-between">LONDON, UK <span className="text-accent">ACTIVE</span></div>
                   </div>
                   <div className="p-8 border border-white/10 bg-[#050505] relative">
-                     <div className="tactical-corner-tl" />
+                     <TacticalCorner />
                      <HUDMetadata text="SOC_AMER_STATUS" className="mb-2" />
                      <div className="text-xs font-bold text-zinc-300 flex justify-between">AUSTIN, TX <span className="text-accent">ACTIVE</span></div>
                   </div>
