@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useMemo } from 'react';
@@ -212,7 +211,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-black/60 to-black" />
         </div>
 
-        <header className="relative z-[60]">
+        <header className="relative z-30">
           <nav className="py-8 px-12 flex items-center justify-between">
             <div className="flex items-center gap-16">
               <RedwallLogo className="h-10" />
