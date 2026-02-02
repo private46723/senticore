@@ -77,7 +77,6 @@ export default function Home() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    // Simulate high-security encryption and transmission delay
     await new Promise(resolve => setTimeout(resolve, 1500));
     setIsSubmitting(false);
     setIsSubmitted(true);
@@ -101,7 +100,7 @@ export default function Home() {
       name: 'SOC as a Service', 
       icon: <Shield className={cn("w-5 h-5 transition-colors", activePlatformTab === 'soc' ? "text-primary" : "text-zinc-400")} />,
       largeTitle: 'BLUE TEAM L1/L2 OPERATIONS',
-      description: 'Our primary 24/7 SOC provides elite log monitoring, SIEM management, real-time alert analysis, and precision incident escalation for modern enterprises.',
+      description: 'Our primary 24/7 Security Operations Center provides elite log monitoring, SIEM management, and real-time alert analysis. We deliver precision incident escalation for modern enterprises, ensuring zero-latency response to critical security events.',
       stats: [
         { value: '24/7', label: 'MONITORING' },
         { value: '15m', label: 'SLA RESPONSE' }
@@ -117,7 +116,7 @@ export default function Home() {
       name: 'EDR / XDR Management', 
       icon: <Activity className={cn("w-5 h-5 transition-colors", activePlatformTab === 'endpoint' ? "text-accent" : "text-zinc-400")} />,
       largeTitle: 'ENDPOINT DEFENSE & RESPONSE',
-      description: 'Advanced management of your EDR/XDR stack. We handle policy tuning, threat hunting, and automated endpoint remediation across your entire fleet.',
+      description: 'Advanced management of your EDR/XDR stack across global deployments. Our team handles specialized policy tuning, proactive threat hunting, and automated endpoint remediation to neutralize threats before they can move laterally.',
       stats: [
         { value: '100%', label: 'VISIBILITY' },
         { value: '99.9%', label: 'PROTECTION' }
@@ -133,7 +132,7 @@ export default function Home() {
       name: 'Vulnerability Assessment', 
       icon: <Bug className={cn("w-5 h-5 transition-colors", activePlatformTab === 'vulnerability' ? "text-cyan-400" : "text-zinc-400")} />,
       largeTitle: 'RISK REPORTS & REMEDIATION',
-      description: 'Continuous scanning and detailed risk assessment. We don’t just find bugs; we provide actionable remediation advice to close gaps before they are exploited.',
+      description: 'Continuous asset discovery and detailed risk assessment. We provide technical remediation playbooks to close critical security gaps, focusing on high-impact vulnerabilities that represent true enterprise risk.',
       stats: [
         { value: 'VA/PT', label: 'EXPERTS' },
         { value: 'ZERO', label: 'MISSED GAPS' }
@@ -146,19 +145,19 @@ export default function Home() {
     },
   ];
 
+  const currentPlatform = platforms.find((p) => p.id === activePlatformTab) || platforms[0];
+
   const specializedServices = [
-    { title: 'Penetration Testing', description: 'Web and network pentesting for compliance and security validation.', icon: <Target className="w-6 h-6 text-primary" />, status: 'Limited Availability' },
-    { title: 'Incident Response', description: 'Elite IR for breach analysis, containment, and recovery.', icon: <Zap className="w-6 h-6 text-primary" />, status: 'On-Call' },
-    { title: 'Cloud Security', description: 'Deep AWS and Azure configuration reviews and security posture management.', icon: <Lock className="w-6 h-6 text-primary" />, status: 'Strategic' },
-    { title: 'AI Security Services', description: 'LLM security, prompt injection protection, and data leakage prevention.', icon: <Cpu className="w-6 h-6 text-primary" />, status: 'Future-Ready' },
-    { title: 'Purple Team Hunting', description: 'Collaborative exercises to stress-test your existing security controls.', icon: <Terminal className="w-6 h-6 text-primary" />, status: 'Advanced' }
+    { title: 'Penetration Testing', description: 'Advanced web application and network infrastructure testing to validate existing security controls and discover hidden exploit paths.', icon: <Target className="w-6 h-6 text-primary" />, status: 'Limited Availability' },
+    { title: 'Incident Response', description: 'Elite IR specialists for rapid breach analysis, containment, and forensic recovery. We minimize downtime and ensure evidence integrity.', icon: <Zap className="w-6 h-6 text-primary" />, status: 'On-Call' },
+    { title: 'Cloud Security', description: 'Deep AWS, Azure, and GCP configuration reviews. We harden cloud identities and secure complex multi-cloud architectures.', icon: <Lock className="w-6 h-6 text-primary" />, status: 'Strategic' },
+    { title: 'AI Security Services', description: 'Specialized LLM security, including prompt injection protection, red-teaming for AI models, and data leakage prevention frameworks.', icon: <Cpu className="w-6 h-6 text-primary" />, status: 'Future-Ready' },
+    { title: 'Purple Team Hunting', description: 'Collaborative offensive and defensive exercises designed to stress-test your detection capabilities and tune SIEM rules.', icon: <Terminal className="w-6 h-6 text-primary" />, status: 'Advanced' }
   ];
 
-  const currentPlatform = platforms.find(p => p.id === activePlatformTab) || platforms[0];
-
   const perspectives = [
-    { type: 'RESEARCH', title: 'The State of Blue Team Operations 2025', imageId: 'article-network', theme: 'light' },
-    { type: 'GUIDE', title: 'Defending Against AI Prompt Injection', imageId: 'article-ai', theme: 'dark-red' }
+    { type: 'RESEARCH', title: 'The State of Blue Team Operations 2025: Navigating Hyper-Scaled Threats', imageId: 'article-network', theme: 'light' },
+    { type: 'GUIDE', title: 'Zero-Day Defense: Implementing Precision AI in Managed SOC Workflows', imageId: 'article-ai', theme: 'dark-red' }
   ];
 
   return (
@@ -171,11 +170,11 @@ export default function Home() {
       {/* Utility Nav */}
       <div className="bg-white text-zinc-800 py-2 px-6 flex justify-between items-center text-[13px] border-b border-gray-200">
         <div className="flex items-center gap-6">
-          <button className="flex items-center gap-1 hover:text-black transition-colors uppercase font-bold">EN <ChevronDown className="w-3.5 h-3.5 opacity-60" /></button>
-          <button className="hover:text-black transition-colors"><Search className="w-4 h-4" /></button>
+          <button className="flex items-center gap-1 hover:text-primary transition-colors uppercase font-bold">EN <ChevronDown className="w-3.5 h-3.5 opacity-60" /></button>
+          <button className="hover:text-primary transition-colors"><Search className="w-4 h-4" /></button>
         </div>
         <div className="flex items-center gap-6 font-bold">
-          <a href="mailto:contact@senticore.com" className="hover:text-black transition-colors flex items-center gap-2">
+          <a href="mailto:contact@senticore.com" className="hover:text-primary transition-colors flex items-center gap-2">
             <Mail className="w-4 h-4" /> contact@senticore.com
           </a>
           <button onClick={() => scrollToSection('contact')} className="bg-white border border-gray-300 px-5 py-1.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm text-zinc-900 font-black uppercase text-[11px]">
@@ -221,7 +220,7 @@ export default function Home() {
                 Defending the Global Enterprise with <span className="text-primary italic">Precision.</span>
               </h1>
               <p className="text-xl md:text-2xl text-zinc-300 max-w-4xl leading-relaxed mb-16 font-medium">
-                Next-gen SOC operations, EDR management, and AI-driven threat intelligence. We are your primary Blue Team partner for 24/7 technical defense.
+                Next-generation Managed SOC, EDR orchestration, and AI-driven threat intelligence. We are your primary Blue Team partner for 24/7 technical defense across every digital perimeter.
               </p>
               <div className="flex gap-8">
                  <Button onClick={() => scrollToSection('services')} className="bg-white text-black hover:bg-gray-100 rounded-full px-12 py-8 font-black uppercase text-sm tracking-widest shadow-2xl border-none">
@@ -257,7 +256,7 @@ export default function Home() {
               <div className="space-y-8">
                 <h2 className="text-primary font-black uppercase tracking-[0.5em] text-[11px] flex items-center gap-6"><div className="w-12 h-[1px] bg-primary" /> Our DNA</h2>
                 <h3 className="text-5xl md:text-[72px] font-black leading-[1.05] text-white tracking-tight">Protecting your <span className="italic text-primary">digital frontier.</span></h3>
-                <p className="text-zinc-400 text-xl leading-relaxed font-normal">Senticore was founded to bridge the gap between complex security data and actionable defense. We provide the elite expertise required to manage the modern threat landscape with technical precision and global reach.</p>
+                <p className="text-zinc-400 text-xl leading-relaxed font-normal">Senticore was engineered to bridge the critical gap between complex security data and actionable defense. We provide the elite expertise required to manage the modern threat landscape with technical precision, operational agility, and global scale.</p>
               </div>
               <div className="grid grid-cols-2 gap-16 pt-12 border-t border-white/10">
                 <div className="space-y-4"><div className="text-5xl font-black text-white italic tracking-tighter">Global</div><div className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Operational Reach</div></div>
@@ -324,7 +323,7 @@ export default function Home() {
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-12">
              <div className="max-w-5xl">
                 <h2 className="text-6xl md:text-[90px] font-black leading-none tracking-tighter uppercase mb-10 text-white">Proven <span className="text-primary italic">Success</span></h2>
-                <p className="text-2xl md:text-3xl text-zinc-100 font-medium tracking-tight">Real-time threat visibility and containment across global enterprise infrastructure.</p>
+                <p className="text-2xl md:text-3xl text-zinc-100 font-medium tracking-tight">Real-time threat visibility and automated containment across global enterprise infrastructure.</p>
              </div>
           </div>
           <div className="absolute bottom-16 left-16 flex items-center gap-8">
@@ -362,7 +361,7 @@ export default function Home() {
               <div className="space-y-8">
                 <h2 className="text-primary font-black uppercase tracking-[0.5em] text-[11px]">Contact Operations</h2>
                 <h3 className="text-6xl font-black text-white tracking-tighter leading-[1.1]">Request a <span className="text-primary italic">Security Consultation</span></h3>
-                <p className="text-zinc-400 text-xl leading-relaxed max-w-xl">Our experts are standing by to discuss your 24/7 SOC requirements, EDR management, or emergency incident response needs.</p>
+                <p className="text-zinc-400 text-xl leading-relaxed max-w-xl">Our specialists are standing by to discuss your 24/7 Managed SOC requirements, specialized EDR/XDR orchestration, or emergency incident response needs.</p>
               </div>
               
               <div className="space-y-10 pt-12 border-t border-white/10">
@@ -398,7 +397,7 @@ export default function Home() {
                       <CheckCircle2 className="w-10 h-10 text-primary" />
                     </div>
                     <h4 className="text-3xl font-black text-white uppercase tracking-tight mb-4">Transmission Successful</h4>
-                    <p className="text-zinc-400 text-lg max-w-sm mb-10">Your secure message has been encrypted and delivered to our Global SOC. An analyst will review your inquiry shortly.</p>
+                    <p className="text-zinc-400 text-lg max-w-sm mb-10">Your secure message has been encrypted and delivered to our Global SOC. A senior security analyst will review your inquiry shortly.</p>
                     <Button 
                       variant="outline" 
                       onClick={() => setIsSubmitted(false)}
@@ -445,7 +444,7 @@ export default function Home() {
                          <FormItem className="space-y-3">
                            <FormLabel className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.4em]">Security Inquiry</FormLabel>
                            <FormControl>
-                             <Textarea placeholder="Describe your security requirements..." className="bg-black/80 border-white/10 text-white min-h-[160px] rounded-xl focus:border-primary text-base placeholder:opacity-30" {...field} />
+                             <Textarea placeholder="Describe your security operational requirements..." className="bg-black/80 border-white/10 text-white min-h-[160px] rounded-xl focus:border-primary text-base placeholder:opacity-30" {...field} />
                            </FormControl>
                            <FormMessage className="text-primary text-[10px] font-bold uppercase" />
                          </FormItem>
@@ -477,18 +476,18 @@ export default function Home() {
               <h3 className="text-white font-black text-lg mb-12 border-b-2 border-primary/20 pb-3 inline-block w-full max-w-[240px] uppercase tracking-tighter">Core Services</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <ul className="space-y-4 text-[14px] font-medium">
-                  <li className="hover:text-primary transition-colors cursor-pointer">SOC as a Service</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">SIEM Management</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Log Monitoring</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Alert Analysis</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">EDR Management</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Managed SOC (L1/L2)</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">SIEM Orchestration</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Real-time Log Monitoring</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Dynamic Alert Analysis</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">EDR/XDR Fleet Management</li>
                 </ul>
                 <ul className="space-y-4 text-[14px] font-medium">
-                  <li className="hover:text-primary transition-colors cursor-pointer">Vulnerability Assessment</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Incident Response</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Cloud Security</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">AI LLM Security</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Pentesting</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Vulnerability Lifecycle</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Precision Incident Response</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Multi-Cloud Hardening</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">AI Infrastructure Security</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">External Pentesting</li>
                 </ul>
               </div>
             </div>

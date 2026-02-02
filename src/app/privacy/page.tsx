@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Lock, Globe, Eye, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function PrivacyPolicy() {
@@ -27,40 +27,87 @@ export default function PrivacyPolicy() {
       </nav>
 
       <main className="container mx-auto px-6 py-20 max-w-4xl">
-        <div className="flex items-center gap-4 mb-12">
-          <ShieldCheck className="w-12 h-12 text-primary" />
-          <h1 className="text-5xl font-black tracking-tight uppercase">Privacy <span className="text-primary italic">Policy</span></h1>
-        </div>
+        <header className="mb-16">
+          <div className="flex items-center gap-4 mb-8">
+            <ShieldCheck className="w-12 h-12 text-primary" />
+            <h1 className="text-5xl font-black tracking-tight uppercase">Privacy <span className="text-primary italic">Policy</span></h1>
+          </div>
+          <p className="text-zinc-400 text-lg leading-relaxed max-w-2xl">
+            At Senticore Security Global, we treat privacy as a fundamental component of enterprise security. This document details our data handling practices for clients, partners, and users of our digital infrastructure.
+          </p>
+        </header>
 
-        <div className="space-y-12 text-zinc-300 leading-relaxed">
-          <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-wide border-b border-white/10 pb-2">1. Introduction</h2>
-            <p>Senticore Security Global ("we," "our," or "Senticore") is committed to protecting your privacy. This policy explains how we collect, use, and safeguard information when you interact with our SOC services, EDR platforms, and our digital infrastructure.</p>
+        <div className="space-y-16 text-zinc-300 leading-relaxed">
+          <section className="space-y-6">
+            <div className="flex items-center gap-4 text-white">
+              <FileText className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl font-bold uppercase tracking-wide border-b border-white/10 pb-2 flex-grow">1. Data Governance Framework</h2>
+            </div>
+            <p>Senticore operates under a strict data governance framework designed for the specialized needs of cybersecurity operations. We collect and process data strictly for the purposes of threat detection, risk management, and service improvement.</p>
+            <div className="bg-[#0a0a0a] p-8 rounded-2xl border border-white/5 space-y-4">
+              <h3 className="text-white font-bold uppercase text-sm">Processed Data Categories:</h3>
+              <ul className="list-disc pl-6 space-y-3 text-sm">
+                <li><span className="text-white font-medium">Operational Telemetry:</span> System logs, network metadata, and endpoint telemetry required for SOC L1/L2 monitoring.</li>
+                <li><span className="text-white font-medium">Enterprise Identifiers:</span> Corporate contact details, API keys, and infrastructure identifiers for secure platform access.</li>
+                <li><span className="text-white font-medium">Technical Support Data:</span> Information shared during incident response consultations or technical troubleshooting sessions.</li>
+              </ul>
+            </div>
           </section>
 
-          <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-wide border-b border-white/10 pb-2">2. Data Collection</h2>
-            <p>We collect information necessary to provide elite cybersecurity services, including:</p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>Log data and system metadata for threat detection.</li>
-              <li>Enterprise contact information for operational communication.</li>
-              <li>Network telemetry required for precision incident response.</li>
+          <section className="space-y-6">
+            <div className="flex items-center gap-4 text-white">
+              <Lock className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl font-bold uppercase tracking-wide border-b border-white/10 pb-2 flex-grow">2. Security & Encryption Standards</h2>
+            </div>
+            <p>As a global security leader, we utilize military-grade encryption for all data at rest and in transit. Our infrastructure is audited against SOC 2 Type II and ISO 27001 standards to ensure the highest level of integrity.</p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <li className="flex gap-4">
+                <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
+                <span>AES-256 encryption for all database records.</span>
+              </li>
+              <li className="flex gap-4">
+                <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
+                <span>TLS 1.3 protocol for all external transmissions.</span>
+              </li>
+              <li className="flex gap-4">
+                <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
+                <span>Strict multi-factor authentication for all Senticore personnel.</span>
+              </li>
+              <li className="flex gap-4">
+                <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
+                <span>Automated threat hunting on our own internal systems.</span>
+              </li>
             </ul>
           </section>
 
-          <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-wide border-b border-white/10 pb-2">3. Security Standards</h2>
-            <p>As a global security leader, your data is protected by industry-leading encryption and strict access controls. We maintain SOC 2 compliance and adhere to international data protection regulations (GDPR, CCPA).</p>
+          <section className="space-y-6">
+            <div className="flex items-center gap-4 text-white">
+              <Globe className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl font-bold uppercase tracking-wide border-b border-white/10 pb-2 flex-grow">3. International Compliance</h2>
+            </div>
+            <p>We adhere to international data protection regulations including <span className="text-white">GDPR</span> (European Union), <span className="text-white">CCPA</span> (California), and <span className="text-white">HIPAA</span> (Healthcare) where applicable. We utilize Standard Contractual Clauses (SCCs) for cross-border data transfers to ensure consistent protection regardless of location.</p>
+          </section>
+
+          <section className="space-y-6">
+            <div className="flex items-center gap-4 text-white">
+              <Eye className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl font-bold uppercase tracking-wide border-b border-white/10 pb-2 flex-grow">4. Retention & Deletion</h2>
+            </div>
+            <p>Client operational data is retained only for the duration specified in your Service Level Agreement (SLA). Upon contract termination, data is purged using forensic-grade sanitization techniques to ensure it cannot be recovered.</p>
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-wide border-b border-white/10 pb-2">4. Contact Us</h2>
-            <p>If you have questions regarding our data handling practices, contact our Data Protection Officer at <strong>compliance@senticore.com</strong>.</p>
+            <h2 className="text-2xl font-bold text-white uppercase tracking-wide border-b border-white/10 pb-2">5. Data Protection Officer</h2>
+            <p>Questions regarding our privacy practices or requests to exercise your data rights should be directed to our Global Compliance Office:</p>
+            <div className="bg-[#0a0a0a] p-6 rounded-xl border border-white/5 inline-block">
+              <p className="text-white font-black uppercase tracking-tight">Senticore Compliance Hub</p>
+              <p className="text-primary font-bold">compliance@senticore.com</p>
+            </div>
           </section>
         </div>
 
-        <div className="mt-20 pt-10 border-t border-white/10 text-center text-zinc-500 text-sm">
-          Last Updated: January 2025 • © Senticore Security Global
+        <div className="mt-32 pt-10 border-t border-white/10 text-center text-zinc-600 text-[11px] font-black uppercase tracking-[0.4em]">
+          Version 2.1 • Effective January 2025 • © Senticore Security Global
         </div>
       </main>
     </div>

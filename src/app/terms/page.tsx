@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Gavel } from 'lucide-react';
+import { ArrowLeft, Gavel, ShieldAlert, Cpu, Scale, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function TermsOfService() {
@@ -27,35 +27,74 @@ export default function TermsOfService() {
       </nav>
 
       <main className="container mx-auto px-6 py-20 max-w-4xl">
-        <div className="flex items-center gap-4 mb-12">
-          <Gavel className="w-12 h-12 text-primary" />
-          <h1 className="text-5xl font-black tracking-tight uppercase">Terms of <span className="text-primary italic">Service</span></h1>
+        <header className="mb-16">
+          <div className="flex items-center gap-4 mb-8">
+            <Gavel className="w-12 h-12 text-primary" />
+            <h1 className="text-5xl font-black tracking-tight uppercase">Terms of <span className="text-primary italic">Service</span></h1>
+          </div>
+          <p className="text-zinc-400 text-lg leading-relaxed max-w-2xl">
+            These Terms of Service govern your engagement with Senticore Security Global. By utilizing our platforms, SOC services, or research data, you agree to abide by these enterprise-grade legal requirements.
+          </p>
+        </header>
+
+        <div className="space-y-16 text-zinc-300 leading-relaxed">
+          <section className="space-y-6">
+            <div className="flex items-center gap-4 text-white">
+              <Cpu className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl font-bold uppercase tracking-wide border-b border-white/10 pb-2 flex-grow">1. Service Scope & SLAs</h2>
+            </div>
+            <p>Senticore provides Managed Security Services (MSSP) and Security Operations Center (SOC) functions. All primary services are governed by an individual <span className="text-white">Service Level Agreement (SLA)</span> which defines response times, availability, and specific technical parameters for Blue Team operations.</p>
+            <div className="bg-[#0a0a0a] p-8 rounded-2xl border border-white/5">
+              <ul className="space-y-4 text-sm">
+                <li className="flex justify-between border-b border-white/5 pb-2">
+                  <span className="text-zinc-500 uppercase font-black">L1/L2 Response SLA</span>
+                  <span className="text-primary font-bold">15 Minutes</span>
+                </li>
+                <li className="flex justify-between border-b border-white/5 pb-2">
+                  <span className="text-zinc-500 uppercase font-black">Critical Incident Escalation</span>
+                  <span className="text-primary font-bold">Immediate</span>
+                </li>
+                <li className="flex justify-between border-b border-white/5 pb-2">
+                  <span className="text-zinc-500 uppercase font-black">Platform Uptime</span>
+                  <span className="text-primary font-bold">99.99%</span>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section className="space-y-6">
+            <div className="flex items-center gap-4 text-white">
+              <ShieldAlert className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl font-bold uppercase tracking-wide border-b border-white/10 pb-2 flex-grow">2. Acceptable Use Policy</h2>
+            </div>
+            <p>Senticore Global Intel and operational platforms are provided for authorized defensive purposes only. Users are strictly prohibited from:</p>
+            <ul className="list-disc pl-6 space-y-3">
+              <li>Attempting to reverse engineer Senticore "Precision AI" algorithms or detection logic.</li>
+              <li>Using our research data to facilitate unauthorized offensive operations.</li>
+              <li>Accessing unauthorized segments of the Senticore SOC management console.</li>
+              <li>Violating any local or international cyber-laws while using our services.</li>
+            </ul>
+          </section>
+
+          <section className="space-y-6">
+            <div className="flex items-center gap-4 text-white">
+              <Scale className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl font-bold uppercase tracking-wide border-b border-white/10 pb-2 flex-grow">3. Limitation of Liability</h2>
+            </div>
+            <p>While Senticore provides elite defensive monitoring, the cybersecurity landscape is inherently unpredictable. Senticore is not liable for data loss or operational disruptions resulting from zero-day vulnerabilities, nation-state attacks, or client failure to implement Senticore-provided remediation advice.</p>
+          </section>
+
+          <section className="space-y-6">
+            <div className="flex items-center gap-4 text-white">
+              <HelpCircle className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl font-bold uppercase tracking-wide border-b border-white/10 pb-2 flex-grow">4. Global Jurisdictions</h2>
+            </div>
+            <p>These terms are governed by the laws of the jurisdiction in which the specific Senticore contracting entity is located. Any disputes arising from these terms will be resolved through professional arbitration in accordance with global commercial standards.</p>
+          </section>
         </div>
 
-        <div className="space-y-12 text-zinc-300 leading-relaxed">
-          <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-wide border-b border-white/10 pb-2">1. Service Agreement</h2>
-            <p>By engaging Senticore services, you agree to comply with our operational guidelines and security protocols. Our "SOC as a Service" and EDR management are governed by specific SLAs provided upon engagement.</p>
-          </section>
-
-          <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-wide border-b border-white/10 pb-2">2. Acceptable Use</h2>
-            <p>Our platforms and research data (Global Intel) are provided for authorized security monitoring and defensive purposes only. Unauthorized reverse engineering or exploitation of our systems is strictly prohibited.</p>
-          </section>
-
-          <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-wide border-b border-white/10 pb-2">3. Limitation of Liability</h2>
-            <p>While Senticore provides elite defensive monitoring, cybersecurity is an evolving landscape. Senticore is not liable for breaches resulting from zero-day vulnerabilities or non-compliance with our remediation advice.</p>
-          </section>
-
-          <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-white uppercase tracking-wide border-b border-white/10 pb-2">4. Jurisdiction</h2>
-            <p>These terms are governed by the laws of the jurisdiction in which Senticore Security Global is incorporated.</p>
-          </section>
-        </div>
-
-        <div className="mt-20 pt-10 border-t border-white/10 text-center text-zinc-500 text-sm">
-          Last Updated: January 2025 • © Senticore Security Global
+        <div className="mt-32 pt-10 border-t border-white/10 text-center text-zinc-600 text-[11px] font-black uppercase tracking-[0.4em]">
+          Version 1.4 • Effective January 2025 • © Senticore Security Global
         </div>
       </main>
     </div>
