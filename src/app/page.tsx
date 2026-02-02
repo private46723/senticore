@@ -1,7 +1,6 @@
-
 'use client';
 
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { 
@@ -562,8 +561,8 @@ export default function Home() {
               <ul className="space-y-5 text-[14px] font-medium">
                 <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
                 <li><Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
-                <li><Link href="/privacy" className="hover:text-primary transition-colors">Cookie Policy</Link></li>
-                <li><button onClick={() => scrollToSection('contact')} className="hover:text-primary transition-colors">Compliance Audit</button></li>
+                <li><Link href="/cookies" className="hover:text-primary transition-colors">Cookie Policy</Link></li>
+                <li><Link href="/compliance" className="hover:text-primary transition-colors">Compliance Audit</Link></li>
               </ul>
             </div>
             <div className="lg:col-span-3">
