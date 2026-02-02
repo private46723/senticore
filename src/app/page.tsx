@@ -175,9 +175,9 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-black text-white font-body selection:bg-primary/30">
+    <div className="flex flex-col min-h-screen bg-black text-white font-body selection:bg-primary/30 w-full overflow-x-hidden">
       {/* Utility Dashboard Bar */}
-      <div className="bg-black/80 backdrop-blur-xl border-b border-white/5 py-2 px-8 flex justify-between items-center text-[11px] font-black uppercase tracking-widest sticky top-0 z-[100]">
+      <div className="bg-black/80 backdrop-blur-xl border-b border-white/5 py-2 px-8 flex justify-between items-center text-[11px] font-black uppercase tracking-widest sticky top-0 z-[100] w-full">
         <div className="flex items-center gap-8">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -199,7 +199,7 @@ export default function Home() {
           </button>
         </div>
         <div className="flex items-center gap-8 text-zinc-500">
-          <div className="flex items-center gap-3 hidden md:flex">
+          <div className="items-center gap-3 hidden md:flex">
              <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
              <span>Redwall Ops Online</span>
           </div>
@@ -210,7 +210,7 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <div className="relative flex flex-col min-h-[90vh]">
+      <div className="relative flex flex-col min-h-[90vh] overflow-hidden">
         <div className="absolute inset-0 z-0">
           {heroBg && <Image src={heroBg.imageUrl} alt={heroBg.description} fill className="object-cover opacity-30 grayscale contrast-125" priority data-ai-hint={heroBg.imageHint} />}
           <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#ffffff 1.5px, transparent 0)', backgroundSize: '32px 32px' }} />
@@ -240,12 +240,12 @@ export default function Home() {
         </header>
 
         <main className="flex-grow flex items-center relative z-10">
-          <div className="container mx-auto px-12 max-w-[1400px]">
+          <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
             <div className="max-w-5xl">
               <div className="flex items-center gap-4 text-primary font-black uppercase tracking-[0.6em] text-[10px] mb-12 animate-in fade-in slide-in-from-left-4 duration-1000">
                 <div className="w-12 h-px bg-primary" /> Global Precision Defense
               </div>
-              <h1 className="text-6xl md:text-[92px] font-black leading-[0.95] mb-12 tracking-tighter text-white uppercase italic">
+              <h1 className="text-5xl md:text-6xl lg:text-[92px] font-black leading-[0.95] mb-12 tracking-tighter text-white uppercase italic">
                 {t.hero.title} <br />
                 <span className="text-primary not-italic">{t.hero.precision}</span>
               </h1>
@@ -277,8 +277,8 @@ export default function Home() {
       </div>
 
       {/* Stats Dashboard */}
-      <section className="bg-black py-24 border-y border-white/5">
-        <div className="container mx-auto px-12 max-w-[1400px]">
+      <section className="bg-black py-24 border-y border-white/5 overflow-hidden">
+        <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
            <div className="grid grid-cols-1 md:grid-cols-3 gap-20">
               {[t.about.stat1, t.about.stat2, t.about.stat3].map((stat, i) => (
                 <div key={i} className="flex flex-col gap-4 group">
@@ -296,11 +296,11 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="bg-[#050505] py-48 scroll-mt-20 overflow-hidden relative">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-        <div className="container mx-auto px-12 max-w-[1400px]">
+        <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
             <div className="space-y-12">
               <h2 className="text-primary font-black uppercase tracking-[0.6em] text-[10px]">{t.nav.about}</h2>
-              <h3 className="text-7xl font-black text-white tracking-tighter leading-[1.0] uppercase italic">{t.about.title}</h3>
+              <h3 className="text-6xl md:text-7xl font-black text-white tracking-tighter leading-[1.0] uppercase italic">{t.about.title}</h3>
               <p className="text-zinc-400 text-2xl leading-relaxed max-w-2xl font-medium">{t.about.sub}</p>
               <div className="pt-12">
                  <Button variant="outline" className="border-white/10 text-white hover:bg-white/5 rounded-none px-12 h-16 font-black uppercase text-[11px] tracking-[0.4em]">
@@ -313,7 +313,7 @@ export default function Home() {
                   <div className="w-[80%] h-[80%] border border-white/5 rounded-full animate-[spin_20s_linear_infinite]" />
                   <div className="absolute w-[60%] h-[60%] border border-white/10 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
                </div>
-               <div className="relative z-10 w-full h-full border border-white/5 bg-black/40 backdrop-blur-2xl flex items-center justify-center p-20 shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]">
+               <div className="relative z-10 w-full h-full border border-white/5 bg-black/40 backdrop-blur-2xl flex items-center justify-center p-12 md:p-20 shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]">
                   <div className="relative w-full h-full flex items-center justify-center">
                      {/* Strategic Target Graphic */}
                      <svg viewBox="0 0 100 100" className="w-full h-full absolute opacity-20 text-zinc-600">
@@ -322,7 +322,7 @@ export default function Home() {
                         <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
                      </svg>
                      <div className="relative z-20 transform scale-125">
-                        <RedwallLogo iconOnly className="h-40" />
+                        <RedwallLogo iconOnly className="h-24 md:h-40" />
                      </div>
                   </div>
                </div>
@@ -332,12 +332,12 @@ export default function Home() {
       </section>
 
       {/* Services Grid */}
-      <section id="services" className="bg-black py-48 border-t border-white/5 scroll-mt-20">
-        <div className="container mx-auto px-12 max-w-[1400px]">
+      <section id="services" className="bg-black py-48 border-t border-white/5 scroll-mt-20 overflow-hidden">
+        <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
           <div className="mb-32 flex flex-col lg:flex-row justify-between items-end gap-12">
             <div className="max-w-3xl">
               <h2 className="text-primary font-black uppercase tracking-[0.6em] text-[10px] mb-12">{t.nav.services}</h2>
-              <h3 className="text-7xl font-black text-white tracking-tighter mb-12 uppercase leading-none">{t.services.title}</h3>
+              <h3 className="text-6xl md:text-7xl font-black text-white tracking-tighter mb-12 uppercase leading-none">{t.services.title}</h3>
               <p className="text-zinc-500 text-2xl font-medium leading-relaxed">{t.services.sub}</p>
             </div>
             <div className="text-[10px] font-black text-zinc-700 uppercase tracking-[0.5em] pb-4">
@@ -371,12 +371,12 @@ export default function Home() {
       </section>
 
       {/* Global Intel Section */}
-      <section id="intel" className="bg-[#050505] py-48 border-t border-white/5 scroll-mt-20">
-        <div className="container mx-auto px-12 max-w-[1400px]">
+      <section id="intel" className="bg-[#050505] py-48 border-t border-white/5 scroll-mt-20 overflow-hidden">
+        <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
           <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-32">
              <div className="space-y-12">
                 <h2 className="text-primary font-black uppercase tracking-[0.6em] text-[10px]">{t.nav.intel}</h2>
-                <h3 className="text-7xl font-black text-white tracking-tighter uppercase italic">{t.intel.title}</h3>
+                <h3 className="text-6xl md:text-7xl font-black text-white tracking-tighter uppercase italic">{t.intel.title}</h3>
                 <p className="text-zinc-500 text-2xl max-w-xl font-medium">{t.intel.sub}</p>
              </div>
              <Button variant="outline" className="border-white/10 text-white hover:bg-white/5 rounded-none px-10 h-16 font-black uppercase text-[11px] tracking-[0.4em]">
@@ -422,12 +422,12 @@ export default function Home() {
           <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
         </div>
 
-        <div className="container mx-auto px-12 max-w-[1400px] relative z-10 text-center">
+        <div className="container mx-auto px-6 md:px-12 max-w-[1400px] relative z-10 text-center">
            <div className="max-w-4xl mx-auto space-y-16">
               <div className="w-24 h-24 border border-primary/40 flex items-center justify-center mx-auto mb-16 group cursor-pointer hover:bg-primary hover:text-black transition-all duration-700 shadow-[0_0_30px_rgba(255,0,0,0.2)]">
                  <Play className="w-8 h-8 fill-current ml-1" />
               </div>
-              <h3 className="text-7xl md:text-[100px] font-black text-white tracking-tighter uppercase leading-[0.85] italic">
+              <h3 className="text-6xl md:text-7xl lg:text-[100px] font-black text-white tracking-tighter uppercase leading-[0.85] italic">
                  {t.proven.title}
               </h3>
               <p className="text-2xl text-zinc-400 font-medium tracking-tight">
@@ -441,23 +441,23 @@ export default function Home() {
            </div>
         </div>
         
-        <div className="absolute bottom-0 left-0 right-0 p-12 flex justify-between items-center text-[9px] font-black text-zinc-700 uppercase tracking-[0.6em] z-20">
+        <div className="absolute bottom-0 left-0 right-0 p-12 flex flex-wrap justify-between items-center text-[9px] font-black text-zinc-700 uppercase tracking-[0.6em] z-20 gap-8">
            <div className="flex items-center gap-12">
               <span className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" /> LATENCY: 11MS</span>
-              <span>GLOBAL UPTIME: 99.9997%</span>
+              <span className="hidden sm:inline-block">GLOBAL UPTIME: 99.9997%</span>
            </div>
            <div>EST. 2025 // REDWALL GLOBAL OPERATIONS</div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="bg-black py-48 border-t border-white/5 scroll-mt-20">
-        <div className="container mx-auto px-12 max-w-[1400px]">
+      <section id="contact" className="bg-black py-48 border-t border-white/5 scroll-mt-20 overflow-hidden">
+        <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-32">
             <div className="space-y-16">
               <div className="space-y-12">
                 <h2 className="text-primary font-black uppercase tracking-[0.6em] text-[10px]">{t.nav.contact}</h2>
-                <h3 className="text-7xl font-black text-white tracking-tighter leading-[0.95] uppercase italic">{t.contact.title}</h3>
+                <h3 className="text-6xl md:text-7xl font-black text-white tracking-tighter leading-[0.95] uppercase italic">{t.contact.title}</h3>
                 <p className="text-zinc-400 text-2xl leading-relaxed max-w-xl font-medium">{t.contact.sub}</p>
               </div>
               
@@ -468,13 +468,13 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em] mb-3">Operational Support</div>
-                    <div className="text-2xl font-black text-white uppercase tracking-tighter italic">contact@redwallcyber.com</div>
+                    <div className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter italic break-all">contact@redwallcyber.com</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#050505] p-16 rounded-none border border-white/5 shadow-2xl relative overflow-hidden">
+            <div className="bg-[#050505] p-8 md:p-16 rounded-none border border-white/5 shadow-2xl relative overflow-hidden">
                <div className="absolute top-0 right-0 p-12 opacity-5">
                   <ShieldCheck className="w-64 h-64 text-primary" />
                </div>
@@ -557,8 +557,8 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-zinc-600 py-48 border-t border-white/5">
-        <div className="container mx-auto px-12 max-w-[1400px]">
+      <footer className="bg-black text-zinc-600 py-48 border-t border-white/5 overflow-hidden">
+        <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-32">
             <div className="lg:col-span-6">
               <RedwallLogo className="h-12 mb-16" />
@@ -605,7 +605,7 @@ export default function Home() {
           </div>
           <div className="mt-48 pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
             <p className="text-[10px] text-zinc-800 font-black uppercase tracking-[0.8em]">{t.footer.rights}</p>
-            <div className="flex items-center gap-12 text-[10px] font-black text-zinc-800 uppercase tracking-widest">
+            <div className="flex flex-wrap items-center gap-6 md:gap-12 text-[10px] font-black text-zinc-800 uppercase tracking-widest">
                <span>V4.0.28-STABLE</span>
                <span>ISO 27001</span>
                <span>SOC2 COMPLIANT</span>
