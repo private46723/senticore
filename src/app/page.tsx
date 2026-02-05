@@ -449,10 +449,6 @@ export default function Home() {
         </div>
       </section>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      {/* Footer */}
       <footer className="bg-black text-zinc-600 py-24 md:py-48 border-t border-white/5 overflow-hidden">
         <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
@@ -477,20 +473,14 @@ export default function Home() {
               </div>
             </div>
             <div className="lg:col-span-3">
-<<<<<<< HEAD
-<<<<<<< HEAD
               <h3 className="text-white font-black text-lg mb-12 border-b-2 border-primary/20 pb-3 inline-block w-full uppercase tracking-tighter">{t.footer.legal}</h3>
               <ul className="space-y-5 text-[14px] font-medium">
-<<<<<<< HEAD
                 <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
                 <li><Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
-<<<<<<< HEAD
                 <li><Link href="/cookies" className="hover:text-primary transition-colors">Cookies Policy</Link></li>
                 <li><button onClick={() => scrollToSection('contact')} className="hover:text-primary transition-colors">Compliance Audit</button></li>
-=======
                 <li><Link href="/cookies" className="hover:text-primary transition-colors">Cookie Policy</Link></li>
                 <li><Link href="/compliance" className="hover:text-primary transition-colors">Compliance Audit</Link></li>
->>>>>>> ab01e70 (Complete all of these pages thoroughly, meticulously, and technically.)
               </ul>
             </div>
             <div className="lg:col-span-3">
@@ -499,34 +489,23 @@ export default function Home() {
                 <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-3"><Linkedin className="w-5 h-5" /> LinkedIn</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-3"><Instagram className="w-5 h-5" /> Instagram</a></li>
                 <li><a href="mailto:contact@redwallcyber.com" className="hover:text-primary transition-colors flex items-center gap-3"><Mail className="w-5 h-5" /> Email Operations</a></li>
-=======
-=======
-              <h3 className="text-white font-black text-xs mb-16 uppercase tracking-[0.5em] border-l-2 border-primary pl-6">Governance</h3>
-              <ul className="space-y-6 text-[11px] font-black tracking-[0.2em] uppercase">
->>>>>>> 45327c5 (create a more professional design)
-=======
+              </ul>
               <h3 className="text-white font-black text-xs mb-10 md:mb-16 uppercase tracking-[0.3em] border-l-2 border-primary pl-6">Governance</h3>
               <ul className="space-y-4 md:space-y-6 text-[11px] font-black tracking-[0.2em] uppercase">
->>>>>>> 4ed71c2 (half shows)
                 <li><Link href="/privacy" className="hover:text-primary transition-colors">{t.legal.privacy}</Link></li>
                 <li><Link href="/terms" className="hover:text-primary transition-colors">{t.legal.terms}</Link></li>
                 <li><Link href="/cookies" className="hover:text-primary transition-colors">{t.legal.cookies}</Link></li>
                 <li><Link href="/compliance" className="hover:text-primary transition-colors">{t.legal.compliance}</Link></li>
->>>>>>> f51259d (Add Russian, Turkish, and Hindi as languages ​​and translate all pages i)
               </ul>
             </div>
             <div className="lg:col-span-3">
                <h3 className="text-white font-black text-xs mb-10 md:mb-16 uppercase tracking-[0.3em] border-l-2 border-primary pl-6">Operations</h3>
-               <div className="space-y-6 md:space-y-8">
-=======
-      {/* Footer Grid */}
-      <footer className="bg-black py-24 md:py-48 border-t border-white/5">
-=======
-      {/* Enterprise HUD Footer */}
-=======
->>>>>>> e0c99f3 (The app isn't starting. Please investigate what could be wrong based on)
-      <footer className="bg-black py-24 md:py-48 border-t border-white/10">
->>>>>>> 6806554 (I didn't like it,Maybe you could add some lines around the edges or some)
+            <div className="space-y-6 md:space-y-8">
+            </div>
+          </div>
+        </div>
+      </footer>      
+       <footer className="bg-black py-24 md:py-48 border-t border-white/10">
          <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-24">
                <div className="space-y-12">
@@ -539,7 +518,7 @@ export default function Home() {
                </div>
                <div>
                   <h5 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-12 flex items-center gap-4">
-                    <div className="w-2 h-2 bg-primary" /> CORE_OPS
+                    <span className="w-2 h-2 bg-primary inline-block" /> CORE_OPS
                   </h5>
                   <ul className="space-y-6 text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em]">
                      <li className="text-zinc-200 hover:text-primary transition-colors cursor-pointer flex items-center gap-3">
@@ -558,7 +537,7 @@ export default function Home() {
                </div>
                <div>
                   <h5 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-12 flex items-center gap-4">
-                    <div className="w-2 h-2 bg-primary" /> CONNECT_SOCIAL
+                    <span className="w-2 h-2 bg-primary inline-block" /> CONNECT_SOCIAL
                   </h5>
                   <ul className="space-y-6 text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em]">
                      <li>
@@ -580,20 +559,19 @@ export default function Home() {
                      </li>
                   </ul>
                </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                <div className="space-y-6">
->>>>>>> 2fb8fb4 (Create another design)
                   <div className="p-6 border border-white/5 bg-[#050505]">
                      <div className="text-[9px] font-black text-zinc-700 uppercase mb-2">SOC EMEA</div>
                      <div className="text-xs font-bold text-zinc-300">LONDON, UK // ACTIVE</div>
-=======
+                  </div>
+                </div>
+
                <div className="space-y-8">
                   <div className="p-8 border border-white/10 bg-[#050505] relative">
                      <TacticalCorner />
                      <HUDMetadata text="SOC_EMEA_STATUS" className="mb-2" />
                      <div className="text-xs font-bold text-zinc-300 flex justify-between">LONDON, UK <span className="text-accent">ACTIVE</span></div>
->>>>>>> 6806554 (I didn't like it,Maybe you could add some lines around the edges or some)
                   </div>
                   <div className="p-8 border border-white/10 bg-[#050505] relative">
                      <TacticalCorner />
@@ -601,8 +579,6 @@ export default function Home() {
                      <div className="text-xs font-bold text-zinc-300 flex justify-between">AUSTIN, TX <span className="text-accent">ACTIVE</span></div>
                   </div>
                </div>
-=======
->>>>>>> 6deba0b (remove this part)
             </div>
             <div className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-12 text-[9px] font-black text-zinc-700 uppercase tracking-[0.8em]">
                <span>{t.footer.rights}</span>
@@ -611,7 +587,7 @@ export default function Home() {
                   <span className="flex items-center gap-3"><div className="w-2 h-2 rounded-full bg-accent" /> SOC2_TYPE_II</span>
                </div>
             </div>
-         </div>
+        </div>
       </footer>
 
       <Dialog open={isHunterOpen} onOpenChange={setIsHunterOpen}>
@@ -729,5 +705,5 @@ export default function Home() {
          </DialogContent>
       </Dialog>
     </div>
-  );
+  )
 }
