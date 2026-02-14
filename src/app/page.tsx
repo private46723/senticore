@@ -16,7 +16,6 @@ import {
   CheckCircle2,
   Globe,
   Loader2,
-  X,
   Radar,
   Crosshair,
   Mail,
