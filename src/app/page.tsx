@@ -246,14 +246,9 @@ export default function Home() {
                  </h2>
                  <h3 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none uppercase italic">{t.about.title}</h3>
                  <p className="text-zinc-500 text-xl md:text-2xl font-medium leading-relaxed">{t.about.sub}</p>
-                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-12 border-t border-white/10">
-                    {[t.about.stat1, t.about.stat2, t.about.stat3].map((stat, i) => (
-                      <div key={i} className="space-y-3 p-6 border border-white/5 bg-black/50 relative">
-                        <div className="text-4xl font-black text-white italic">{stat.value}</div>
-                        <HUDMetadata text={stat.label} />
-                        <div className="absolute top-0 right-0 w-2 h-2 bg-primary/20" />
-                      </div>
-                    ))}
+                 <div className="pt-12 border-t border-white/10">
+                   <div className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em] mb-4">TACTICAL_MANDATE</div>
+                   <p className="text-zinc-400 italic text-sm">Deploying precision security frameworks across global enterprise environments with zero-trust protocols.</p>
                  </div>
               </div>
               
@@ -461,7 +456,7 @@ export default function Home() {
 
       <footer className="bg-black py-24 md:py-48 border-t border-white/10">
          <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-24">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24">
                <div className="space-y-12">
                   <RedwallLogo className="h-12" />
                   <p className="text-zinc-600 text-lg font-medium leading-relaxed border-l border-primary/20 pl-6 italic">{t.nav.about} SOC services and AI-driven security orchestration.</p>
@@ -512,18 +507,6 @@ export default function Home() {
                        </div>
                      </li>
                   </ul>
-               </div>
-               <div className="space-y-8">
-                  <div className="p-8 border border-white/10 bg-[#050505] relative">
-                     <TacticalCorner />
-                     <HUDMetadata text="SOC_EMEA_STATUS" className="mb-2" />
-                     <div className="text-xs font-bold text-zinc-300 flex justify-between">LONDON, UK <span className="text-accent">ACTIVE</span></div>
-                  </div>
-                  <div className="p-8 border border-white/10 bg-[#050505] relative">
-                     <TacticalCorner />
-                     <HUDMetadata text="SOC_AMER_STATUS" className="mb-2" />
-                     <div className="text-xs font-bold text-zinc-300 flex justify-between">AUSTIN, TX <span className="text-accent">ACTIVE</span></div>
-                  </div>
                </div>
             </div>
             <div className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-12 text-[9px] font-black text-zinc-700 uppercase tracking-[0.8em]">
