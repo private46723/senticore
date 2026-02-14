@@ -456,7 +456,7 @@ export default function Home() {
 
       <footer className="bg-black py-24 md:py-48 border-t border-white/10">
          <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
                <div className="space-y-12">
                   <RedwallLogo className="h-12" />
                   <p className="text-zinc-600 text-lg font-medium leading-relaxed border-l border-primary/20 pl-6 italic">{t.nav.about} SOC services and AI-driven security orchestration.</p>
@@ -464,25 +464,6 @@ export default function Home() {
                     <HUDMetadata text="CONTACT_INFO" className="mb-2" />
                     <div className="text-zinc-300 font-bold flex items-center gap-3"><Mail className="w-4 h-4 text-primary" /> info@redwallcyber.com</div>
                   </div>
-               </div>
-               <div>
-                  <h5 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-12 flex items-center gap-4">
-                    <div className="w-2 h-2 bg-primary" /> CORE_OPS
-                  </h5>
-                  <ul className="space-y-6 text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em]">
-                     <li className="text-zinc-200 hover:text-primary transition-colors cursor-pointer flex items-center gap-3">
-                       <div className="w-1.5 h-1.5 border border-primary/50" /> Managed SOC (L1/L2)
-                     </li>
-                     <li className="hover:text-primary transition-colors cursor-pointer flex items-center gap-3">
-                       <div className="w-1.5 h-1.5 border border-zinc-800" /> EDR/XDR Management
-                     </li>
-                     <li className="hover:text-primary transition-colors cursor-pointer flex items-center gap-3">
-                       <div className="w-1.5 h-1.5 border border-zinc-800" /> Vulnerability Lifecycle
-                     </li>
-                     <li className="hover:text-primary transition-colors cursor-pointer flex items-center gap-3">
-                       <div className="w-1.5 h-1.5 border border-zinc-800" /> Cloud Security
-                     </li>
-                  </ul>
                </div>
                <div>
                   <h5 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-12 flex items-center gap-4">
